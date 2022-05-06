@@ -4,7 +4,7 @@ import { buildAssets, buildElectron, buildRelease, buildSrc, buildVite } from ".
 // import { clean } from "./utils";
 
 import { readConfig } from "./config";
-import * as dev from "./dev";
+import * as dev from "./start";
 import { cleanRelease, cleanVoxer } from "./utils";
 
 const pkg = require("../package.json");
@@ -15,7 +15,7 @@ program.name("voxer")
     .description(pkg.description)
     .version(pkg.version);
 
-program.action(async () => {
+async function start() {
     cleanVoxer();
     await buildSrc();
 
@@ -26,10 +26,17 @@ program.action(async () => {
     electron.on("close", () => {
         server.close();
     });
-});
+}
+
+program.action(() => start());
+program
+    .command("start")
+    .description("[default] Run application in a development")
+    .action(() => start());
 
 program
     .command("build")
+    .description("Build")
     .option("-s, --src", "build src")
     .option("-v, --vite", "build vite")
     .option("-e, --electron", "build electron")
@@ -55,14 +62,20 @@ program
         }
     });
 
-program.command("clean").action(() => {
-    cleanVoxer();
-});
+program
+    .command("clean")
+    .description("Remove output files")
+    .action(() => {
+        cleanVoxer();
+    });
 
-program.command("rebuild").action(async () => {
-    cleanVoxer();
-    cleanRelease();
-    await buildRelease();
-});
+program
+    .command("rebuild")
+    .description("Rebuild")
+    .action(async () => {
+        cleanVoxer();
+        cleanRelease();
+        await buildRelease();
+    });
 
 program.parse(process.argv);

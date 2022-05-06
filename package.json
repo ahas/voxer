@@ -6,5 +6,8 @@
     "workspaces": [
         "packages/examples/app",
         "packages/voxer"
-    ]
+    ],
+    "scripts": {
+        "build": "yarn workspace voxer run build"
+    }
 }
