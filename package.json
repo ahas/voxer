@@ -1,0 +1,10 @@
+{
+    "name": "voxer-monorepo",
+    "private": true,
+    "license": "MIT",
+    "packageManager": "yarn@3.2.0",
+    "workspaces": [
+        "packages/examples/app",
+        "packages/voxer"
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name": "voxer",
+    "version": "1.0.0",
+    "description": "vite + electron framework",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": "https://github.com/ahas/voxer",
+    "author": "ahas <dev@ahas.io>",
+    "license": "MIT",
+    "bin": "./dist/cli.js",
+    "files": [
+        "dist",
+        "types",
+        "vue.d.ts"
+    ],
+    "scripts": {
+        "clean": "rm -rf dist",
+        "build": "tsc -p tsconfig.json",
+        "start": "node dist/dev.js",
+        "dev": "yarn tsc && yarn start"
+    },
+    "dependencies": {
+        "commander": "^9.2.0",
+        "electron": "^18.2.0",
+        "electron-builder": "^23.0.3",
+        "typescript": "^4.6.4",
+        "vite": "^2.9.8"
+    }
+}
