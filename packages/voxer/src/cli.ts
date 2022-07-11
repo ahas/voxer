@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { buildAssets, buildElectron, buildRelease, buildSrc, buildVite } from "./build";
+import { buildElectron, buildRelease, buildSrc, buildVite } from "./build";
 // import { clean } from "./utils";
 
 import { readConfig } from "./config";
-import * as dev from "./start";
-import { cleanRelease, cleanVoxer } from "./utils";
+import * as dev from "./dev";
+import { cleanRelease, cleanVoxer, isTs } from "./utils";
 
 const pkg = require("../package.json");
 
@@ -17,15 +17,8 @@ program.name("voxer")
 
 async function start() {
     cleanVoxer();
-    await buildSrc();
 
-    const config = readConfig();
-    const server = await dev.runVite(config);
-    const electron = dev.runElectron();
-
-    electron.on("close", () => {
-        server.close();
-    });
+    await dev.runApp();
 }
 
 program.action(() => start());
@@ -46,10 +39,10 @@ program
         if (Object.keys(options).length === 0) {
             await buildRelease();
         } else {
-            if (options.src) {
+            if (isTs()) {
                 await buildSrc();
             }
-            await buildAssets();
+
             const config = readConfig();
 
             if (options.vite) {

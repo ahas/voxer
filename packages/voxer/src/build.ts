@@ -1,10 +1,10 @@
 import ts from "typescript";
 import { resolve } from "path";
-import { UserConfig, readConfig } from "./config";
+import { readConfig, UserConfig } from "./config";
 import { build as _buildVite } from "vite";
 import { build as _buildElectron } from "electron-builder";
-import { copySource, mkdir } from "./utils";
-import fs from "fs";
+import { isTs, mkdir } from "./utils";
+import { writeTemplate } from "./template";
 
 const cwd = process.cwd();
 
@@ -39,17 +39,6 @@ export async function buildSrc() {
     }
 }
 
-export async function buildAssets() {
-    mkdir(".voxer");
-    const config = require(resolve(cwd, ".voxer/dist/voxer.config.js")).default;
-    const configJson = JSON.stringify({
-        window: config.window,
-    });
-    fs.writeFileSync(resolve(cwd, ".voxer/voxer.config.json"), configJson);
-    fs.rmSync(resolve(cwd, ".voxer/dist/voxer.config.js"), { force: true });
-    fs.rmSync(resolve(cwd, ".voxer/dist/voxer.config.d.ts"), { force: true });
-}
-
 export async function buildVite(config: UserConfig) {
     mkdir(".voxer");
     return await _buildVite({
@@ -65,8 +54,14 @@ export async function buildVite(config: UserConfig) {
 
 export async function buildElectron(config: UserConfig) {
     mkdir(".voxer");
-    copySource("prod/main.js", ".voxer");
-    copySource("prod/preload.js", ".voxer");
+
+    const options = {
+        isTs: isTs(),
+        isDev: false,
+        config,
+    };
+    writeTemplate("main.js", options);
+    writeTemplate("preload.js", options);
 
     return await _buildElectron({
         config: {
@@ -80,10 +75,12 @@ export async function buildElectron(config: UserConfig) {
 }
 
 export async function buildRelease() {
-    await buildSrc();
-    await buildAssets();
+    if (isTs()) {
+        await buildSrc();
+    }
 
     const config = readConfig();
+
     await buildVite(config);
     await buildElectron(config);
 }

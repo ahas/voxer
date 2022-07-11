@@ -1,0 +1,22 @@
+const { contextBridge } = require("electron");
+<% if (isTs) { %>
+let config = require("./dist/voxer.config.js");
+<% } else { %>
+let config = require("../voxer.config.js");
+<% } %>
+
+if (config.default) {
+    config = config.default;
+}
+
+window.addEventListener("DOMContentLoaded", () => {});
+
+contextBridge.exposeInMainWorld("voxer", {
+    title: config.window?.title,
+});
+
+<% if (isTs) { %>
+require("./dist/src/main").preload?.();
+<% } else { %>
+require("../src/main").preload?.();
+<% } %>

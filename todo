@@ -1,0 +1,2 @@
+vite 기본 resolve alias 추가
+voxer.config.ts 위치를 최상단으로 변경

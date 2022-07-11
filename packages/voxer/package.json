@@ -1,20 +1,30 @@
 {
     "name": "voxer",
-    "version": "0.0.1",
+    "version": "0.0.5-beta.8",
     "description": "vite + electron framework",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "repository": "https://github.com/ahas/voxer",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ahas/voxer.git",
+        "directory": "packages/voxer"
+    },
     "bugs": {
-        "url": "https://github.com/ahas/voxer"
+        "url": "https://github.com/ahas/voxer/issues"
+    },
+    "engines": {
+        "node": ">=14.6.0"
     },
     "author": "ahas <dev@ahas.io>",
     "license": "MIT",
     "bin": "./dist/cli.js",
     "files": [
+        "assets",
         "dist",
         "types",
-        "vue.d.ts"
+        "vue.d.ts",
+        "react.d.ts",
+        "svelte.d.ts"
     ],
     "keywords": [
         "vite",
@@ -28,9 +38,15 @@
     },
     "dependencies": {
         "commander": "^9.2.0",
+        "ejs": "^3.1.8",
         "electron": "^18.2.0",
         "electron-builder": "^23.0.3",
+        "prettier": "^2.6.2",
         "typescript": "^4.6.4",
         "vite": "^2.9.8"
+    },
+    "devDependencies": {
+        "@types/ejs": "^3.1.1",
+        "@types/prettier": "^2.6.1"
     }
 }

@@ -1,0 +1,17 @@
+{
+    "name": "voxer-app",
+    "version": "0.0.1",
+    "main": ".voxer/main.js",
+    "private": true,
+    "scripts": {
+        "clean": "voxer clean",
+        "rebuild": "voxer rebuild",
+        "dev": "voxer",
+        "build": "voxer build"
+    },
+    "devDependencies": {
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.49",
+        "svelte": "^3.49.0",
+        "voxer": "file:../../../voxer"
+    }
+}

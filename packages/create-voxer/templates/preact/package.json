@@ -1,0 +1,19 @@
+{
+    "name": "voxer-app",
+    "version": "0.0.1",
+    "main": ".voxer/main.js",
+    "private": true,
+    "scripts": {
+        "clean": "voxer clean",
+        "rebuild": "voxer rebuild",
+        "dev": "voxer",
+        "build": "voxer build"
+    },
+    "dependencies": {
+        "preact": "^10.9.0"
+    },
+    "devDependencies": {
+        "@preact/preset-vite": "^2.3.0",
+        "voxer": "file:../../../voxer"
+    }
+}

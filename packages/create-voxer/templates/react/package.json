@@ -1,0 +1,22 @@
+{
+    "name": "voxer-app",
+    "version": "0.0.1",
+    "main": ".voxer/main.js",
+    "private": true,
+    "scripts": {
+        "clean": "voxer clean",
+        "rebuild": "voxer rebuild",
+        "dev": "voxer",
+        "build": "voxer build"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.14",
+        "@types/react-dom": "^18.0.5",
+        "@vitejs/plugin-react": "^1.3.2",
+        "voxer": "file:../../../voxer"
+    }
+}

@@ -1,0 +1,49 @@
+const { app, BrowserWindow } = require("electron");
+const { resolve: _resolve } = require("path");
+
+async function createWindow() {
+    const win = new BrowserWindow({
+        webPreferences: {
+            preload: __dirname + "/preload.js",
+            nodeIntegration: false,
+            contextIsolation: true,
+        },
+    });
+    const resolve = _resolve.bind(_resolve, __dirname, "../view");
+    <% if (isTs) {  %>
+    const { main } = require("./dist/src/main.js");
+    <% } else { %>
+    const { main } = require("../src/main.js");
+    <% } %>
+    await main(win, resolve);
+
+    if (!win.webContents.getURL()) {
+        <% if (isDev) { %>
+            <% if (isTs) {  %>
+            const config = require("./dist/voxer.config.js").default;
+            const { main } = require("./dist/src/main.js");
+            <% } else { %>
+            const config = require("../voxer.config.js");
+            const { main } = require("../src/main.js");
+            <% } %>
+            win.loadURL("http://localhost:<%= config.vite?.port || 3000 %>");
+        <% } else { %>
+            win.loadFile(resolve("<%= "index.html" %>"));
+        <% } %>
+    }
+}
+
+app.whenReady().then(() => {
+    createWindow();
+    app.on("activate", () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow();
+        }
+    });
+});
+
+app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+        app.quit();
+    }
+});

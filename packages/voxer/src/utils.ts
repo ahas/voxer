@@ -20,3 +20,11 @@ export function mkdir(...paths: string[]): void {
 export function copySource(filename: string, dst: string): void {
     fs.copyFileSync(resolve(__dirname, filename), resolve(cwd, dst, basename(filename)));
 }
+
+export function exists(...paths: string[]) {
+    return fs.existsSync(paths.join("\\"));
+}
+
+export function isTs() {
+    return exists(resolve(cwd, "voxer.config.ts"));
+}

@@ -1,0 +1,19 @@
+{
+    "name": "voxer-app",
+    "version": "0.0.1",
+    "main": ".voxer/main.js",
+    "private": true,
+    "scripts": {
+        "clean": "voxer clean",
+        "rebuild": "voxer rebuild",
+        "dev": "voxer",
+        "build": "voxer build"
+    },
+    "dependencies": {
+        "lit": "^2.2.7"
+    },
+    "devDependencies": {
+        "typescript": "^4.7.4",
+        "voxer": "file:../../../voxer"
+    }
+}
