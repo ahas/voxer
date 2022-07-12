@@ -1,12 +1,16 @@
 {
     "name": "create-voxer",
-    "version": "0.0.6-beta.6",
+    "version": "0.0.6-beta.7",
     "license": "MIT",
     "author": "ahas",
     "bin": "dist/index.js",
     "files": [
         "dist/index.js",
-        "templates/*"
+        "templates/**/*/src",
+        "templates/**/*/view",
+        "templates/**/*/package.json",
+        "templates/**/*/voxer.config.js",
+        "templates/**/*/voxer.config.ts"
     ],
     "main": "dist/index.js",
     "engines": {
