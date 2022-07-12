@@ -1,15 +1,15 @@
 import { exec, ChildProcess } from "child_process";
 import { createServer, ViteDevServer } from "vite";
 import { isTs, mkdir } from "./utils";
-import { writeTemplate } from "./template";
 import fs from "fs";
 import { readConfig, UserConfig } from "./config";
-import { buildSrc } from "./build";
+import { buildTs, installLibraries } from "./build";
 
 const cwd = process.cwd();
 const watchers: fs.FSWatcher[] = [];
 
 let printLine = 0;
+
 export function pipeIo(child: ChildProcess): void {
     const print = (type: "info" | "error", chunk: any) => {
         const messages = Buffer.from(chunk).toString().trim().split("\n");
@@ -24,18 +24,11 @@ export function pipeIo(child: ChildProcess): void {
     child.stdout?.on("data", print.bind(null, "info"));
 }
 
-export function runElectron(config: UserConfig): ChildProcess {
+export function runElectron(args: string[]): ChildProcess {
     mkdir(".voxer");
 
-    const options = {
-        isTs: isTs(),
-        isDev: true,
-        config,
-    };
-    writeTemplate("main.js", options);
-    writeTemplate("preload.js", options);
-
-    const electron = exec(`npx electron .`);
+    const command = `npx electron ${args.join(" ")} .`;
+    const electron = exec(command);
     pipeIo(electron);
 
     return electron;
@@ -53,17 +46,19 @@ export async function runVite(config: UserConfig): Promise<ViteDevServer> {
     return server;
 }
 
-export async function runApp(server?: ViteDevServer): Promise<void> {
+export async function runApp(electronArgs: string[], server?: ViteDevServer): Promise<void> {
     if (isTs()) {
-        await buildSrc();
+        await buildTs();
     }
 
     const config = readConfig();
+    installLibraries(config);
+
     const isRestart = !!server;
     if (!isRestart) {
         server = await runVite(config);
     }
-    const electron = runElectron(config);
+    const electron = runElectron(electronArgs);
 
     const closeElectron = async () => {
         await server?.close();
@@ -78,7 +73,7 @@ export async function runApp(server?: ViteDevServer): Promise<void> {
         electron.off("close", closeElectron);
         electron.kill();
 
-        await runApp(server);
+        await runApp(electronArgs, server);
     };
 
     watch("src", restartElectron);

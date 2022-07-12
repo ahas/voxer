@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import { Command } from "commander";
-import { buildElectron, buildRelease, buildSrc, buildVite } from "./build";
+import { Command, Option } from "commander";
+import { electronFlags } from "./electron-flags";
+import { buildElectron, buildRelease, buildTs, buildVite } from "./build";
 // import { clean } from "./utils";
 
 import { readConfig } from "./config";
@@ -15,17 +16,43 @@ program.name("voxer")
     .description(pkg.description)
     .version(pkg.version);
 
-async function start() {
-    cleanVoxer();
-
-    await dev.runApp();
-}
-
-program.action(() => start());
-program
-    .command("start")
+withElectronFlags(program.command("start"))
     .description("[default] Run application in a development")
-    .action(() => start());
+    .action(async (options, command) => {
+        const optionDefs: Option[] = command.options;
+        const electronOptions = [];
+
+        for (const optionDef of optionDefs) {
+            const { long, required, negate } = optionDef;
+            const attr = optionDef.attributeName();
+            const val = options[attr];
+
+            if (
+                (negate && !val) ||
+                (!required && !negate && val && typeof val === "boolean") ||
+                (required && val && typeof val !== "boolean")
+            ) {
+                let exp = long;
+                if (required) {
+                    exp += "=" + val;
+                }
+
+                electronOptions.push({
+                    attr,
+                    required,
+                    long,
+                    negate,
+                    val,
+                    type: typeof val,
+                    exp,
+                });
+            }
+        }
+
+        const electronArgs = electronOptions.map((x) => x.exp || "");
+        cleanVoxer();
+        await dev.runApp(electronArgs);
+    });
 
 program
     .command("build")
@@ -33,14 +60,14 @@ program
     .option("-s, --src", "build src")
     .option("-v, --vite", "build vite")
     .option("-e, --electron", "build electron")
-    .action(async (options) => {
+    .action(async (options, command) => {
         cleanVoxer();
 
         if (Object.keys(options).length === 0) {
             await buildRelease();
         } else {
             if (isTs()) {
-                await buildSrc();
+                await buildTs();
             }
 
             const config = readConfig();
@@ -65,10 +92,17 @@ program
 program
     .command("rebuild")
     .description("Rebuild")
-    .action(async () => {
+    .action(async (options) => {
         cleanVoxer();
         cleanRelease();
         await buildRelease();
     });
 
-program.parse(process.argv);
+program.parse();
+
+function withElectronFlags(command: Command) {
+    electronFlags.forEach((flags) => {
+        command.option(flags.join(" "));
+    });
+    return command;
+}

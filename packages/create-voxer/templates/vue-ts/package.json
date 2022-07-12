@@ -6,10 +6,11 @@
     "scripts": {
         "clean": "voxer clean",
         "rebuild": "voxer rebuild",
-        "dev": "voxer",
+        "dev": "voxer start --enable-logging --inspect=5858 --remote-debugging-port=9222",
         "build": "voxer build"
     },
     "dependencies": {
+        "reflect-metadata": "^0.1.13",
         "vue": "^3.2.33"
     },
     "devDependencies": {

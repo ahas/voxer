@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "declaration": true,
+        "resolveJsonModule": true,
+        "inlineSourceMap": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "types": ["node"],
+        "baseUrl": "../src",
+        "outDir": "../.voxer/dist",
+        "paths": {
+            "#app": ["../.voxer"],
+            "#app/*": ["../.voxer/*"]
+        }
+    },
+    "include": ["./voxer.d.ts", "../src/**/*", "../voxer.config.ts"]
+}

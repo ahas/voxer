@@ -1,6 +1,6 @@
 {
     "name": "voxer",
-    "version": "0.0.5-beta.8",
+    "version": "0.0.5-beta.9",
     "description": "vite + electron framework",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -37,16 +37,18 @@
         "dev": "yarn tsc && yarn start"
     },
     "dependencies": {
-        "commander": "^9.2.0",
+        "commander": "^9.3.0",
         "ejs": "^3.1.8",
         "electron": "^18.2.0",
         "electron-builder": "^23.0.3",
+        "glob": "^8.0.3",
         "prettier": "^2.6.2",
         "typescript": "^4.6.4",
         "vite": "^2.9.8"
     },
     "devDependencies": {
         "@types/ejs": "^3.1.1",
-        "@types/prettier": "^2.6.1"
+        "@types/prettier": "^2.6.1",
+        "reflect-metadata": "^0.1.13"
     }
 }

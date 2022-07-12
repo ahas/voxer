@@ -1,5 +1,9 @@
-const { app, BrowserWindow } = require("electron");
+require("reflect-metadata");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const { resolve: _resolve } = require("path");
+const { INJECTED_INSTANCE_METADATA } = require("./constants");
+
+global.__VOXER_MAIN__ = true;
 
 async function createWindow() {
     const win = new BrowserWindow({
@@ -9,13 +13,31 @@ async function createWindow() {
             contextIsolation: true,
         },
     });
+
+    <% if (isDev) { %>
     const resolve = _resolve.bind(_resolve, __dirname, "../view");
-    <% if (isTs) {  %>
-    const { main } = require("./dist/src/main.js");
     <% } else { %>
-    const { main } = require("../src/main.js");
+    const resolve = _resolve.bind(_resolve, __dirname);
+    <% } %>
+
+    <% if (isTs) {  %>
+    const { main, inject } = require("./dist/src/main.js");
+    <% } else { %>
+    const { main, inject } = require("../src/main.js");
     <% } %>
     await main(win, resolve);
+    const injectables = await require("./inject")(inject);
+
+    for (const injectable of injectables) {
+        for (const method of injectable.__exposedMethods) {
+            const eventName = injectable.name + "." + method;
+
+            ipcMain.on(eventName, () => {
+                const instance = Reflect.getMetadata(INJECTED_INSTANCE_METADATA, injectable);
+                instance[method]();
+            });
+        }
+    }
 
     if (!win.webContents.getURL()) {
         <% if (isDev) { %>

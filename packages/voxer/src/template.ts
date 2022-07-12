@@ -20,3 +20,7 @@ export async function writeTemplate(name: string, options: any) {
         }),
     );
 }
+
+export async function duplicateTemplate(name: string) {
+    fs.copyFileSync(resolve(__dirname, "../assets", name), resolve(cwd, ".voxer", name));
+}

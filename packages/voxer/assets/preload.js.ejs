@@ -1,3 +1,9 @@
+require("reflect-metadata");
+require("./inject");
+const { ipcRenderer } = require("electron");
+
+global.__VOXER_PRELOAD__ = true;
+
 const { contextBridge } = require("electron");
 <% if (isTs) { %>
 let config = require("./dist/voxer.config.js");
@@ -20,3 +26,21 @@ require("./dist/src/main").preload?.();
 <% } else { %>
 require("../src/main").preload?.();
 <% } %>
+
+<% if (isTs) {  %>
+const { inject: getInjectables} = require("./dist/src/main.js");
+<% } else { %>
+const { inject: getInjectables } = require("../src/main.js");
+<% } %>
+
+const injectables = getInjectables();
+
+for (const injectable of injectables) {
+    const api = {};
+
+    for (const method of injectable.__exposedMethods) {
+        api[method] = () => ipcRenderer.send(injectable.name + "." + method);
+    }
+
+    contextBridge.exposeInMainWorld(injectable.name, api);
+}
