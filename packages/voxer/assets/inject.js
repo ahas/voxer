@@ -45,7 +45,7 @@ function inject(injectable) {
 
 module.exports = function (getInjectables) {
     if (!getInjectables) {
-        return;
+        return [];
     }
 
     const injectables = getInjectables();

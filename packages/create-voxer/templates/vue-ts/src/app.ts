@@ -6,30 +6,30 @@ import { Sub } from "./sub";
     inject: [Sub],
 })
 export class App {
-    constructor(private readonly sub: Sub) {}
+    win: BrowserWindow;
+
+    constructor(private readonly sub: Sub) {
+        this.win = BrowserWindow.getAllWindows()[0];
+    }
 
     @Expose()
     maximize() {
-        const win = BrowserWindow.getAllWindows()[0];
-        win.maximize();
+        this.win.maximize();
         this.sub.sub();
     }
 
     @Expose()
     unmaximize() {
-        const win = BrowserWindow.getAllWindows()[0];
-        win.unmaximize();
+        this.win.unmaximize();
     }
 
     @Expose()
     showMenu() {
-        const win = BrowserWindow.getAllWindows()[0];
-        win.setMenuBarVisibility(true);
+        this.win.setMenuBarVisibility(true);
     }
 
     @Expose()
     hideMenu() {
-        const win = BrowserWindow.getAllWindows()[0];
-        win.setMenuBarVisibility(false);
+        this.win.setMenuBarVisibility(false);
     }
 }
