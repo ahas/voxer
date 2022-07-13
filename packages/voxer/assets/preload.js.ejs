@@ -33,14 +33,16 @@ const { inject: getInjectables} = require("./dist/src/main.js");
 const { inject: getInjectables } = require("../src/main.js");
 <% } %>
 
-const injectables = getInjectables();
+if (getInjectables) {
+    const injectables = getInjectables();
 
-for (const injectable of injectables) {
-    const api = {};
+    for (const injectable of injectables) {
+        const api = {};
 
-    for (const method of injectable.__exposedMethods) {
-        api[method] = () => ipcRenderer.send(injectable.name + "." + method);
+        for (const method of injectable.__exposedMethods) {
+            api[method] = () => ipcRenderer.send(injectable.name + "." + method);
+        }
+
+        contextBridge.exposeInMainWorld(injectable.name, api);
     }
-
-    contextBridge.exposeInMainWorld(injectable.name, api);
 }
