@@ -32,9 +32,12 @@ async function createWindow() {
         for (const method of injectable.__exposedMethods) {
             const eventName = injectable.name + "." + method;
 
-            ipcMain.on(eventName, () => {
+            ipcMain.on(eventName, async (event, ...args) => {
                 const instance = Reflect.getMetadata(INJECTED_INSTANCE_METADATA, injectable);
-                instance[method]();
+                const ret = await instance[method](...args);
+                if (ret !== undefined) {
+                    event.returnValue = ret;
+                }
             });
         }
     }

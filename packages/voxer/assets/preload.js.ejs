@@ -40,7 +40,7 @@ if (getInjectables) {
         const api = {};
 
         for (const method of injectable.__exposedMethods) {
-            api[method] = () => ipcRenderer.send(injectable.name + "." + method);
+            api[method] = (args) => ipcRenderer.invoke(injectable.name + "." + method, ...args);
         }
 
         contextBridge.exposeInMainWorld(injectable.name, api);
