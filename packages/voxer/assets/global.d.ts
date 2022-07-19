@@ -1,10 +1,13 @@
-import { EventEmitter } from "events";
+import type { EventEmitter } from "node:events";
 
 declare global {
     interface VoxerApp {
         injectables: Function[];
-        renderer: EventEmitter;
-        main: EventEmitter;
+        events: {
+            on: InstanceType<typeof EventEmitter>["on"];
+            once: InstanceType<typeof EventEmitter>["once"];
+            off: InstanceType<typeof EventEmitter>["off"];
+        };
     }
 
     var voxer: VoxerApp;
