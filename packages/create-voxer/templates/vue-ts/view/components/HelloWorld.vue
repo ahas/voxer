@@ -7,6 +7,7 @@
         <button type="button" @click="App.unmaximize()">Minimize</button>
         <button type="button" @click="App.showMenu()">Show Menu</button>
         <button type="button" @click="App.hideMenu()">Hide Menu</button>
+        <p>{{ msgFromServer }}</p>
         <p>
             Edit
             <code>components/HelloWorld.vue</code> to test HMR
@@ -31,8 +32,16 @@ import { ref } from "vue";
 
 defineProps<{ msg: string }>();
 
-const App = window.App;
+const { App, voxer } = window;
+
 const count = ref(0);
+
+const msgFromServer = ref("");
+
+console.log(voxer.events);
+voxer.events.on("call", (msg: string) => {
+    msgFromServer.value = msg;
+});
 </script>
 
 <style scoped>

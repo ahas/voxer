@@ -1,7 +1,11 @@
 require("reflect-metadata");
 require("./inject");
+const { EventEmitter } = require("events");
 const { ipcRenderer } = require("electron");
 
+class VoxerEventEmitter extends EventEmitter {};
+
+// Init preloader and configuration
 global.__VOXER_PRELOAD__ = true;
 
 const { contextBridge } = require("electron");
@@ -17,8 +21,21 @@ if (config.default) {
 
 window.addEventListener("DOMContentLoaded", () => {});
 
+// Voxer framework initialization
+
+const events = new VoxerEventEmitter();
+
+ipcRenderer.on("voxer:renderer", (event, channel, ...args) => {
+    events.emit(channel, ...args);
+});
+
 contextBridge.exposeInMainWorld("voxer", {
     title: config.window?.title,
+    events: {
+        on: events.on.bind(events),
+        once: events.once.bind(events),
+        off: events.off.bind(events),
+    },
 });
 
 <% if (isTs) { %>
