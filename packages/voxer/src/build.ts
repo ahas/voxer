@@ -1,4 +1,4 @@
-import ts from "typescript";
+import ts, { InstallPackageOptions } from "typescript";
 import { resolve } from "path";
 import { readConfig, UserConfig } from "./config";
 import { build as _buildVite } from "vite";
@@ -8,8 +8,13 @@ import { duplicateTemplate, writeTemplate } from "./template";
 
 const cwd = process.cwd();
 
+interface InstallVoxerOptions {
+    isTs?: boolean;
+    isDev?: boolean;
+    config?: UserConfig;
+}
+
 export async function installTs() {
-    duplicateTemplate("global.d.ts");
     duplicateTemplate("params.d.ts");
     duplicateTemplate("decorators.d.ts");
     duplicateTemplate("metadata-storage.d.ts");
@@ -84,17 +89,14 @@ export async function buildRelease() {
     }
 
     const config = readConfig();
-    installLibraries(config);
+    installLibraries({ isDev: false, config });
     await buildVite(config);
     await buildElectron(config);
 }
 
-export function installLibraries(config: UserConfig) {
-    const options = {
-        isTs: isTs(),
-        isDev: true,
-        config,
-    };
+export function installLibraries(options: InstallVoxerOptions) {
+    options = options || {};
+    options.isTs = isTs();
 
     writeTemplate("main.js", options);
     writeTemplate("preload.js", options);

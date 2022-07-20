@@ -1,9 +1,20 @@
+import type { EventEmitter } from "node:events";
+import type { ipcRenderer } from "electron";
 
 declare global {
     interface CustomEventMap {}
     interface Api {}
     interface Voxer {
         title: string;
+        injectables: Function[];
+        events: {
+            on: InstanceType<typeof EventEmitter>["on"];
+            once: InstanceType<typeof EventEmitter>["once"];
+            off: InstanceType<typeof EventEmitter>["off"];
+            send: typeof ipcRenderer["send"];
+            sendSync: typeof ipcRenderer["sendSync"];
+            invoke: typeof ipcRenderer["invoke"];
+        };
     }
 
     interface Window {
@@ -23,4 +34,4 @@ declare global {
     var voxer: Voxer;
 }
 
-export {}
+export {};

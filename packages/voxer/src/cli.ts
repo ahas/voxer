@@ -57,26 +57,32 @@ withElectronFlags(program.command("start"))
 program
     .command("build")
     .description("Build")
-    .option("-s, --src", "build src")
-    .option("-v, --vite", "build vite")
-    .option("-e, --electron", "build electron")
+    .option("--no-src", "Run typescript build")
+    .option("--no-vite", "Run vite build")
+    .option("--no-electron", "Run electron build")
+    // .option("-m, --mac")
+    // .option("-w, --win")
+    // .option("-l, --linux")
+    // .option("--portable")
+    // .option("--ia32")
+    // .option("--x64")
     .action(async (options, command) => {
         cleanVoxer();
 
         if (Object.keys(options).length === 0) {
             await buildRelease();
         } else {
-            if (isTs()) {
+            if (!options.noSrc && isTs()) {
                 await buildTs();
             }
 
             const config = readConfig();
 
-            if (options.vite) {
+            if (!options.noVite && options.vite) {
                 await buildVite(config);
             }
 
-            if (options.electron) {
+            if (!options.noElectron && options.electron) {
                 await buildElectron(config);
             }
         }

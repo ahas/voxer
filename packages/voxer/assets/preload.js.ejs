@@ -9,15 +9,6 @@ class VoxerEventEmitter extends EventEmitter {};
 global.__VOXER_PRELOAD__ = true;
 
 const { contextBridge } = require("electron");
-<% if (isTs) { %>
-let config = require("./dist/voxer.config.js");
-<% } else { %>
-let config = require("../voxer.config.js");
-<% } %>
-
-if (config.default) {
-    config = config.default;
-}
 
 window.addEventListener("DOMContentLoaded", () => {});
 
@@ -30,11 +21,13 @@ ipcRenderer.on("voxer:renderer", (event, channel, ...args) => {
 });
 
 contextBridge.exposeInMainWorld("voxer", {
-    title: config.window?.title,
     events: {
         on: events.on.bind(events),
         once: events.once.bind(events),
         off: events.off.bind(events),
+        send: ipcRenderer.send.bind(ipcRenderer),
+        sendSync: ipcRenderer.sendSync.bind(ipcRenderer),
+        invoke: ipcRenderer.invoke.bind(ipcRenderer),
     },
 });
 

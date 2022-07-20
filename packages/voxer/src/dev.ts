@@ -52,7 +52,7 @@ export async function runApp(electronArgs: string[], server?: ViteDevServer): Pr
     }
 
     const config = readConfig();
-    installLibraries(config);
+    installLibraries({ isDev: true, config });
 
     const isRestart = !!server;
     if (!isRestart) {
