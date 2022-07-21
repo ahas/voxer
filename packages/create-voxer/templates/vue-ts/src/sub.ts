@@ -1,4 +1,4 @@
-import { Expose, Injectable } from "#app/decorators";
+import { Expose, Injectable } from "#app";
 
 @Injectable()
 export class Sub {

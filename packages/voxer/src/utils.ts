@@ -2,16 +2,17 @@ import fs from "fs";
 import { relative, dirname, join, resolve, basename } from "path";
 import glob from "glob";
 import ts, { MapLike } from "typescript";
+import { info } from "./logger";
 
 const cwd = process.cwd();
 
 export function cleanVoxer(): void {
-    console.info("clean .voxer");
+    info("Remove .voxer");
     fs.rmSync(resolve(cwd, ".voxer"), { force: true, recursive: true });
 }
 
 export function cleanRelease(): void {
-    console.info("clean voxer_release");
+    info("Remove voxer_release");
     fs.rmSync(resolve(cwd, "voxer_release"), { force: true, recursive: true });
 }
 
@@ -39,7 +40,8 @@ function getAliases(paths: MapLike<string[]>): Map<string, string> {
         if (!p.includes("*") || paths[p].filter((x) => x.includes("*")).length === 0) {
             continue;
         }
-        const prefix = p.indexOf("/") >= 0 ? join(p.substring(0, p.indexOf("/")), "/").replace(/\\/g, "/") : p;
+        // const prefix = p.indexOf("/") >= 0 ? join(p.substring(0, p.indexOf("/")), "/").replace(/\\/g, "/") : p;
+        const prefix = dirname(p);
         const dst = paths[p][0].substring(0, paths[p][0].lastIndexOf("/"));
         map.set(prefix, resolve(baseDir, dst));
     }
@@ -65,7 +67,9 @@ export function resolveAlias(options: ts.CompilerOptions): void {
     const IMPORT_REGEX = /(?:import|from)\s+['"]([^'"]*)['"]/g;
     const REQUIRE_REGEX = /(?:import|require)\s*\(\s*['"]([^'"]*)['"]\s*\)/g;
     const exts = ["js", "jsx", "ts", "tsx", "d.ts"];
-    const files = glob.sync(`**/*.{${exts.join()}}`, { cwd: options.outDir }).map((x) => resolve(options.outDir || "", x));
+    const files = glob
+        .sync(`**/*.{${exts.join()}}`, { cwd: options.outDir })
+        .map((x) => resolve(options.outDir || "", x));
     const aliases = getAliases(options.paths || {});
 
     const replace = (matched: string, pathText: string, file: string) => {

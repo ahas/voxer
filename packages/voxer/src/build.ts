@@ -1,10 +1,10 @@
-import ts, { InstallPackageOptions } from "typescript";
+import ts from "typescript";
 import { resolve } from "path";
 import { readConfig, UserConfig } from "./config";
 import { build as _buildVite } from "vite";
 import { build as _buildElectron } from "electron-builder";
 import { isTs, mkdir, resolveAlias } from "./utils";
-import { duplicateTemplate, writeTemplate } from "./template";
+import { duplicateAsset, compileTemplate } from "./assets";
 
 const cwd = process.cwd();
 
@@ -14,17 +14,10 @@ interface InstallVoxerOptions {
     config?: UserConfig;
 }
 
-export async function installTs() {
-    duplicateTemplate("params.d.ts");
-    duplicateTemplate("decorators.d.ts");
-    duplicateTemplate("metadata-storage.d.ts");
-    duplicateTemplate("voxer.d.ts");
-    duplicateTemplate("tsconfig.json");
-}
 
 export async function buildTs() {
     mkdir(".voxer");
-    installTs();
+    installTypes();
 
     const configFile = ts.findConfigFile(resolve(cwd, "src"), ts.sys.fileExists, "tsconfig.json");
     if (!configFile) {
@@ -89,20 +82,35 @@ export async function buildRelease() {
     }
 
     const config = readConfig();
-    installLibraries({ isDev: false, config });
+    installAssets({ isDev: false, config });
     await buildVite(config);
     await buildElectron(config);
 }
 
-export function installLibraries(options: InstallVoxerOptions) {
+export async function installTypes() {
+    duplicateAsset("lib/params.d.ts");
+    duplicateAsset("lib/decorators.d.ts");
+    duplicateAsset("lib/metadata-storage.d.ts");
+    duplicateAsset("lib/events.d.ts");
+    duplicateAsset("index.d.ts");
+    duplicateAsset("voxer.d.ts");
+    duplicateAsset("tsconfig.json");
+}
+
+export function installAssets(options: InstallVoxerOptions) {
     options = options || {};
     options.isTs = isTs();
 
-    writeTemplate("main.js", options);
-    writeTemplate("preload.js", options);
-    duplicateTemplate("constants.js");
-    duplicateTemplate("decorators.js");
-    duplicateTemplate("inject.js");
-    duplicateTemplate("metadata-storage.js");
-    duplicateTemplate("params.js");
+    compileTemplate("templates/main.js", options);
+    compileTemplate("templates/load.js", options);
+    compileTemplate("templates/resolve.js", options);
+    duplicateAsset("lib/constants.js");
+    duplicateAsset("lib/decorators.js");
+    duplicateAsset("lib/inject.js");
+    duplicateAsset("lib/metadata-storage.js");
+    duplicateAsset("lib/params.js");
+    duplicateAsset("lib/events.js");
+    duplicateAsset("main.js");
+    duplicateAsset("preload.js");
+    duplicateAsset("index.js");
 }

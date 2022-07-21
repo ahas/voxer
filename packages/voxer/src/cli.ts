@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command, Option } from "commander";
 import { electronFlags } from "./electron-flags";
-import { buildElectron, buildRelease, buildTs, buildVite, installLibraries } from "./build";
+import { buildElectron, buildRelease, buildTs, buildVite, installAssets } from "./build";
 // import { clean } from "./utils";
 
 import { readConfig } from "./config";
@@ -74,7 +74,7 @@ program
         }
 
         const config = readConfig();
-        installLibraries({ isDev: false, config });
+        installAssets({ isDev: false, config });
 
         if (options.vite) {
             await buildVite(config);

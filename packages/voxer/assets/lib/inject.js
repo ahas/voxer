@@ -15,7 +15,7 @@ function inject(injectable) {
     const name = injectable.name;
 
     if (circularInjection[name]) {
-        console.log("Circular dependency injection detected: %s", name);
+        console.error("Circular dependency injection detected: %s", name);
     }
 
     circularInjection[name] = true;

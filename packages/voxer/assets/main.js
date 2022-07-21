@@ -1,7 +1,7 @@
 require("reflect-metadata");
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { resolve: _resolve } = require("path");
-const { INJECTED_INSTANCE_METADATA } = require("./constants");
+const { INJECTED_INSTANCE_METADATA } = require("./lib/constants");
 
 global.__VOXER_MAIN__ = true;
 
@@ -14,19 +14,11 @@ async function createWindow() {
         },
     });
 
-    <% if (isDev) { %>
-    const resolve = _resolve.bind(_resolve, __dirname, "../view");
-    <% } else { %>
-    const resolve = _resolve.bind(_resolve, __dirname);
-    <% } %>
+    const resolve = require("./templates/resolve");
+    const { main, inject } = require("./templates/main");
 
-    <% if (isTs) {  %>
-    const { main, inject } = require("./dist/src/main.js");
-    <% } else { %>
-    const { main, inject } = require("../src/main.js");
-    <% } %>
     await main(win, resolve);
-    const injectables = await require("./inject")(inject);
+    const injectables = await require("./lib/inject")(inject);
 
     for (const injectable of injectables) {
         for (const method of injectable.__exposedMethods) {
@@ -40,18 +32,7 @@ async function createWindow() {
     }
 
     if (!win.webContents.getURL()) {
-        <% if (isDev) { %>
-            <% if (isTs) {  %>
-            const config = require("./dist/voxer.config.js").default;
-            const { main } = require("./dist/src/main.js");
-            <% } else { %>
-            const config = require("../voxer.config.js");
-            const { main } = require("../src/main.js");
-            <% } %>
-            win.loadURL("http://localhost:<%= config.vite?.port || 3000 %>");
-        <% } else { %>
-            win.loadFile(resolve("<%= "index.html" %>"));
-        <% } %>
+        require("./templates/load").load(win);
     }
 }
 

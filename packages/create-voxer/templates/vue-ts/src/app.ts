@@ -1,5 +1,5 @@
 import { BrowserWindow } from "electron";
-import { Expose, Injectable } from "#app/decorators";
+import { Expose, Injectable } from "#app";
 import { Sub } from "./sub";
 
 @Injectable({

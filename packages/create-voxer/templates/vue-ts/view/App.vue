@@ -14,6 +14,12 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from "./components/HelloWorld.vue";
+
+const { voxer } = window;
+voxer.events.handle("add", (a, b, c) => {
+    console.log(a, b, c);
+    return a + b + c;
+});
 </script>
 
 <style scoped>

@@ -12,7 +12,7 @@ async function fetchVoxerVersion(): Promise<string> {
     return new Promise((resolve) => {
         const proc = exec("npm show voxer version");
         proc.stdout.on("data", (version) => {
-            resolve(String(version).replace(/[\\n\n]/gi, ''));
+            resolve(String(version).replace(/[\\n\n]/gi, ""));
         });
     });
 }
@@ -30,8 +30,8 @@ function toValidPackageName(projectName: string): string {
         .replace(/[^a-z0-9-~]+/g, "-");
 }
 
-function print(...msg: string[]): void {
-    console.log(...msg);
+function print(message?: any, ...optionalParams?: any[]): void {
+    console.log(message, ...optionalParams);
 }
 
 function getDefaultProjectName(): string {
@@ -68,7 +68,7 @@ async function copyTemplate(target: "vue", projectName: string): Promise<void> {
 
     const pkg = require(resolve(projectDir, "package.json"));
     pkg.name = projectName;
-    pkg.devDependencies['voxer'] = '^' + await fetchVoxerVersion();
+    pkg.devDependencies["voxer"] = "^" + (await fetchVoxerVersion());
     write(
         projectDir,
         "package.json",
@@ -131,12 +131,12 @@ function pkgFromUserAgent(userAgent: string | undefined) {
     print(`  cd ${projectName}`);
     switch (pkgManager) {
         case "yarn":
-            console.log("  yarn");
-            console.log("  yarn dev");
+            print("  yarn");
+            print("  yarn dev");
             break;
         default:
-            console.log(`  ${pkgManager} install`);
-            console.log(`  ${pkgManager} run dev`);
+            print(`  ${pkgManager} install`);
+            print(`  ${pkgManager} run dev`);
             break;
     }
 })(process.argv[2]);

@@ -3,7 +3,7 @@ import { createServer, ViteDevServer } from "vite";
 import { isTs, mkdir } from "./utils";
 import fs from "fs";
 import { readConfig, UserConfig } from "./config";
-import { buildTs, installLibraries } from "./build";
+import { buildTs, installAssets } from "./build";
 
 const cwd = process.cwd();
 const watchers: fs.FSWatcher[] = [];
@@ -52,7 +52,7 @@ export async function runApp(electronArgs: string[], server?: ViteDevServer): Pr
     }
 
     const config = readConfig();
-    installLibraries({ isDev: true, config });
+    installAssets({ isDev: true, config });
 
     const isRestart = !!server;
     if (!isRestart) {

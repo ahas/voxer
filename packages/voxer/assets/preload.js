@@ -1,9 +1,7 @@
 require("reflect-metadata");
-require("./inject");
-const { EventEmitter } = require("events");
+require("./lib/inject");
 const { ipcRenderer } = require("electron");
-
-class VoxerEventEmitter extends EventEmitter {};
+const { VoxerEventEmitter } = require("./lib/events");
 
 // Init preloader and configuration
 global.__VOXER_PRELOAD__ = true;
@@ -13,10 +11,9 @@ const { contextBridge } = require("electron");
 window.addEventListener("DOMContentLoaded", () => {});
 
 // Voxer framework initialization
-
 const events = new VoxerEventEmitter();
 
-ipcRenderer.on("voxer:renderer", (event, channel, ...args) => {
+ipcRenderer.on("voxer:renderer", (_, channel, ...args) => {
     events.emit(channel, ...args);
 });
 
@@ -28,20 +25,18 @@ contextBridge.exposeInMainWorld("voxer", {
         send: ipcRenderer.send.bind(ipcRenderer),
         sendSync: ipcRenderer.sendSync.bind(ipcRenderer),
         invoke: ipcRenderer.invoke.bind(ipcRenderer),
+        handle: (eventName, listener) => {
+            ipcRenderer.on.call(ipcRenderer, "voxer:renderer:" + eventName, (_, ...args) => {
+                let result = listener(...args);
+                result = Array.isArray(result) ? result : [result];
+                ipcRenderer.send("voxer:main:" + eventName, ...result);
+            });
+        },
     },
 });
 
-<% if (isTs) { %>
-require("./dist/src/main").preload?.();
-<% } else { %>
-require("../src/main").preload?.();
-<% } %>
-
-<% if (isTs) {  %>
-const { inject: getInjectables} = require("./dist/src/main.js");
-<% } else { %>
-const { inject: getInjectables } = require("../src/main.js");
-<% } %>
+const { inject: getInjectables, preload } = require("./templates/main");
+preload?.();
 
 if (getInjectables) {
     const injectables = getInjectables();

@@ -32,16 +32,11 @@ import { ref } from "vue";
 
 defineProps<{ msg: string }>();
 
-const { App, voxer } = window;
+const { App } = window;
 
 const count = ref(0);
 
 const msgFromServer = ref("");
-
-console.log(voxer.events);
-voxer.events.on("call", (msg: string) => {
-    msgFromServer.value = msg;
-});
 </script>
 
 <style scoped>
