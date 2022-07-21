@@ -67,7 +67,6 @@ program
     // .option("--ia32")
     // .option("--x64")
     .action(async (options, command) => {
-        console.log(options);
         cleanVoxer();
 
         if (options.src && isTs()) {
