@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command, Option } from "commander";
 import { electronFlags } from "./electron-flags";
-import { buildElectron, buildRelease, buildTs, buildVite } from "./build";
+import { buildElectron, buildRelease, buildTs, buildVite, installLibraries } from "./build";
 // import { clean } from "./utils";
 
 import { readConfig } from "./config";
@@ -69,22 +69,19 @@ program
     .action(async (options, command) => {
         cleanVoxer();
 
-        if (Object.keys(options).length === 0) {
-            await buildRelease();
-        } else {
-            if (!options.noSrc && isTs()) {
-                await buildTs();
-            }
+        if (!options.src && isTs()) {
+            await buildTs();
+        }
 
-            const config = readConfig();
+        const config = readConfig();
+        installLibraries({ isDev: false, config });
 
-            if (!options.noVite && options.vite) {
-                await buildVite(config);
-            }
+        if (options.vite) {
+            await buildVite(config);
+        }
 
-            if (!options.noElectron && options.electron) {
-                await buildElectron(config);
-            }
+        if (options.electron) {
+            await buildElectron(config);
         }
     });
 
