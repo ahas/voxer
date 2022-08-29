@@ -175,6 +175,7 @@ export class App {
 ```
 
 Command 데코레이터는 Mousetrap.bind를 사용하여 단축키를 등록합니다.
+
 Mousetrap에 대한 사용법은 [이곳](https://github.com/ccampbell/mousetrap)에서 확인하세요.
 
 ## OnMain & OnRenderer
@@ -227,6 +228,8 @@ export async function main(win: BrowserWindow) {
   // > 실행 결과는 6 입니다.
 }
 ```
+
+# 배포
 
 # 라이센스
 MIT (라이센스 파일 추가 예정)
