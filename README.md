@@ -55,6 +55,7 @@ voxer-app/
 ```
 
 기본적으로 Voxer 프로젝트는 최상단에 .voxer 폴더, src, view 폴더가 있습니다.
+
 .voxer 폴더는 개발용 빌드에 대한 리소스가 포함되어 있으며 Voxer 에 의해 자동 생성됩니다.
 
 src 폴더는 Main 프로세스에 대한 소스 코드들이 포함되며 view 폴더는 프론트엔드단의 리소스들이 포함됩니다.
@@ -84,14 +85,17 @@ export function inject() {
 Voxer에는 세가지의 예약된 함수가 있습니다.
 
 **main**: export된 함수는 애플리케이션 실행 시 가장 먼저 호출됩니다.
+
 첫번째 매개변수로 메인 BrowserWindow가 전달됩니다.
 필수적으로 선언되어야 하는 함수입니다.
 
 **preload**: Electron에서 preload.js를 실행 시에 호출되는 함수입니다.
+
 Renderer 프로세스 상에서 실행됩니다.
 꼭 선언하지 않아도 되는 함수입니다.
 
 **inject**: Voxer에서 의존성 주입시에 호출되는 함수입니다.
+
 Injectable 데코레이터가 선언된 클래스를 반환해야합니다.
 꼭 선언하지 않아도 되는 함수입니다.
 
@@ -117,7 +121,11 @@ export class App {
 
 ## Expose
 
-기존 Electron만 사용한 방식에서 Renderer와 Main 프로세스를 분리하기 위해서는 preload.js 상에서 contextBridge를 통한 exposeInMainWorld 함수를 사용하여 분리된 프로세스 사이를 연결해줄 수 있는 함수를 생성해줘야 했습니다.
+기존 Electron만 사용한 방식에서 Renderer와 Main 프로세스를 분리하기 위해서는
+
+preload.js 상에서 contextBridge를 통한 exposeInMainWorld 함수를 사용하여
+
+분리된 프로세스 사이를 연결해줄 수 있는 함수를 생성해줘야 했습니다.
 
 ```ts
 // Preload
@@ -132,6 +140,7 @@ window.App.doThing();
 ```
 
 Voxer에서는 해당 절차를 간소화한 Expose 데코레이터를 사용하여
+
 코드를 더욱 깔끔하게 작성할 수 있습니다.
 
 ```ts
@@ -202,6 +211,7 @@ ipcRenderer.on("bar", () => {});
 ## handle & invoke
 
 Renderer -> Main 방향의 함수 호출은 Expose 된 함수를 호출하는 것으로 간단하지만
+
 반대로 Main -> Renderer 방향의 함수 호출은 구현하기 까다롭습니다.
 
 Voxer에서는 handle과 invoke 함수로 간단하게 구현할 수 있습니다.
