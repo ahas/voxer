@@ -1,0 +1,3 @@
+{
+  "extends": "../.voxer/tsconfig.json"
+}

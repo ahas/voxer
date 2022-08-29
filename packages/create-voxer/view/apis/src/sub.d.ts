@@ -1,3 +1,3 @@
 export declare class Sub {
-    sub(): void;
+  sub(): void;
 }

@@ -8,34 +8,34 @@ const voxerPackageJson = JSON.parse(fs.readFileSync(voxerPackageJsonPath).toStri
 const prettier = require("prettier");
 
 module.exports = (env) => {
-    for (const template of templates) {
-        const packageJsonPath = resolve(templatesDir, template, "package.json");
+  for (const template of templates) {
+    const packageJsonPath = resolve(templatesDir, template, "package.json");
 
-        if (!fs.existsSync(packageJsonPath)) {
-            continue;
-        }
-
-        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath));
-        if (env === "production") {
-            packageJson.devDependencies.voxer = voxerPackageJson.version;
-        } else {
-            packageJson.devDependencies.voxer = "file:../../../voxer";
-        }
-
-        fs.writeFileSync(
-            packageJsonPath,
-            prettier.format(JSON.stringify(packageJson, null, 4), {
-                parser: "json",
-                printWidth: 120,
-                tabWidth: 4,
-                useTabs: false,
-            }),
-        );
+    if (!fs.existsSync(packageJsonPath)) {
+      continue;
     }
 
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath));
     if (env === "production") {
-        console.log("Voxer version of all templates are set to", voxerPackageJson.version);
+      packageJson.devDependencies.voxer = voxerPackageJson.version;
     } else {
-        console.log("Voxer version of all templates are set to repository voxer");
+      packageJson.devDependencies.voxer = "file:../../../voxer";
     }
+
+    fs.writeFileSync(
+      packageJsonPath,
+      prettier.format(JSON.stringify(packageJson, null, 4), {
+        parser: "json",
+        printWidth: 120,
+        tabWidth: 4,
+        useTabs: false,
+      })
+    );
+  }
+
+  if (env === "production") {
+    console.log("Voxer version of all templates are set to", voxerPackageJson.version);
+  } else {
+    console.log("Voxer version of all templates are set to repository voxer");
+  }
 };

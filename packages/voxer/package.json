@@ -1,54 +1,56 @@
 {
-    "name": "voxer",
-    "version": "0.0.5-beta.28",
-    "description": "vite + electron framework",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ahas/voxer.git",
-        "directory": "packages/voxer"
-    },
-    "bugs": {
-        "url": "https://github.com/ahas/voxer/issues"
-    },
-    "engines": {
-        "node": ">=14.6.0"
-    },
-    "author": "ahas <dev@ahas.io>",
-    "license": "MIT",
-    "bin": "./dist/cli.js",
-    "files": [
-        "assets",
-        "dist",
-        "types",
-        "vue.d.ts",
-        "react.d.ts",
-        "svelte.d.ts"
-    ],
-    "keywords": [
-        "vite",
-        "electron"
-    ],
-    "scripts": {
-        "clean": "rm -rf dist",
-        "build": "tsc -p tsconfig.json",
-        "start": "node dist/dev.js",
-        "dev": "yarn tsc && yarn start"
-    },
-    "dependencies": {
-        "commander": "^9.3.0",
-        "ejs": "^3.1.8",
-        "electron": "^18.2.0",
-        "electron-builder": "^23.0.3",
-        "glob": "^8.0.3",
-        "prettier": "^2.6.2",
-        "typescript": "^4.6.4",
-        "vite": "^2.9.8"
-    },
-    "devDependencies": {
-        "@types/ejs": "^3.1.1",
-        "@types/prettier": "^2.6.1",
-        "reflect-metadata": "^0.1.13"
-    }
+  "name": "voxer",
+  "version": "1.0.0-rc.1",
+  "description": "vite + electron framework",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahas/voxer.git",
+    "directory": "packages/voxer"
+  },
+  "bugs": {
+    "url": "https://github.com/ahas/voxer/issues"
+  },
+  "engines": {
+    "node": ">=14.6.0"
+  },
+  "author": "ahas <dev@ahas.io>",
+  "license": "MIT",
+  "bin": "./dist/cli.js",
+  "files": [
+    "assets",
+    "dist",
+    "types",
+    "vue.d.ts",
+    "react.d.ts",
+    "svelte.d.ts"
+  ],
+  "keywords": [
+    "vite",
+    "electron"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/dev.js",
+    "dev": "yarn tsc && yarn start",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "commander": "^9.3.0",
+    "ejs": "^3.1.8",
+    "electron": "^18.2.0",
+    "electron-builder": "^23.0.3",
+    "glob": "^8.0.3",
+    "mousetrap": "^1.6.5",
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.8"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.1",
+    "@types/prettier": "^2.6.1",
+    "reflect-metadata": "^0.1.13"
+  }
 }

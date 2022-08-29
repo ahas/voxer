@@ -1,7 +1,7 @@
 module.exports = {
-    ...require("./lib/decorators"),
-    ...require("./lib/constants"),
-    ...require("./lib/inject"),
-    ...require("./lib/params"),
-    ...require("./lib/events"),
+  ...require("./lib/decorators"),
+  ...require("./lib/constants"),
+  ...require("./lib/inject"),
+  ...require("./lib/params"),
+  ...require("./lib/events"),
 };
