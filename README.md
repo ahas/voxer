@@ -21,8 +21,23 @@
 
 # 설치
 
-```console
+```bash
 npm insgall -g voxer
+```
+
+# 프로젝트 생성
+```bash
+# NPM
+npx create-voxer my-app
+cd my-app
+npm install
+npm run dev
+
+# Yarn
+yarn create voxer my-app
+cd my-app
+yarn install
+yarn dev
 ```
 
 # 프로젝트 구조
