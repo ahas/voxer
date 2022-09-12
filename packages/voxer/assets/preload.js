@@ -28,10 +28,15 @@ contextBridge.exposeInMainWorld("voxer", {
     sendSync: ipcRenderer.sendSync.bind(ipcRenderer),
     invoke: ipcRenderer.invoke.bind(ipcRenderer),
     handle: (eventName, listener) => {
-      ipcRenderer.on.call(ipcRenderer, "voxer:renderer:" + eventName, (_, ...args) => {
-        let result = listener(...args);
-        result = Array.isArray(result) ? result : [result];
-        ipcRenderer.send("voxer:main:" + eventName, ...result);
+      if (ipcRenderer.listenerCount(eventName) > 0) {
+        console.info(`[Voxer] Event "${eventName}" is already listening, method will be skipped`);
+        return;
+      }
+
+      ipcRenderer.on.call(ipcRenderer, "voxer:renderer:" + eventName, async (_, ...args) => {
+        const result = await listener(...args);
+
+        ipcRenderer.send("voxer:main:" + eventName, result);
       });
     },
   },
@@ -45,11 +50,11 @@ if (getInjectables) {
   for (const injectable of injectables) {
     const api = {};
 
-    for (const method of injectable.__exposedMethods) {
+    for (const method of injectable?.__exposedMethods || []) {
       api[method] = (...args) => ipcRenderer.invoke(injectable.name + "." + method, ...args);
     }
 
-    for (const command of injectable.__commandMethods) {
+    for (const command of injectable?.__commandMethods || []) {
       const instance = Reflect.getMetadata(INJECTED_INSTANCE_METADATA, injectable);
       const method = injectable?.prototype?.[command[0]].bind(instance);
       Mousetrap.bind(command[1], method);

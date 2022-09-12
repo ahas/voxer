@@ -14,7 +14,7 @@ declare global {
       send: typeof ipcRenderer["send"];
       sendSync: typeof ipcRenderer["sendSync"];
       invoke: typeof ipcRenderer["invoke"];
-      handle: (eventName: string | symbol, listener: (...args: any[]) => any) => this;
+      handle: (eventName: string | symbol, listener: (...args: any[]) => any) => Voxer["events"];
     };
   }
 
