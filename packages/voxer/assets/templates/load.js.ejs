@@ -8,6 +8,7 @@ module.exports.load = (win) => {
         <% } %>
         win.loadURL("http://localhost:<%= config.vite?.port || 3000 %>");
     <% } else { %>
+        const { resolve } = require("./resolve");
         win.loadFile(resolve("<%= "index.html" %>"));
     <% } %>
 };

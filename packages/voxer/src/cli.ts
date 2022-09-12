@@ -60,12 +60,12 @@ program
   .option("--no-src", "Run typescript build")
   .option("--no-vite", "Run vite build")
   .option("--no-electron", "Run electron build")
-  // .option("-m, --mac")
-  // .option("-w, --win")
-  // .option("-l, --linux")
-  // .option("--portable")
-  // .option("--ia32")
-  // .option("--x64")
+  .option("-m, --mac")
+  .option("-w, --win")
+  .option("-l, --linux")
+  .option("--portable")
+  .option("--ia32")
+  .option("--x64")
   .action(async (options, command) => {
     cleanVoxer();
 

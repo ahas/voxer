@@ -3,7 +3,7 @@ const { resolve: _resolve } = require("path");
 <% if (isDev) { %>
 const resolve = _resolve.bind(_resolve, __dirname, "../view");
 <% } else { %>
-const resolve = _resolve.bind(_resolve, __dirname);
+const resolve = _resolve.bind(_resolve, __dirname, "..");
 <% } %>
 
 module.exports.resolve = resolve;
