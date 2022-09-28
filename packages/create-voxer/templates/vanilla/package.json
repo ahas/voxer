@@ -1,17 +1,19 @@
 {
-    "name": "voxer-app",
-    "version": "0.0.1",
-    "main": ".voxer/main.js",
-    "private": true,
-    "scripts": {
-        "clean": "voxer clean",
-        "rebuild": "voxer rebuild",
-        "dev": "voxer",
-        "build": "voxer build"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "voxer": "file:../../../voxer",
-        "typescript": "^4.6.4"
-    }
+  "name": "voxer-app",
+  "version": "0.0.1",
+  "main": ".voxer/main.js",
+  "private": true,
+  "scripts": {
+    "clean": "voxer clean",
+    "rebuild": "voxer rebuild",
+    "dev": "voxer start --enable-logging --inspect=5858 --remote-debugging-port=9222",
+    "build": "voxer build"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "voxer": "file:../../../voxer",
+    "typescript": "^4.6.4"
+  }
 }

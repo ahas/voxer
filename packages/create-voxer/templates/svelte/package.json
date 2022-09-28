@@ -1,23 +1,26 @@
 {
-    "name": "voxer-app",
-    "version": "0.0.1",
-    "main": ".voxer/main.js",
-    "private": true,
-    "scripts": {
-        "clean": "voxer clean",
-        "rebuild": "voxer rebuild",
-        "dev": "voxer start --enable-logging --inspect=5858 --remote-debugging-port=9222",
-        "build": "voxer build",
-        "check": "svelte-check --tsconfig ./tsconfig.json"
-    },
-    "devDependencies": {
-        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.49",
-        "@tsconfig/svelte": "^3.0.0",
-        "svelte": "^3.49.0",
-        "svelte-check": "^2.8.0",
-        "svelte-preprocess": "^4.10.7",
-        "tslib": "^2.4.0",
-        "typescript": "^4.7.4",
-        "voxer": "file:../../../voxer"
-    }
+  "name": "voxer-app",
+  "version": "0.0.1",
+  "main": ".voxer/main.js",
+  "private": true,
+  "scripts": {
+    "clean": "voxer clean",
+    "rebuild": "voxer rebuild",
+    "dev": "voxer start --enable-logging --inspect=5858 --remote-debugging-port=9222",
+    "build": "voxer build",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.49",
+    "@tsconfig/svelte": "^3.0.0",
+    "svelte": "^3.49.0",
+    "svelte-check": "^2.8.0",
+    "svelte-preprocess": "^4.10.7",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "voxer": "file:../../../voxer"
+  }
 }

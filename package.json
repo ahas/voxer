@@ -4,11 +4,10 @@
     "license": "MIT",
     "packageManager": "yarn@3.2.0",
     "workspaces": [
-        "packages/examples/vue-app",
-        "packages/create-voxer-app",
+        "packages/create-voxer",
         "packages/voxer"
     ],
     "scripts": {
-        "build": "yarn workspace voxer run build"
+        "build": "yarn workspace voxer run build && yarn workspace create-voxer run build"
     }
 }

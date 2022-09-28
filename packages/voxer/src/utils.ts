@@ -64,6 +64,10 @@ function getRelativeModulePath(baseDir: string, p: string): string {
 }
 
 export function resolveAlias(options: ts.CompilerOptions): void {
+  if (!options || !options.outDir) {
+    return;
+  }
+
   const IMPORT_REGEX = /(?:import|from)\s+['"]([^'"]*)['"]/g;
   const REQUIRE_REGEX = /(?:import|require)\s*\(\s*['"]([^'"]*)['"]\s*\)/g;
   const exts = ["js", "jsx", "ts", "tsx", "d.ts"];
