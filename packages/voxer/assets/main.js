@@ -20,8 +20,8 @@ async function createWindow() {
   await main(win, resolve);
   const injectables = await require("./lib/inject")(inject);
 
-  for (const injectable of injectables) {
-    for (const method of injectable.__exposedMethods) {
+  for (const injectable of injectables || []) {
+    for (const method of injectable.__exposedMethods || []) {
       const eventName = injectable.name + "." + method;
 
       ipcMain.handle(eventName, async (event, ...args) => {
