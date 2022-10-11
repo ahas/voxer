@@ -87,7 +87,7 @@ export async function runApp(electronArgs: string[]): Promise<void> {
 export function watch(path: string, callback: () => void | Promise<void>): fs.FSWatcher | null {
   path = cwd + "/" + path;
   if (fs.existsSync(path)) {
-    const watcher = fs.watch(path, { recursive: true, persistent: true }, callback);
+    const watcher = fs.watch(path, callback);
     watchers.push(watcher);
 
     return watcher;
