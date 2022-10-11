@@ -46,7 +46,7 @@ export async function runVite(config: UserConfig): Promise<ViteDevServer> {
   return server;
 }
 
-export async function runApp(electronArgs: string[], server?: ViteDevServer): Promise<void> {
+export async function runApp(electronArgs: string[]): Promise<void> {
   if (isTs()) {
     await buildTs();
   }
@@ -54,26 +54,26 @@ export async function runApp(electronArgs: string[], server?: ViteDevServer): Pr
   const config = readConfig();
   installAssets({ isDev: true, config });
 
-  const isRestart = !!server;
-  if (!isRestart) {
-    server = await runVite(config);
-  }
+  const viteServer = await runVite(config);
   const electron = runElectron(electronArgs);
 
+  const restartVite = async () => {
+    viteServer?.restart();
+  };
+
   const closeElectron = async () => {
-    await server?.close();
+    await viteServer?.close();
     unwatchAll();
+
+    electron.removeAllListeners();
+    electron.kill();
   };
 
   electron.on("close", closeElectron);
 
   const restartElectron = async () => {
-    unwatchAll();
-
-    electron.off("close", closeElectron);
-    electron.kill();
-
-    await runApp(electronArgs, server);
+    await closeElectron();
+    await runApp(electronArgs);
   };
 
   watch("src", restartElectron);
@@ -81,12 +81,13 @@ export async function runApp(electronArgs: string[], server?: ViteDevServer): Pr
   watch("voxer.config.ts", restartElectron);
   watch("package.json", restartElectron);
   watch("tsconfig.json", restartElectron);
+  watch("view", restartVite);
 }
 
 export function watch(path: string, callback: () => void | Promise<void>): fs.FSWatcher | null {
   path = cwd + "/" + path;
   if (fs.existsSync(path)) {
-    const watcher = fs.watch(path, callback);
+    const watcher = fs.watch(path, { recursive: true, persistent: true }, callback);
     watchers.push(watcher);
 
     return watcher;
