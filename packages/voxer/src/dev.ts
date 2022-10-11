@@ -58,7 +58,7 @@ export async function runApp(electronArgs: string[]): Promise<void> {
   const electron = runElectron(electronArgs);
 
   const restartVite = async () => {
-    viteServer?.restart();
+    await viteServer?.restart();
   };
 
   const closeElectron = async () => {
