@@ -1,12 +1,13 @@
 import { exec, ChildProcess } from "child_process";
 import { createServer, ViteDevServer } from "vite";
 import { isTs, mkdir } from "./utils";
+import chokidar from "chokidar";
 import fs from "fs";
 import { readConfig, UserConfig } from "./config";
 import { buildTs, installAssets } from "./build";
 
 const cwd = process.cwd();
-const watchers: fs.FSWatcher[] = [];
+const watchers: chokidar.FSWatcher[] = [];
 
 let printLine = 0;
 
@@ -58,36 +59,44 @@ export async function runApp(electronArgs: string[]): Promise<void> {
   const electron = runElectron(electronArgs);
 
   const restartVite = async () => {
+    console.info("Restart vite dev server");
     await viteServer?.restart();
   };
 
   const closeElectron = async () => {
-    await viteServer?.close();
-    unwatchAll();
-
-    electron.removeAllListeners();
+    console.info("Close electron process");
+    if (viteServer.httpServer?.listening) {
+      await viteServer?.close();
+    }
+    await unwatchAll();
     electron.kill();
   };
 
-  electron.on("close", closeElectron);
-
   const restartElectron = async () => {
+    console.info("Restart electron process");
+    electron.once("close", () => {
+      runApp(electronArgs);
+    });
     await closeElectron();
-    await runApp(electronArgs);
   };
+
+  electron.on("exit", () => {
+    closeElectron();
+  });
 
   watch("src", restartElectron);
   watch("voxer.config.js", restartElectron);
   watch("voxer.config.ts", restartElectron);
   watch("package.json", restartElectron);
   watch("tsconfig.json", restartElectron);
-  watch("view", restartVite);
 }
 
-export function watch(path: string, callback: () => void | Promise<void>): fs.FSWatcher | null {
+export function watch(path: string, callback: (...args: any[]) => void): fs.FSWatcher | null {
   path = cwd + "/" + path;
+
   if (fs.existsSync(path)) {
-    const watcher = fs.watch(path, callback);
+    const watcher = chokidar.watch(path);
+    watcher.on("change", callback);
     watchers.push(watcher);
 
     return watcher;
@@ -96,8 +105,10 @@ export function watch(path: string, callback: () => void | Promise<void>): fs.FS
   return null;
 }
 
-export function unwatchAll() {
+export async function unwatchAll() {
   for (const watcher of watchers) {
-    watcher?.close();
+    await watcher?.close();
   }
+
+  watchers.length = 0;
 }
