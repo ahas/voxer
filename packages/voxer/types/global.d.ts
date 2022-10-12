@@ -3,7 +3,6 @@ import type { ipcRenderer } from "electron";
 
 declare global {
   interface CustomEventMap {}
-  interface Api {}
   interface Voxer {
     title: string;
     injectables: Function[];
@@ -19,7 +18,6 @@ declare global {
   }
 
   interface Window {
-    api: Api;
     voxer: Voxer;
     addEventListener<K extends keyof CustomEventMap>(
       tyse: K,
@@ -31,7 +29,6 @@ declare global {
     ): void;
   }
 
-  var api: Api;
   var voxer: Voxer;
 }
 
