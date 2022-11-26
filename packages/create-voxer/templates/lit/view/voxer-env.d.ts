@@ -1,1 +1,1 @@
-/// <reference types="voxer/lit" />
+/// <reference types="voxer/types/lit" />

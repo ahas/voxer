@@ -3,8 +3,10 @@ import { resolve } from "path";
 import { readConfig, UserConfig } from "./config";
 import { build as _buildVite } from "vite";
 import { build as _buildElectron } from "electron-builder";
-import { isTs, mkdir, resolveAlias } from "./utils";
+import { cleanVoxer, isTs, mkdir, resolveAlias } from "./utils";
 import { duplicateAsset, compileTemplate } from "./assets";
+import { consoleStart } from "./console";
+import { transform } from "./transform";
 
 const cwd = process.cwd();
 
@@ -19,16 +21,15 @@ export async function buildTs() {
   installTypes();
 
   const configFile = ts.findConfigFile(resolve(cwd, "src"), ts.sys.fileExists, "tsconfig.json");
+
   if (!configFile) {
     throw Error("tsconfig.json not found");
   }
+
   const { config } = ts.readConfigFile(configFile, ts.sys.readFile);
   const { options, fileNames, errors } = ts.parseJsonConfigFileContent(config, ts.sys, resolve(cwd, "src"));
-
   const program = ts.createProgram({ options, rootNames: fileNames, configFileParsingDiagnostics: errors });
-
   const { diagnostics, emitSkipped } = program.emit();
-
   const allDiagnostics = ts.getPreEmitDiagnostics(program).concat(diagnostics, errors);
 
   if (allDiagnostics.length) {
@@ -45,11 +46,12 @@ export async function buildTs() {
     process.exit(1);
   }
 
-  resolveAlias(options);
+  return { options };
 }
 
 export async function buildVite(config: UserConfig) {
   mkdir(".voxer");
+
   return await _buildVite({
     configFile: false,
     root: cwd + "/view",
@@ -75,28 +77,39 @@ export async function buildElectron(config: UserConfig) {
   });
 }
 
-export async function buildRelease() {
-  if (isTs()) {
+export async function buildRelease(options: any) {
+  cleanVoxer();
+
+  if (options.src && isTs()) {
     await buildTs();
+    resolveAlias();
   }
 
   const config = readConfig();
   installAssets({ isDev: false, config });
-  await buildVite(config);
-  await buildElectron(config);
+  transform();
+
+  if (options.vite) {
+    await buildVite(config);
+  }
+
+  if (options.electron) {
+    await buildElectron(config);
+  }
 }
 
 export async function installTypes() {
   duplicateAsset("lib/params.d.ts");
   duplicateAsset("lib/decorators.d.ts");
   duplicateAsset("lib/metadata-storage.d.ts");
-  duplicateAsset("lib/events.d.ts");
+  duplicateAsset("lib/serverside.d.ts");
   duplicateAsset("index.d.ts");
   duplicateAsset("voxer.d.ts");
   duplicateAsset("tsconfig.json");
 }
 
 export function installAssets(options: InstallVoxerOptions) {
+  consoleStart("Installing voxer assets...");
   options = options || {};
   options.isTs = isTs();
 
@@ -108,7 +121,9 @@ export function installAssets(options: InstallVoxerOptions) {
   duplicateAsset("lib/inject.js");
   duplicateAsset("lib/metadata-storage.js");
   duplicateAsset("lib/params.js");
-  duplicateAsset("lib/events.js");
+  duplicateAsset("lib/serverside.js");
+  duplicateAsset("lib/clientside.js");
+  duplicateAsset("lib/utils.js");
   duplicateAsset("main.js");
   duplicateAsset("preload.js");
   duplicateAsset("index.js");

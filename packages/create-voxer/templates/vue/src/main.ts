@@ -1,25 +1,16 @@
 import { BrowserWindow, Menu } from "electron";
 import { App } from "./app";
-import { voxer } from "#app";
 
 export async function main(win: BrowserWindow) {
-  win.setTitle("Voxer + Vue (TS)");
+  win.setTitle("VOXER (vue)");
   win.setSize(800, 600);
 
   const menu = Menu.buildFromTemplate([
-    {
-      label: "Call",
-      click: async () => {
-        const result = await voxer.invoke(win, "add", 1, 2, 3);
-        console.log(result);
-      },
-    },
-    {
-      role: "viewMenu",
-    },
+    { role: "fileMenu", submenu: [{ label: "Open", accelerator: "CommandOrControl+O" }] },
+    { role: "viewMenu" },
   ]);
 
-  win.setMenu(menu);
+  Menu.setApplicationMenu(menu);
 }
 
 export function preload() {}

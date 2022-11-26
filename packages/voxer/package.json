@@ -1,6 +1,6 @@
 {
   "name": "voxer",
-  "version": "1.0.0-rc.8",
+  "version": "1.0.0-rc.9",
   "description": "vite + electron framework",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,10 +21,7 @@
   "files": [
     "assets",
     "dist",
-    "types",
-    "vue.d.ts",
-    "react.d.ts",
-    "svelte.d.ts"
+    "types/**/*"
   ],
   "keywords": [
     "vite",
@@ -38,6 +35,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "commander": "^9.3.0",
     "ejs": "^3.1.8",

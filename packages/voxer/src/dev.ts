@@ -1,10 +1,12 @@
 import { exec, ChildProcess } from "child_process";
 import { createServer, ViteDevServer } from "vite";
-import { isTs, mkdir } from "./utils";
+import { isTs, mkdir, resolveAlias } from "./utils";
 import chokidar from "chokidar";
 import fs from "fs";
 import { readConfig, UserConfig } from "./config";
 import { buildTs, installAssets } from "./build";
+import { transform } from "./transform";
+import { consoleInfo } from "./console";
 
 const cwd = process.cwd();
 const watchers: chokidar.FSWatcher[] = [];
@@ -50,21 +52,23 @@ export async function runVite(config: UserConfig): Promise<ViteDevServer> {
 export async function runApp(electronArgs: string[]): Promise<void> {
   if (isTs()) {
     await buildTs();
+    resolveAlias();
   }
 
   const config = readConfig();
   installAssets({ isDev: true, config });
+  transform();
 
   const viteServer = await runVite(config);
   const electron = runElectron(electronArgs);
 
   const restartVite = async () => {
-    console.info("Restart vite dev server");
+    consoleInfo("Restart vite dev server");
     await viteServer?.restart();
   };
 
   const closeElectron = async () => {
-    console.info("Close electron process");
+    consoleInfo("Close electron process");
     if (viteServer.httpServer?.listening) {
       await viteServer?.close();
     }
@@ -73,7 +77,7 @@ export async function runApp(electronArgs: string[]): Promise<void> {
   };
 
   const restartElectron = async () => {
-    console.info("Restart electron process");
+    consoleInfo("Restart electron process");
     electron.once("close", () => {
       runApp(electronArgs);
     });

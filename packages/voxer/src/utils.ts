@@ -2,17 +2,17 @@ import fs from "fs";
 import { relative, dirname, join, resolve, basename } from "path";
 import glob from "glob";
 import ts, { MapLike } from "typescript";
-import { info } from "./logger";
+import { consoleDel } from "./console";
 
 const cwd = process.cwd();
 
 export function cleanVoxer(): void {
-  info("Remove .voxer");
+  consoleDel("Deleting voxer assets... (.voxer)");
   fs.rmSync(resolve(cwd, ".voxer"), { force: true, recursive: true });
 }
 
 export function cleanRelease(): void {
-  info("Remove voxer_release");
+  consoleDel("Deleting voxer release folder... (voxer_release)");
   fs.rmSync(resolve(cwd, "voxer_release"), { force: true, recursive: true });
 }
 
@@ -63,7 +63,16 @@ function getRelativeModulePath(baseDir: string, p: string): string {
   return (relativePath.startsWith(".") ? relativePath : `./${relativePath}`).replace(/\\/g, "/");
 }
 
-export function resolveAlias(options: ts.CompilerOptions): void {
+export function resolveAlias(): void {
+  const configFile = ts.findConfigFile(resolve(cwd, "src"), ts.sys.fileExists, "tsconfig.json");
+
+  if (!configFile) {
+    throw Error("tsconfig.json not found");
+  }
+
+  const { config } = ts.readConfigFile(configFile, ts.sys.readFile);
+  const { options } = ts.parseJsonConfigFileContent(config, ts.sys, resolve(cwd, "src"));
+
   if (!options || !options.outDir) {
     return;
   }
@@ -92,6 +101,7 @@ export function resolveAlias(options: ts.CompilerOptions): void {
     const newText = oldText
       .replace(REQUIRE_REGEX, (src, matched) => replace(src, matched, file))
       .replace(IMPORT_REGEX, (src, matched) => replace(src, matched, file));
+
     if (oldText != newText) {
       fs.writeFileSync(file, newText);
     }

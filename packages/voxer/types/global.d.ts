@@ -1,21 +1,21 @@
 import type { EventEmitter } from "node:events";
-import type { ipcRenderer } from "electron";
 
 declare global {
-  interface CustomEventMap {}
-  interface Voxer {
+  class Voxer {
     title: string;
     injectables: Function[];
-    events: {
-      on: InstanceType<typeof EventEmitter>["on"];
-      once: InstanceType<typeof EventEmitter>["once"];
-      off: InstanceType<typeof EventEmitter>["off"];
-      send: typeof ipcRenderer["send"];
-      sendSync: typeof ipcRenderer["sendSync"];
-      invoke: typeof ipcRenderer["invoke"];
-      handle: (eventName: string | symbol, listener: (...args: any[]) => any) => Voxer["events"];
-    };
+    on: InstanceType<typeof EventEmitter>["on"];
+    once: InstanceType<typeof EventEmitter>["once"];
+    off: InstanceType<typeof EventEmitter>["off"];
+    send(channel: string, ...args: any[]): void;
+    sendSync<T = void>(channel: string, ...args: any[]): T;
+    invoke<T = void>(channel: string, ...args: any[]): Promise<T>;
+    handle(eventName: string | symbol, listener: (...args: any[]) => any): this;
+    serve(name: string | symbol, listener: (...args: any[]) => any): this;
+    receive<T>(name: string | symbol, ...args: any[]): T;
   }
+
+  interface CustomEventMap {}
 
   interface Window {
     voxer: Voxer;

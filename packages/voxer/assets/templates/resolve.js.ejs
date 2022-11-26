@@ -1,9 +1,11 @@
-const { resolve: _resolve } = require("path");
+<script>
+  const { resolve: _resolve } = require("path");
 
-<% if (isDev) { %>
-const resolve = _resolve.bind(_resolve, __dirname, "../view");
-<% } else { %>
-const resolve = _resolve.bind(_resolve, __dirname, "..");
-<% } %>
+  <% if (isDev) { %>
+    const resolve = _resolve.bind(_resolve, __dirname, "../view");
+  <% } else { %>
+    const resolve = _resolve.bind(_resolve, __dirname, "..");
+  <% } %>
 
-module.exports.resolve = resolve;
+  module.exports.resolve = resolve;
+</script>

@@ -1,10 +1,18 @@
-<script>
-  let count = 0
+<script lang="ts">
+  let count = 0;
+
   const increment = () => {
-    count += 1
-  }
+    count = app.getValue();
+  };
+
+  const reset = () => {
+    app.setValue(0);
+    count = 0;
+  };
 </script>
 
 <button on:click={increment}>
-  count is {count}
+  Increase <br />
+  Count = {count}
 </button>
+<button on:click={reset}>Reset</button>

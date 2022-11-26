@@ -1,40 +1,39 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>VOXER</h1>
 
   <div class="buttons">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <button type="button" @click="App.maximize()">Maximize</button>
-    <button type="button" @click="App.unmaximize()">Minimize</button>
-    <button type="button" @click="App.showMenu()">Show Menu</button>
-    <button type="button" @click="App.hideMenu()">Hide Menu</button>
+    <button type="button" @click="count = app.getValue()">Increase<br />Count = {{ count }}</button>
+    <button type="button" @click="app.setValue(0)">Reset</button>
+    <button type="button" @click="app.maximize()">Maximize</button>
+    <button type="button" @click="app.unmaximize()">Unmaximize</button>
+    <button type="button" @click="app.showMenu()">Show menu</button>
+    <button type="button" @click="app.hideMenu()">Hide menu</button>
   </div>
 
   <div class="card">
-    <p>{{ msgFromServer }}</p>
+    <p>Message: {{ msg }}</p>
     <p>
       Edit
-      <code>components/HelloWorld.vue</code> to test HMR
+      <code>view/components/HelloWorld.vue</code> to test HMR
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
-defineProps<{ msg: string }>();
+const { app } = window;
 
-const { App } = window;
-
+const msg = ref("");
 const count = ref(0);
 
-const msgFromServer = ref("");
+voxer.handle("count", (v) => (count.value = v));
+voxer.handle("message", (v) => (msg.value = v));
+
+onMounted(async () => {});
 </script>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
-
 .buttons {
   display: flex;
   flex-wrap: wrap;

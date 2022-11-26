@@ -1,4 +1,4 @@
-#app {
+#_app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -20,6 +20,12 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.buttons > *:not(:first-child) {
+  margin-left: 8px;
 }

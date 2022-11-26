@@ -1,14 +1,16 @@
-module.exports.load = (win) => {
+<script>
+  module.exports.load = (win) => {
     <% if (isDev) { %>
-        const { main } = require("./main");
-        <% if (isTs) {  %>
-        const config = require("../dist/voxer.config.js").default;
-        <% } else { %>
-        const config = require("../../voxer.config.js");
-        <% } %>
-        win.loadURL("http://localhost:<%= config.vite?.port || 3000 %>");
+      const { main } = require("./main");
+    <% if (isTs) { %>
+      const config = require("../dist/voxer.config.js").default;
     <% } else { %>
-        const { resolve } = require("./resolve");
-        win.loadFile(resolve("<%= "index.html" %>"));
+      const config = require("../../voxer.config.js");
     <% } %>
-};
+      win.loadURL("http://localhost:<%= config.vite?.port || 3000 %>");
+    <% } else { %>
+      const { resolve } = require("./resolve");
+      win.loadFile(resolve("<%= "index.html" %>"));
+    <% } %>
+  };
+</script>

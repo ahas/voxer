@@ -3,7 +3,6 @@
     "target": "ESNext",
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "declaration": true,
     "resolveJsonModule": true,
     "inlineSourceMap": true,
     "esModuleInterop": true,
@@ -21,5 +20,5 @@
       "#app/*": ["../.voxer/*"]
     }
   },
-  "include": ["./voxer.d.ts", "../src/**/*", "../voxer.config.ts"]
+  "include": ["./**/*", "../src/**/*", "../voxer.config.ts"]
 }

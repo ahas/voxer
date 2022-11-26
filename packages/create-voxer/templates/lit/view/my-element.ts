@@ -16,6 +16,14 @@ export class MyElement extends LitElement {
   @property({ type: Number })
   count = 0;
 
+  @property({ type: String })
+  message = "";
+
+  constructor() {
+    super();
+    voxer.handle("message", (v) => (this.message = v));
+  }
+
   render() {
     return html`
       <div>
@@ -23,15 +31,35 @@ export class MyElement extends LitElement {
           <img src=${litLogo} class="logo lit" alt="Lit logo" />
         </a>
       </div>
+
       <slot></slot>
+
+      <div class="buttons">
+        <button part="button" @click=${this._increase}>Increase<br />Count = ${this.count}</button>
+        <button part="button" @click=${this._reset}>Reset</button>
+        <button part="button" @click=${app.maximize}>Maximize</button>
+        <button part="button" @click=${app.unmaximize}>Unmaximize</button>
+        <button part="button" @click=${app.showMenu}>Show menu</button>
+        <button part="button" @click=${app.hideMenu}>Hide menu</button>
+      </div>
+
       <div class="card">
-        <button @click=${this._onClick} part="button">count is ${this.count}</button>
+        <p>Message: ${this.message}</p>
+        <p>
+          Edit
+          <code>view/my-element.ts</code> to test HMR
+        </p>
       </div>
     `;
   }
 
-  private _onClick() {
-    this.count++;
+  private _increase() {
+    this.count = app.getValue();
+  }
+
+  private _reset() {
+    app.setValue(0);
+    this.count = 0;
   }
 
   static styles = css`
@@ -56,15 +84,6 @@ export class MyElement extends LitElement {
 
     .card {
       padding: 2em;
-    }
-
-    .read-the-docs {
-      color: #888;
-    }
-
-    h1 {
-      font-size: 3.2em;
-      line-height: 1.1;
     }
 
     a {
@@ -102,6 +121,16 @@ export class MyElement extends LitElement {
       button {
         background-color: #f9f9f9;
       }
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .buttons > *:not(:first-child) {
+      margin-left: 8px;
     }
   `;
 }

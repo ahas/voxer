@@ -13,7 +13,7 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "voxer": "file:../../../voxer",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "voxer": "file:///home/ahas/repos/ahas/voxer/packages/voxer"
   }
 }

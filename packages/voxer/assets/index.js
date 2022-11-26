@@ -3,5 +3,5 @@ module.exports = {
   ...require("./lib/constants"),
   ...require("./lib/inject"),
   ...require("./lib/params"),
-  ...require("./lib/events"),
+  ...require("./lib/serverside"),
 };

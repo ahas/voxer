@@ -1,1 +1,1 @@
-/// <reference types="voxer/svelte" />
+/// <reference types="voxer/types/svelte" />

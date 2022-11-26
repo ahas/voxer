@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Attach",
+      "configurations": ["Attach: Main", "Attach: Renderer"]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Attach: Main",
+      "type": "node",
+      "request": "attach",
+      "port": 5858,
+      "sourceMaps": true,
+      "timeout": 30000,
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Attach: Renderer",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "sourceMaps": true,
+      "webRoot": "${workspaceFolder}/view",
+      "timeout": 30000
+    }
+  ]
+}

@@ -6,7 +6,8 @@ import { buildElectron, buildRelease, buildTs, buildVite, installAssets } from "
 
 import { readConfig } from "./config";
 import * as dev from "./dev";
-import { cleanRelease, cleanVoxer, isTs } from "./utils";
+import { cleanRelease, cleanVoxer, isTs, resolveAlias } from "./utils";
+import { transform } from "./transform";
 
 const pkg = require("../package.json");
 
@@ -71,10 +72,12 @@ program
 
     if (options.src && isTs()) {
       await buildTs();
+      resolveAlias();
     }
 
     const config = readConfig();
     installAssets({ isDev: false, config });
+    transform();
 
     if (options.vite) {
       await buildVite(config);
@@ -95,10 +98,19 @@ program
 program
   .command("rebuild")
   .description("Rebuild")
+  .option("--no-src", "Run typescript build")
+  .option("--no-vite", "Run vite build")
+  .option("--no-electron", "Run electron build")
+  .option("-m, --mac")
+  .option("-w, --win")
+  .option("-l, --linux")
+  .option("--portable")
+  .option("--ia32")
+  .option("--x64")
   .action(async (options) => {
     cleanVoxer();
     cleanRelease();
-    await buildRelease();
+    await buildRelease(options);
   });
 
 program.parse();

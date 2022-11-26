@@ -16,6 +16,6 @@
     "checkJs": true,
     "isolatedModules": true
   },
-  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.js", "./**/*.svelte"],
+  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.js", "../.voxer/api.d.ts", "./voxer-env.d.ts", "./**/*.svelte"],
   "exclude": ["./svelte.config.js"]
 }

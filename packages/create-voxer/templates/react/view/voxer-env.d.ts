@@ -1,1 +1,1 @@
-/// <reference types="voxer/react" />
+/// <reference types="voxer/types/react" />
