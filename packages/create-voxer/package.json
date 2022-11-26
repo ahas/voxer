@@ -1,6 +1,6 @@
 {
   "name": "create-voxer",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "ahas",
   "bin": "dist/index.js",
