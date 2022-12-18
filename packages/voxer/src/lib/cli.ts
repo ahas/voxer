@@ -1,0 +1,114 @@
+#!/usr/bin/env node
+import { Command, Option } from "commander";
+import { electronFlags } from "./electron-flags";
+import { buildRelease, installVoxer } from "./build";
+
+import { runDevApp } from "./dev";
+import { cleanRelease, cleanVoxer, isTs, resolveAlias } from "./utils";
+
+const pkg = require("../../package.json");
+
+const program = new Command();
+// prettier-ignore
+program.name("voxer")
+    .description(pkg.description)
+    .version(pkg.version);
+
+function getElectronArgs(options: any, optionDefs: Option[]) {
+  const electronOptions = [];
+
+  for (const optionDef of optionDefs) {
+    const { long, required, negate } = optionDef;
+    const attr = optionDef.attributeName();
+    const val = options[attr];
+
+    if (
+      (negate && !val) ||
+      (!required && !negate && val && typeof val === "boolean") ||
+      (required && val && typeof val !== "boolean")
+    ) {
+      let exp = long;
+      if (required) {
+        exp += "=" + val;
+      }
+
+      electronOptions.push({
+        attr,
+        required,
+        long,
+        negate,
+        val,
+        type: typeof val,
+        exp,
+      });
+    }
+  }
+
+  return electronOptions.map((x) => x.exp || "");
+}
+
+withElectronFlags(program.command("start"))
+  .description("[default] Run application in a development")
+  .action(async (options, command) => {
+    cleanVoxer();
+    await runDevApp(getElectronArgs(options, command.options));
+  });
+
+program
+  .command("install")
+  .description("Install voxer resources")
+  .option("-d, --dev")
+  .option("--no-src", "Run typescript build")
+  .action(async () => {
+    await installVoxer();
+  });
+
+program
+  .command("build")
+  .description("Build")
+  .option("--no-src", "Run typescript build")
+  .option("--no-vite", "Run vite build")
+  .option("--no-electron", "Run electron build")
+  .option("-m, --mac")
+  .option("-w, --win")
+  .option("-l, --linux")
+  .option("--portable")
+  .option("--ia32")
+  .option("--x64")
+  .action(async (options) => {
+    await buildRelease(options);
+  });
+
+program
+  .command("clean")
+  .description("Remove output files")
+  .action(() => {
+    cleanVoxer();
+  });
+
+program
+  .command("rebuild")
+  .description("Rebuild")
+  .option("--no-src", "Run typescript build")
+  .option("--no-vite", "Run vite build")
+  .option("--no-electron", "Run electron build")
+  .option("-m, --mac")
+  .option("-w, --win")
+  .option("-l, --linux")
+  .option("--portable")
+  .option("--ia32")
+  .option("--x64")
+  .action(async (options) => {
+    cleanVoxer();
+    cleanRelease();
+    await buildRelease(options);
+  });
+
+program.parse();
+
+function withElectronFlags(command: Command) {
+  electronFlags.forEach((flags) => {
+    command.option(flags.join(" "));
+  });
+  return command;
+}

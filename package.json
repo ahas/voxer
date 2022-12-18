@@ -1,13 +1,12 @@
 {
-    "name": "voxer-monorepo",
-    "private": true,
-    "license": "MIT",
-    "packageManager": "yarn@3.2.0",
-    "workspaces": [
-        "packages/create-voxer",
-        "packages/voxer"
-    ],
-    "scripts": {
-        "build": "yarn workspace voxer run build && yarn workspace create-voxer run build"
-    }
+  "name": "voxer-monorepo",
+  "private": true,
+  "license": "MIT",
+  "packageManager": "yarn@3.2.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspace voxer run build && yarn workspace create-voxer run build"
+  }
 }

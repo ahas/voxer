@@ -1,215 +1,266 @@
-**로고가 필요해 ~ !**
+<h1 align="center">VOXER</h1>
 
-# Voxer
+<p align="center">Vite + Electron</p>
+<p align="center">더 간편한 크로스 플랫폼 데스크탑 개발 프레임워크</p>
 
-> Vite와 Electron의 조합으로 더 간편한 크로스 플랫폼 데스크탑 애플리케이션을 만들어보세요.
+## 목차
 
-# 주의
-아직 상용 서비스 레벨에 사용하기에 적절한 완성도가 아닙니다.
+- [소개](#소개)
 
-해당 문서는 현재 작성중이며 프로젝트는 완전한 테스트를 거치지 않았습니다.
+## 소개
 
-# 특징
+`Electron`은 JavaScript, HTML, CSS를 사용하여 크로스 플랫폼 데스크탑 애플리케이션을 개발할 수 있는 프레임워크입니다.
+그러나 `Electron` 단독으로 사용할 때의 개발 퍼포먼스는 매우 제한적이며 다른 프론트엔드 프레임워크와의 결합은 매우 까다로운 작업 중 하나입니다.
 
-- Vite를 기반으로 한 모던 웹 개발 환경 지원
-- 간편한 Preload 지원
-- Main과 Renderer 프로세스간 통신 간소화
-- 데코레이터를 사용한 개발 지원
-- electron-builder 기본 지원
+`voxer`는 이 문제에 대한 해결 방안으로 `Vite`을 선택했습니다.
 
-# 설치
+`Vite` + `Electron` 조합을 기본으로 지원하여 보일러 플레이트 수정없이 빠르게 다양한 모던 웹 개발 환경을 구성할 수 있습니다. 또한 `Electron`을 사용하면서 불편했던 `Main`과 `Renderer` 프로세스 간 브릿지 구성을 자동화하여 더 빠르고 편리한 개발이 가능합니다.
 
-```console
-npm insgall -g voxer
-```
+## 기능
 
-# 프로젝트 구조
+- `Vite`를 기반으로 한 모던 웹 개발 환경
+- 데코레이터를 사용한 개발
+- 100% 타입스크립트
+- 백엔드 타입 자동 생성
+- 더 쉬운 일렉트론 래퍼
+- `electron-builder` 기본 지원
+
+## 설치 방법
+
+- yarn
 
 ```bash
-voxer-app/
-├─ .voxer/
-├─ src/
-│  ├─ main.ts
-│  └─ tsconfig.json
-├─ view/
-│  └─ ...
-└─ package.json
-
+yarn create voxer project-name
 ```
 
-기본적으로 Voxer 프로젝트는 최상단에 .voxer 폴더, src, view 폴더가 있습니다.
-.voxer 폴더는 개발용 빌드에 대한 리소스가 포함되어 있으며 Voxer 에 의해 자동 생성됩니다.
+- npm
 
-src 폴더는 Main 프로세스에 대한 소스 코드들이 포함되며 view 폴더는 프론트엔드단의 리소스들이 포함됩니다.
+```bash
+npm install -g create-voxer
+create-voxer project-name
+```
 
-## src/main.ts
+## 디렉토리 구조
+
+```bash
+project-name/
+├─ src/               # main 프로세스 작업 폴더
+│  ├─ main.ts         # main 프로세스 시작점
+│  └─ tsconfig.json
+├─ view/              # renderer 프로세스 작업 폴더
+│  ├─ index.html
+│  ├─ main.ts
+│  ├─ style.css
+│  ├─ tsconfig.json
+│  └─ voxer-env.d.ts  # 프론트엔드 타입 참조 파일
+├─ package.json
+└─ voxer.config.ts    # voxer 설정 파일
+```
+
+## Main 프로세스
+
+`Main` 프로세스의 시작점은 `src/main.ts` 에 선언됩니다.
+main.ts는 네개의 함수 `main` `inject` `launch` `preload` 를 export 하여 `voxer` 가 사용할 수 있도록 합니다.
 
 ```ts
-import { BrowserWindow } from "electron";
-import { voxer } from "#app"; // Voxer가 자동적으로 포함시키는 리소스에 대한 단축경로
-import { App } from "./app"; // 유저가 임의로 구현한 애플리케이션 모델
+// src/main.ts
+import { BrowserWindow, Menu } from "electron";
+import { App } from "./app";
 
-// 애플리케이션 실행 시 제일 먼저 호출되는 함수
+// 시작점이 되는 함수입니다. 반드시 선언되어야합니다.
+// 첫번째 매개변수로 BrowserWindow를 전달받습니다.
 export async function main(win: BrowserWindow) {
-  win.setTitle("My Voxer App");
+  win.setTitle("VOXER");
   win.setSize(800, 600);
 }
+```
 
-// Electron의 Preload 실행 시 호출되는 함수
-export function preload() {}
-
-// Voxer에서 애플리케이션 모델에 대한 의존성 주입시 호출되는 함수
+```ts
+// 의존성 주입을 실행할 클래스들을 반환하는 함수입니다.
+// 의존성 주입 단원을 확인하세요.
 export function inject() {
   return [App];
 }
 ```
 
-Voxer에는 세가지의 예약된 함수가 있습니다.
-
-**main**: export된 함수는 애플리케이션 실행 시 가장 먼저 호출됩니다.
-첫번째 매개변수로 메인 BrowserWindow가 전달됩니다.
-필수적으로 선언되어야 하는 함수입니다.
-
-**preload**: Electron에서 preload.js를 실행 시에 호출되는 함수입니다.
-Renderer 프로세스 상에서 실행됩니다.
-꼭 선언하지 않아도 되는 함수입니다.
-
-**inject**: Voxer에서 의존성 주입시에 호출되는 함수입니다.
-Injectable 데코레이터가 선언된 클래스를 반환해야합니다.
-꼭 선언하지 않아도 되는 함수입니다.
-
-# 의존성 주입
-
-Voxer는 NestJS 또는 Spring과 비슷한 느낌으로 의존성 주입을 사용할 수 있습니다.
+```ts
+// 애플리케이션이 실행될 떄 호출되는 함수입니다.
+export function launch() {}
+```
 
 ```ts
-import { Injectable } from "#app";
+// Renderer 프로세스의 preload가 실행될 때 호출되는 함수입니다.
+export function preload() {}
+```
+
+## 의존성 주입
+
+`voxer` 는 `NestJS` 와 유사한 형태로 의존성 주입이 가능합니다
+
+```ts
+// src/sub.ts
+@Injectable()
+export class Sub {
+  bar() {
+    console.log("bar");
+  }
+}
+```
+
+```ts
+// src/app.ts
+import { Injectable } from "#app"; // .voxer 내 소스 파일들을 가리키는 alias
 import { Sub } from "./sub";
 
+// 다른 의존성을 주입하려면 Injectable 데코레이터에 inject 옵션으로 전달하세요.
 @Injectable({
   inject: [Sub],
 })
 export class App {
+  // 주입된 의존성은 생성자 매개변수로 전달됩니다.
+  // 순서는 상관 없으며 타입이 일치하면 됩니다.
   constructor(private readonly sub: Sub) {}
+
+  foo() {
+    this.sub.bar();
+  }
 }
 ```
 
-아직까지는 매우 제한적인 기능이므로 피드백이 이루어지는 대로 기능을 추가하겠습니다.
+## 데코레이터
 
-# 데코레이터
+`voxer` 는 `Electron` 기능 구현을 간소화 할 수 있는 편리한 데코레이터들을 지원합니다.
 
-## Expose
-
-기존 Electron만 사용한 방식에서 Renderer와 Main 프로세스를 분리하기 위해서는 preload.js 상에서 contextBridge를 통한 exposeInMainWorld 함수를 사용하여 분리된 프로세스 사이를 연결해줄 수 있는 함수를 생성해줘야 했습니다.
+### Expose
 
 ```ts
-// Preload
-const { contextBridge } from "electron";
+// src/main.ts
+import { Expose } from "#app";
 
-contextBridge.exposeInMainWorld("App", {
-  doThing: () => ipcRenderer.send("do-a-thing");
-});
-
-// Renderer
-window.App.doThing();
-```
-
-Voxer에서는 해당 절차를 간소화한 Expose 데코레이터를 사용하여
-코드를 더욱 깔끔하게 작성할 수 있습니다.
-
-```ts
-// main.ts
-import { App } from "./app";
-
-export function inject() {
-  return [App];
-}
-
-// app.ts
 @Injectable()
 export class App {
   @Expose()
-  doThing() {
-    console.log("do-a-thing");
-  }
-}
-
-// Renderer
-window.App.doThing();
-```
-
-## Command
-
-Voxer는 Mousetrap 라이브러리를 기본적으로 내장하고 있어 단축키를 간편하게 등록할 수 있습니다.
-
-```ts
-@Injectable()
-export class App {
-  @Command("ctrl+c")
-  copy() {
-    /* 복사 작업 */
-  }
-
-  @Command(["command+z", "ctrl+z"])
-  undo() {
-    /* 되돌리기 작업 */
-  }
-}
-```
-
-Command 데코레이터는 Mousetrap.bind를 사용하여 단축키를 등록합니다.
-Mousetrap에 대한 사용법은 [이곳](https://github.com/ccampbell/mousetrap)에서 확인하세요.
-
-## OnMain & OnRenderer
-
-ipcRenderer와 ipcMain에 on을 호출하는 것과 동일한 기능을 합니다.
-
-```ts
-@Injectable()
-export class App {
-  @OnMain("foo")
   foo() {}
-
-  @OnRenderer("bar")
-  bar() {}
 }
-
-// 이것과 동일합니다.
-ipcMain.on("foo", () => {});
-ipcRenderer.on("bar", () => {});
 ```
 
-# 유용한 함수
+`Expose` 데코레이터를 사용하면 의존성 클래스의 메소드를 `Renderer` 프로세스에서 사용할 수 있습니다.
 
-## handle & invoke
-
-Renderer -> Main 방향의 함수 호출은 Expose 된 함수를 호출하는 것으로 간단하지만
-반대로 Main -> Renderer 방향의 함수 호출은 구현하기 까다롭습니다.
-
-Voxer에서는 handle과 invoke 함수로 간단하게 구현할 수 있습니다.
+예시 1
 
 ```ts
-// Renderer
-const { voxer } = window;
+// Renderer 프로세스의 JavaScript 파일
+app.foo();
+```
 
-voxer.events.handle("add", (a, b, c) => {
-  return a + b + c;
-});
+예시 2
 
-// Main
-import { BrowserWindow } from "electron";
-import { voxer } from "#app";
+```html
+<template>
+  <button @click="app.foo()">Foo</button>
+</template>
 
-export async function main(win: BrowserWindow) {
-  // 첫번째 매개변수로 BrowserWindow
-  // 두번째 매개변수로 호출할 함수 이름
-  // 그 이후로는 전달할 매개변수 입니다.
-  // 실행 결과를 담은 Promise를 반환합니다.
-  const result = await voxer.invoke(win, "add", 1, 2, 3);
-  console.log("실행 결과는 %d 입니다.", result);
-  // > 실행 결과는 6 입니다.
+<script setup lang="ts">
+  const { app } = window;
+</script>
+```
+
+`Expose` 데코레이터는 대상 메소드를 클래스 이름([캐멀 케이스](https://en.wikipedia.org/wiki/Camel_case) 적용) 객체에 포함시켜 내보냅니다.
+
+예를 들어 클래스 이름이 `ProgramManager` 라면 `window` 에 `programManager` 라는 이름의 객체가 생성됩니다.
+
+```ts
+// src/main.ts
+import { Expose } from "#app";
+
+@Injectable()
+export class App {
+  @Expose({ as: "bar" })
+  foo() {}
 }
 ```
 
-# 라이센스
-MIT (라이센스 파일 추가 예정)
+`as` 옵션을 사용하면 대상 메소드의 이름을 변경 할 수 있습니다.
+
+```ts
+// Renderer 프로세스의 JavaScript 파일
+app.bar();
+```
+
+### Accessor
+`Accessor` 데코레이터는 멤버 변수에 대한 접근자를 자동 생성합니다.
+
+```ts
+// src/main.ts
+import { Accessor } from "#app";
+
+@Injectable()
+export class App {
+  @Accessor()
+  foo: number = 1;
+}
+```
+```ts
+// Renderer 프로세스의 JavaScript 파일
+let value: number;
+
+value = app.getFoo();
+console.log(value); // 1
+
+app.setFoo(2);
+value = app.getFoo();
+console.log(value); // 2
+```
+`Accessor` 는 대상 멤버 변수의 이름을 각각 get + 이름, set + 이름 형식으로 조합하여 변수에 접근 가능한 함수를 생성합니다.
+
+예를들어 멤버 변수명이 `userName` 이라면 `getUserName` 과 `setUserName` 함수가 생성됩니다.
+
+```ts
+// src/main.ts
+import { Accessor } from "#app";
+
+@Injectable()
+export class App {
+  @Accessor({ as: "bar" })
+  foo: number = 1;
+}
+```
+
+`Accessor` 또한 `as` 옵션을 사용하여 변수명을 변경할 수 있습니다.
+
+```ts
+const foo = app.getBar();
+app.setBar(2);
+```
+
+`getter` `setter` 옵션을 사용하면 접근자명을 수동 지정할 수 있습니다.
+
+*`getter` `setter`는 `as` 보다 우선 순위가 높습니다.*
+
+```ts
+// src/main.ts
+import { Accessor } from "#app";
+
+@Injectable()
+export class App {
+  @Accessor({ getter: "foofoo", setter: "barbar" })
+  foo: number = 1;
+}
+```
+```ts
+const foo = app.foofoo();
+app.barbar(2);
+```
+
+### Command
+`Command` 데코레이터를 사용하면 `Renderer` 프로세스에서 입력된 키보드 입력으로 `Main` 프로세스의 메소드를 호출 할 수 있습니다.
+
+키보드 이벤트는 [Mousetrap](https://github.com/ccampbell/mousetrap) 을 사용하여 등록하며 모듈은 별도로 설치하여야 합니다.
+
+```bash
+npm install mousetrap
+```
+
+
+
+### MenuItem

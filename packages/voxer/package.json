@@ -2,8 +2,8 @@
   "name": "voxer",
   "version": "1.0.0-rc.10",
   "description": "vite + electron framework",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ahas/voxer.git",
@@ -17,11 +17,14 @@
   },
   "author": "ahas <dev@ahas.io>",
   "license": "MIT",
-  "bin": "./dist/cli.js",
+  "bin": "./dist/lib/cli.js",
   "files": [
     "assets",
     "dist",
-    "types/**/*"
+    "types/**/*",
+    "src/runtime/injectable.ts",
+    "src/runtime/core/voxer.renderer.ts",
+    "src/runtime/core/utils.ts"
   ],
   "keywords": [
     "vite",
@@ -38,14 +41,18 @@
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "commander": "^9.3.0",
+    "cross-env": "^7.0.3",
     "ejs": "^3.1.8",
-    "electron": "^18.2.0",
-    "electron-builder": "^23.0.3",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
     "glob": "^8.0.3",
     "mousetrap": "^1.6.5",
     "prettier": "^2.6.2",
-    "typescript": "^4.6.4",
-    "vite": "^2.9.8"
+    "ts-loader": "^9.4.2",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4",
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "@types/chokidar": "^2.1.3",

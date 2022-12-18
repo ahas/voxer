@@ -3,7 +3,7 @@
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "baseUrl": "src",
+    "baseUrl": "lib",
     "declaration": true,
     "outDir": "./dist",
     "inlineSourceMap": true,
@@ -12,5 +12,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/lib/**/*.ts", "src/runtime/**/*.ts"],
+  "exclude": ["src/runtime/preload.ts"]
 }

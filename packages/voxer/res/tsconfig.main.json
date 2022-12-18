@@ -1,0 +1,7 @@
+// this configurations file will be locate into .voxer
+// and extended by src/tsconfig.json
+{
+  "extends": "./tsconfig.json",
+  "include": ["../src/**/*", "../voxer.config.ts"],
+  "exclude": ["../src/preload.*", "../src/preload/**/*"]
+}
