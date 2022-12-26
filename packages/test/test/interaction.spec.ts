@@ -1,6 +1,23 @@
 import { setupBrowser } from "@testing-library/webdriverio";
 import { getBounds, waitFor } from "./utils";
 
+async function reset() {
+  const counterButton = await browser.$("button#counter");
+  const resetButton = await browser.$("button#reset");
+
+  await resetButton.click();
+  await waitFor(100);
+  expect(await counterButton.getText()).toEqual("0");
+  await expectMessage("Reset");
+  await waitFor(100);
+}
+
+async function expectMessage(msg: string) {
+  const messageP = await browser.$("p#message");
+
+  expect(await messageP.getText()).toEqual(msg);
+}
+
 describe("application loading", () => {
   before(() => {
     setupBrowser(browser);
@@ -10,14 +27,12 @@ describe("application loading", () => {
     describe("when the button counter is clicked", () => {
       it("increases the number", async () => {
         const counterButton = await browser.$("button#counter");
-        const resetButton = await browser.$("button#reset");
 
         await counterButton.click();
         expect(await counterButton.getText()).toEqual("0");
         await counterButton.click();
         expect(await counterButton.getText()).toEqual("1");
-        await resetButton.click();
-        expect(await counterButton.getText()).toEqual("0");
+        await reset();
       });
     });
   });
@@ -26,7 +41,6 @@ describe("application loading", () => {
     describe("when resize buttons is clicked", () => {
       it("resizes window", async () => {
         const bounds = await getBounds();
-        const messageP = await browser.$("p#message");
         const maximizeButton = await browser.$("button#maximize");
         const unmaximizeButton = await browser.$("button#unmaximize");
         await maximizeButton.click();
@@ -34,7 +48,7 @@ describe("application loading", () => {
 
         const biggerBounds = await getBounds();
 
-        expect(await messageP.getText()).toEqual("Maximized");
+        await expectMessage("Maximized");
         expect(biggerBounds.width).toBeGreaterThan(bounds.width);
         expect(biggerBounds.height).toBeGreaterThan(bounds.height);
 
@@ -43,7 +57,7 @@ describe("application loading", () => {
 
         const lastBounds = await getBounds();
 
-        expect(await messageP.getText()).toEqual("Unmaximized");
+        await expectMessage("Unmaximized");
         expect(lastBounds.width).toEqual(bounds.width);
         expect(lastBounds.height).toEqual(bounds.height);
       });
@@ -65,13 +79,14 @@ describe("application loading", () => {
       });
 
       it("triggers application menu click events", async () => {
-        const messageP = await browser.$("p#message");
+        await reset();
         const apis = ["MenuItem_Label", "MenuItem_Id", "MenuItem_Accel", "MenuItem_Role"];
 
         for (const api of apis) {
           await browser.electronAPI(api);
           await waitFor(100);
-          expect(await messageP.getText()).toEqual(api);
+          await expectMessage(api);
+          await reset();
         }
       });
     });
@@ -80,29 +95,57 @@ describe("application loading", () => {
   describe("keyboard events", () => {
     describe("when command pressed", () => {
       it("sends ctrl + c and ctrl + v command", async () => {
-        const messageP = await browser.$("p#message");
-
+        await reset();
         await browser.keys(["WDIO_CONTROL", "c"]);
-        expect(await messageP.getText()).toEqual("Ctrl + c pressed");
+        await expectMessage("Ctrl + c pressed");
+
+        await reset();
         await browser.keys(["WDIO_CONTROL", "v"]);
-        expect(await messageP.getText()).toEqual("Ctrl + v pressed");
+        await expectMessage("Ctrl + v pressed");
       });
     });
   });
 
   describe("dependency", () => {
     describe("when dependency method call button is pressed", () => {
-      it("call dependency method", async () => {
-        const messageP = await browser.$("p#message");
-        const callDepButton = await browser.$("button#call-dep");
-        const callDepDirectlyButton = await browser.$("button#call-dep-directly");
+      it("call dependency async methods", async () => {
+        const callDepAsyncButton = await browser.$("#call-dep-async");
+        const callDepAsyncDirectlyButton = await browser.$("#call-dep-async-directly");
 
-        await callDepButton.click();
-        expect(await messageP.getText()).toEqual("Message from Dependency");
+        await reset();
+        await callDepAsyncButton.click();
+        await expectMessage("Asynchronous message from Dependency");
 
-        await callDepDirectlyButton.click();
-        expect(await messageP.getText()).toEqual("Message from Dependency");
+        await reset();
+        await callDepAsyncDirectlyButton.click();
+        await expectMessage("Asynchronous message from Dependency");
       });
-    })
+
+      it("call dependency sync methods", async () => {
+        const callDepSyncButton = await browser.$("#call-dep-sync");
+        const callDepSyncDirectlyButton = await browser.$("#call-dep-sync-directly");
+
+        await reset();
+        await callDepSyncButton.click();
+        await expectMessage("Synchronous message from Dependency");
+
+        await reset();
+        await callDepSyncDirectlyButton.click();
+        await expectMessage("Synchronous message from Dependency");
+      });
+
+      it("call dependency sync methods as async", async () => {
+        const callDepSyncAsyncButton = await browser.$("#call-dep-sync-async");
+        const callDepSyncDirectlyAsyncButton = await browser.$("#call-dep-sync-directly-async");
+
+        await reset();
+        await callDepSyncAsyncButton.click();
+        await expectMessage("Synchronous message from Dependency");
+
+        await reset();
+        await callDepSyncDirectlyAsyncButton.click();
+        await expectMessage("Synchronous message from Dependency");
+      });
+    });
   });
 });

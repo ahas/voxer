@@ -1,15 +1,22 @@
 import { dialog } from "electron";
-import { voxer, Injectable, MenuItem } from "#app";
-import { Sub } from "./sub";
+import { voxer, Injectable, MenuItem, MainWindow } from "#voxer";
 import fs from "fs";
 
 @Injectable({
-  inject: [Sub],
+  as: "app",
 })
-export class App {
+export class Application extends MainWindow {
   currentFile: string | undefined = undefined;
 
-  constructor(private readonly sub: Sub) {}
+  constructor() {
+    super({
+      title: "NotePad",
+      width: 800,
+      height: 600,
+      frame: false,
+      titleBarStyle: "hidden",
+    });
+  }
 
   @MenuItem("New")
   async newFile() {
@@ -19,7 +26,7 @@ export class App {
 
   @MenuItem("Open")
   async openFile() {
-    const fileName = dialog.showOpenDialogSync(voxer.win)?.[0];
+    const fileName = dialog.showOpenDialogSync(this.handle)?.[0];
 
     if (fileName) {
       this.currentFile = fileName;
@@ -31,7 +38,7 @@ export class App {
   @MenuItem("Save")
   async save() {
     const content = await voxer.receive<string>("content");
-    this.currentFile ??= dialog.showSaveDialogSync(voxer.win);
+    this.currentFile ??= dialog.showSaveDialogSync(this.handle);
 
     if (this.currentFile) {
       fs.writeFileSync(this.currentFile, content);
@@ -41,7 +48,7 @@ export class App {
   @MenuItem("Save as")
   async saveAs() {
     const content = await voxer.invoke<string>("menu:save");
-    const fileName = dialog.showSaveDialogSync(voxer.win);
+    const fileName = dialog.showSaveDialogSync(this.handle);
 
     if (fileName) {
       fs.writeFileSync(fileName, content);
@@ -50,6 +57,6 @@ export class App {
 
   @MenuItem("Print")
   print() {
-    voxer.win.webContents.print();
+    this.handle.webContents.print();
   }
 }

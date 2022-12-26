@@ -6,8 +6,12 @@
   <button id="unmaximize" type="button" @click="app.unmaximize()">Unmaximize</button>
   <button id="show_menu" type="button" @click="app.showMenu()">Show menu</button>
   <button id="hide_menu" type="button" @click="app.hideMenu()">Hide menu</button>
-  <button id="call-dep" type="button" @click="app.callDependency()">Call dependency</button>
-  <button id="call-dep-directly" type="button" @click="dep.foo()">Call dependency directly</button>
+  <button id="call-dep-async" type="button" @click="app.callDepAsync()">Call dep async</button>
+  <button id="call-dep-async-directly" type="button" @click="dep.getAsyncMessage()">Call dep async directly</button>
+  <button id="call-dep-sync" type="button" @click="app.callDepSync()">Call dep sync</button>
+  <button id="call-dep-sync-directly" type="button" @click="dep.getSyncMessage()">Call dep sync directly</button>
+  <button id="call-dep-sync-async" type="button" @click="app.callDepSyncAsync()">Call dep sync</button>
+  <button id="call-dep-sync-directly-async" type="button" @click="dep.getSyncMessageAsync()">Call dep sync directly</button>
   <p id="message">{{ msg }}</p>
 </template>
 

@@ -16,16 +16,15 @@
     "test": "wdio run ./wdio.conf.js || (cat ./wdio-logs/wdio-0-0.log && cat ./wdio-logs/wdio-chromedriver.log && exit 1)"
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "^3.2.0",
     "mousetrap": "^1.6.5",
     "reflect-metadata": "^0.1.13",
-    "tsc-alias": "^1.8.2",
     "vue": "^3.2.45"
   },
   "devDependencies": {
     "@testing-library/webdriverio": "^3.2.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.9",
+    "@vitejs/plugin-vue": "^3.2.0",
     "@wdio/cli": "^8.0.6",
     "@wdio/local-runner": "^8.0.6",
     "@wdio/mocha-framework": "^8.0.6",

@@ -40,7 +40,7 @@ export const voxer: VoxerRendererProcess = {
       ipcRenderer.send(`$voxer:main:receive:${name}`, result);
     });
 
-    return this;
+    return voxer;
   },
   receive(name, ...args) {
     return ipcRenderer.sendSync(`$voxer:main:serve:${name}`, ...args);

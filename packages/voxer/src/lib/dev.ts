@@ -4,24 +4,17 @@ import chokidar from "chokidar";
 import fs from "fs";
 import { mkdir } from "./utils";
 import { UserConfig } from "./config";
-import { installVoxer } from "./build";
-import { consoleInfo } from "./console";
+import { BuildOptions, installVoxer } from "./build";
+import { plain, printBufferSync, printInfo } from "cornsol";
 
 const cwd = process.cwd();
 const watchers: chokidar.FSWatcher[] = [];
 
-let printLine = 0;
-
 export function pipeIo(child: ChildProcess): void {
-  const print = (type: "info" | "error", chunk: any) => {
-    const messages = Buffer.from(chunk).toString().trim().split("\n");
-    for (const msg of messages) {
-      console[type]("➤ Electron [%s] %s", String(printLine).padStart(4, "0"), msg);
-    }
-    if (++printLine >= 10000) {
-      printLine = 0;
-    }
+  const print = async (type: "info" | "error", chunk: any) => {
+    printBufferSync(console[type], chunk);
   };
+
   child.stderr?.on("data", print.bind(null, "error"));
   child.stdout?.on("data", print.bind(null, "info"));
 }
@@ -31,6 +24,7 @@ export function runElectron(args: string[]): ChildProcess {
 
   const command = `npx cross-env NODE_ENV=development electron ${args.join(" ")} .`;
   const electron = exec(command);
+
   pipeIo(electron);
 
   return electron;
@@ -49,18 +43,18 @@ export async function runVite(config: UserConfig): Promise<ViteDevServer> {
   return server;
 }
 
-export async function runDevApp(electronArgs: string[]): Promise<void> {
-  const config = await installVoxer();
+export async function runDevApp(options: BuildOptions, electronArgs: string[]): Promise<void> {
+  const config = await installVoxer(options);
   const viteServer = await runVite(config);
   const electron = runElectron(electronArgs);
 
   const restartVite = async () => {
-    consoleInfo("Restart vite dev server");
+    printInfo("Restart vite dev server");
     await viteServer?.restart();
   };
 
   const closeElectron = async () => {
-    consoleInfo("Close electron process");
+    printInfo("Close electron process");
 
     if (viteServer.httpServer?.listening) {
       await viteServer?.close();
@@ -71,9 +65,9 @@ export async function runDevApp(electronArgs: string[]): Promise<void> {
   };
 
   const restartElectron = async () => {
-    consoleInfo("Restart electron process");
+    printInfo("Restart electron process");
     electron.once("close", () => {
-      runDevApp(electronArgs);
+      runDevApp(options, electronArgs);
     });
     await closeElectron();
   };

@@ -28,7 +28,9 @@ function connectExposedMethods(injectable: InjectableMetadata) {
     const eventName = asExposeEvent(injectable, methodName);
 
     if (isAsync) {
-      api[methodName] = (...args: any[]) => ipcRenderer.invoke(eventName, ...args);
+      api[methodName] = (...args: any[]) => {
+        ipcRenderer.invoke(eventName, ...args);
+      };
     } else {
       api[methodName] = (...args: any[]) => ipcRenderer.sendSync(eventName, ...args);
       api[String(methodName) + "Async"] = (...args: any[]) => ipcRenderer.invoke(asAsync(eventName), ...args);
@@ -38,12 +40,12 @@ function connectExposedMethods(injectable: InjectableMetadata) {
   return api;
 }
 
-function connectCommandMethods(injectable: InjectableMetadata) {
+async function connectCommandMethods(injectable: InjectableMetadata) {
   const api = {};
   const methods = injectable.commands;
 
   if (methods.length > 0) {
-    const Mousetrap = require("mousetrap");
+    const Mousetrap = (await import("mousetrap")).default;
 
     for (const { methodName, isAsync, combinations } of methods) {
       const eventName = asCommandEvent(injectable, methodName);
@@ -76,14 +78,13 @@ function connectAccessors(injectable: InjectableMetadata) {
   return api;
 }
 
-function exposeInjectables() {
+async function exposeInjectables() {
   const injectables: InjectableMetadata[] = ipcRenderer.sendSync("$voxer:injectables");
-  console.log(injectables);
 
   for (const injectable of injectables) {
     const api = {
       ...connectExposedMethods(injectable),
-      ...connectAccessors(injectable),
+      ...await connectAccessors(injectable),
       ...connectCommandMethods(injectable),
     };
 
@@ -93,7 +94,7 @@ function exposeInjectables() {
 
 (async () => {
   exposeVoxer();
-
+  // #!if IS_PRELOAD_DEFINED
   try {
     // @ts-ignore
     const { preload } = await import("~/preload");
@@ -101,5 +102,7 @@ function exposeInjectables() {
   } catch {
     console.info("No user preload detected");
   }
-  exposeInjectables();
+  // #!endif
+
+  await exposeInjectables();
 })();

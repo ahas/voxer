@@ -1,3 +1,3 @@
 {
-  "extends": "../.voxer/tsconfig.json"
+  "extends": "../.voxer/tsconfig.main.json"
 }

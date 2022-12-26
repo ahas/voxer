@@ -1,6 +1,6 @@
 {
   "name": "voxer",
-  "version": "1.0.0-rc.10",
+  "version": "1.0.0-rc.12",
   "description": "vite + electron framework",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -19,9 +19,10 @@
   "license": "MIT",
   "bin": "./dist/lib/cli.js",
   "files": [
-    "assets",
-    "dist",
+    "res/**/*",
+    "dist/**/*",
     "types/**/*",
+    "src/runtime/preload.ts",
     "src/runtime/injectable.ts",
     "src/runtime/core/voxer.renderer.ts",
     "src/runtime/core/utils.ts"
@@ -31,7 +32,7 @@
     "electron"
   ],
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/dev.js",
     "dev": "yarn tsc && yarn start",
@@ -41,23 +42,24 @@
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "commander": "^9.3.0",
+    "cornsol": "^1.1.1",
     "cross-env": "^7.0.3",
-    "ejs": "^3.1.8",
     "electron": "^22.0.0",
-    "electron-builder": "^23.6.0",
+    "electron-builder": "latest",
     "glob": "^8.0.3",
-    "mousetrap": "^1.6.5",
     "prettier": "^2.6.2",
     "ts-loader": "^9.4.2",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "^4.9.3",
     "vite": "^3.2.4",
-    "webpack": "^5.75.0"
+    "webpack": "^5.75.0",
+    "webpack-preprocessor-loader": "^1.2.0"
   },
   "devDependencies": {
     "@types/chokidar": "^2.1.3",
-    "@types/ejs": "^3.1.1",
     "@types/prettier": "^2.6.1",
-    "reflect-metadata": "^0.1.13"
+    "mousetrap": "^1.6.5",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2"
   }
 }

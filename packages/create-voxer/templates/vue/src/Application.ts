@@ -1,11 +1,12 @@
-import { voxer, Expose, Command, Injectable, Accessor, MenuItem } from "#app";
+import { MainWindow, voxer, Expose, Command, Injectable, Accessor, MenuItem } from "#voxer";
 import { dialog } from "electron";
-import { Sub } from "./sub";
+import { Dependency } from "./Dependency";
 
 @Injectable({
-  inject: [Sub],
+  as: "app",
+  inject: [Dependency],
 })
-export class App {
+export class Application extends MainWindow {
   @Accessor({ as: "value" })
   private _value: number = 0;
 
@@ -18,30 +19,20 @@ export class App {
     voxer.invoke("count", val);
   }
 
-  constructor(private readonly sub: Sub) {}
+  constructor(private readonly dep: Dependency) {
+    super();
+  }
 
   @Expose()
   async maximize() {
-    voxer.win.maximize();
+    this.handle.maximize();
     await voxer.invoke("message", "Maximized");
   }
 
   @Expose()
   unmaximize() {
-    voxer.win.unmaximize();
+    this.handle.unmaximize();
     voxer.invoke("message", "Unmaximized");
-  }
-
-  @Expose()
-  showMenu() {
-    voxer.win.setMenuBarVisibility(true);
-    voxer.invoke("message", "Menu bar visible");
-  }
-
-  @Expose()
-  hideMenu() {
-    voxer.win.setMenuBarVisibility(false);
-    voxer.invoke("message", "Menu bar hidden");
   }
 
   @Command("ctrl+c")
@@ -56,8 +47,13 @@ export class App {
 
   @MenuItem("Open")
   openFile() {
-    const fileName = dialog.showOpenDialogSync(voxer.win);
+    const fileName = dialog.showOpenDialogSync(this.handle);
 
     voxer.invoke("message", fileName);
+  }
+
+  @Expose()
+  async callDependency() {
+    await this.dep.foo();
   }
 }

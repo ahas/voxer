@@ -6,8 +6,7 @@
     <button type="button" @click="app.setValue(0)">Reset</button>
     <button type="button" @click="app.maximize()">Maximize</button>
     <button type="button" @click="app.unmaximize()">Unmaximize</button>
-    <button type="button" @click="app.showMenu()">Show menu</button>
-    <button type="button" @click="app.hideMenu()">Hide menu</button>
+    <button type="button" @click="app.callDependency()">Call dependency</button>
   </div>
 
   <div class="card">
@@ -22,7 +21,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 
-const { app } = window;
+const { app, dep } = window;
 
 const msg = ref("");
 const count = ref(0);

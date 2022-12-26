@@ -1,20 +1,11 @@
-import { BrowserWindow, Menu } from "electron";
-import { App } from "./app";
+import { Application } from "./Application";
+import { inject } from "#voxer";
 
-export async function main(win: BrowserWindow) {
-  win.setTitle("VOXER (vue)");
-  win.setSize(800, 600);
+export async function main() {
+  const app = inject(Application);
 
-  const menu = Menu.buildFromTemplate([
+  app.setApplicationMenu([
     { role: "fileMenu", submenu: [{ label: "Open", accelerator: "CommandOrControl+O" }] },
     { role: "viewMenu" },
   ]);
-
-  Menu.setApplicationMenu(menu);
-}
-
-export function preload() {}
-
-export function inject() {
-  return [App];
 }

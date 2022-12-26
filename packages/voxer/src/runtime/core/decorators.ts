@@ -9,9 +9,11 @@ import {
   INJECTABLE_COMMANDS_METADATA,
   INJECTABLE_MENU_ITEMS_METADATA,
   INJECTABLE_EXPOSED_METHODS_METADATA,
+  INJECTABLE_INVOKE_HOOK_METADATA,
 } from "./constants";
 import { isAsyncFunction } from "./utils";
 import { inject } from "./inject";
+import { voxer } from "./voxer.main";
 
 export interface InjectableOptions {
   inject?: Function[];
@@ -28,10 +30,19 @@ export interface ExposeOptions {
   as?: string;
 }
 
-export interface ExposedMethod<T> {
+export interface MethodMetadata<T> {
   methodName: keyof T;
   isAsync: boolean;
+}
+
+export interface ExposedMethod<T> extends MethodMetadata<T> {
   options?: ExposeOptions;
+}
+
+export interface InvokeHook<T> {
+  methodName: keyof T;
+  channel: string;
+  rendererChannel: string;
 }
 
 export interface AccessorMethod<T> {
@@ -39,15 +50,11 @@ export interface AccessorMethod<T> {
   options?: AccessorOptions;
 }
 
-export interface CommandHandler<T> {
-  methodName: keyof T;
-  isAsync: boolean;
+export interface CommandHandler<T> extends MethodMetadata<T> {
   combinations: string | string[];
 }
 
-export interface MenuItemHandler<T> {
-  methodName: keyof T;
-  isAsync: boolean;
+export interface MenuItemHandler<T> extends MethodMetadata<T> {
   selector: string | string[];
 }
 
@@ -81,6 +88,34 @@ export function Expose(options?: ExposeOptions): MethodDecorator {
       isAsync,
       options,
     });
+  };
+}
+
+export function Invoke(channel: string): MethodDecorator {
+  return function <T extends Object>(target: T, propertyKey: string | symbol, descriptor: any) {
+    const invokeHooks = getMetadata<InvokeHook<T>[]>(INJECTABLE_INVOKE_HOOK_METADATA, target.constructor, []);
+    const methodName = propertyKey as keyof T;
+    const hook = {
+      methodName,
+      channel,
+      rendererChannel: `$voxer:renderer:${channel}`,
+    };
+
+    invokeHooks.push(hook);
+
+    const originalMethod = descriptor.value;
+
+    descriptor.value = function (...args: any[]) {
+      if (isAsyncFunction(originalMethod)) {
+        originalMethod.apply(target, args).then((ret: any) => {
+          voxer.win.handle.webContents.send(hook.rendererChannel, ret);
+        });
+      } else {
+        const ret = originalMethod.apply(target, args);
+
+        voxer.win.handle.webContents.send(hook.rendererChannel, ret);
+      }
+    };
   };
 }
 

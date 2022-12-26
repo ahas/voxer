@@ -1,7 +1,7 @@
 {
     "name": "voxer-app",
     "version": "0.0.1",
-    "main": ".voxer/main.js",
+    "main": ".voxer/runtime/main.js",
     "private": true,
     "scripts": {
         "clean": "voxer clean",
@@ -10,6 +10,7 @@
         "build": "voxer build"
     },
     "dependencies": {
+        "cornsol": "^1.0.10",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "reflect-metadata": "^0.1.13"

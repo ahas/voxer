@@ -45,6 +45,12 @@ function App() {
         <button type="button" onClick={() => app.hideMenu()}>
           Hide Menu
         </button>
+        <button type="button" onClick={() => app.callDependency()}>
+          Call dependency
+        </button>
+        <button type="button" onClick={() => dep.foo()}>
+          Call dependency directly
+        </button>
       </div>
       <div className="card">
         <p>Message: {message}</p>

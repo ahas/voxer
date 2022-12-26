@@ -62,6 +62,7 @@ export class Application extends MainWindow {
 
   @MenuItem("MenuItem_Label")
   async MenuItem_Label() {
+    console.log("label");
     await voxer.invoke("message", "MenuItem_Label");
   }
 
@@ -81,7 +82,12 @@ export class Application extends MainWindow {
   }
 
   @Expose()
-  async callDependency() {
-    await this.dep.foo();
+  async callDepAsync() {
+    await this.dep.getAsyncMessage();
+  }
+
+  @Expose()
+  callDepSync() {
+    this.dep.getSyncMessage();
   }
 }

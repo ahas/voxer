@@ -2,17 +2,17 @@ import fs from "fs";
 import { relative, dirname, join, resolve, basename } from "path";
 import glob from "glob";
 import ts, { MapLike } from "typescript";
-import { consoleDel } from "./console";
+import { printDel } from "cornsol";
 
 const cwd = process.cwd();
 
 export function cleanVoxer(): void {
-  consoleDel("Deleting voxer runtime");
+  printDel("Delete voxer runtime");
   fs.rmSync(resolve(cwd, ".voxer"), { force: true, recursive: true });
 }
 
 export function cleanRelease(): void {
-  consoleDel("Deleting voxer release folder");
+  printDel("Delete voxer release folder");
   fs.rmSync(resolve(cwd, "voxer_release"), { force: true, recursive: true });
 }
 
@@ -106,4 +106,22 @@ export function resolveAlias(): void {
       fs.writeFileSync(file, newText);
     }
   }
+}
+
+export function formatDuration(duration: number) {
+  if (duration > 1000 * 60) {
+    const minutes = Math.floor(duration / 1000 / 60);
+    const seconds = Math.ceil((duration - minutes * 60 * 1000) / 1000);
+
+    return seconds === 0 ? `${minutes}m` : `${minutes}m ${seconds}s`;
+  } else {
+    const seconds = Math.floor(duration / 1000);
+    const milliseconds = duration - seconds * 1000;
+
+    return milliseconds === 0 ? `${seconds}s` : `${seconds}s ${milliseconds}ms`;
+  }
+}
+
+export function isPreloadDefined() {
+  return glob.sync(resolve(cwd, "src/preload.{js,ts,jsx,tsx}")).length > 0;
 }

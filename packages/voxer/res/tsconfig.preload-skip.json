@@ -1,0 +1,15 @@
+// this configurations file will be locate into .voxer
+// and extended by src/tsconfig.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "include": [
+    "node_modules/voxer/src/runtime/preload.ts",
+    "node_modules/voxer/src/runtime/injectable.ts",
+    "node_modules/voxer/src/runtime/core/utils.ts",
+    "node_modules/voxer/src/runtime/core/voxer.renderer.ts",
+    "_voxer_empty_.ts"
+  ]
+}

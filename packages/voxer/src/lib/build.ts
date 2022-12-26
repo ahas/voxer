@@ -1,12 +1,13 @@
 import ts from "typescript";
-import { resolve } from "path";
+import { resolve as resolvePath } from "path";
 import { readConfig, type UserConfig } from "./config";
 import { build as _buildVite } from "vite";
 import { build as _buildElectron } from "electron-builder";
-import { cleanVoxer, mkdir, resolveAlias } from "./utils";
+import { cleanVoxer, isPreloadDefined, mkdir, resolveAlias } from "./utils";
 import { duplicateResource } from "./resources";
-import { consoleStart } from "./console";
+import { printLog, printStep } from "cornsol";
 import { transform } from "./transform";
+import fs from "fs";
 import type { RollupOutput, RollupWatcher } from "rollup";
 
 // webpack features
@@ -14,153 +15,187 @@ import webpack from "webpack";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
 
 const cwd = process.cwd();
+const EMPTY_TS_FILE = ".voxer/_voxer_empty_.ts";
 
-export function buildPreload(): Promise<webpack.Stats> {
-  const entry = resolve(__dirname, "../../src/runtime/preload.ts");
-  const configFile = resolve(cwd, ".voxer/tsconfig.preload.json");
-  const outputPath = resolve(cwd, ".voxer/runtime");
+export interface BuildOptions {
+  mode: "development" | "production";
+  targets?: { [key in "vite" | "electron"]?: boolean };
+}
 
-  const compiler = webpack({
-    entry,
-    mode: "development",
-    externals: {
-      electron: "commonjs electron",
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: "ts-loader",
-              options: {
-                configFile,
+export function buildPreload(options: BuildOptions): Promise<webpack.Stats> {
+  return printStep("Build preload", async () => {
+    const entry = resolvePath(__dirname, "../../src/runtime/preload.ts");
+    const configFile = resolvePath(cwd, ".voxer", "tsconfig.preload.json");
+    const outputPath = resolvePath(cwd, ".voxer/runtime");
+
+    const compiler = webpack({
+      entry,
+      mode: options.mode,
+      externals: {
+        electron: "commonjs electron",
+      },
+      module: {
+        rules: [
+          {
+            test: /\.[jt]sx?$/,
+            use: [
+              {
+                loader: "webpack-preprocessor-loader",
+                options: {
+                  params: {
+                    IS_PRELOAD_DEFINED: isPreloadDefined(),
+                  },
+                },
               },
-            },
-          ],
-          exclude: /node_modules|.yarn/,
-        },
-      ],
-    },
-    resolve: {
-      plugins: [new TsconfigPathsPlugin({ configFile })],
-      extensions: [".tsx", ".ts", ".js"],
-    },
-    output: {
-      filename: "preload.js",
-      path: outputPath,
-    },
-    devtool: "inline-source-map",
-  });
+              {
+                loader: "ts-loader",
+                options: {
+                  configFile,
+                  allowTsInNodeModules: true,
+                },
+              },
+            ],
+          },
+        ],
+      },
+      resolve: {
+        plugins: [new TsconfigPathsPlugin({ configFile })],
+        extensions: [".tsx", ".ts", ".js"],
+      },
+      output: {
+        filename: "preload.js",
+        path: outputPath,
+      },
+      devtool: "inline-source-map",
+    });
 
-  return new Promise((resolve, reject) => {
-    compiler.run((err, stats) => {
-      if (err) {
-        reject(err);
+    return new Promise((resolve, reject) => {
+      printLog("Bundling...");
+      compiler.run((err, stats) => {
+        fs.rmSync(resolvePath(cwd, EMPTY_TS_FILE), { force: true });
 
-        return;
-      }
+        if (err) {
+          reject(err);
 
-      const info = stats?.toJson();
-
-      if (stats) {
-        if (stats.hasErrors()) {
-          info?.errors?.forEach((e) => console.error(e.stack));
+          return;
         }
 
-        resolve(stats);
-      } else {
-        reject();
-      }
+        const info = stats?.toJson();
+
+        if (stats) {
+          if (stats.hasErrors()) {
+            info?.errors?.forEach((e) => console.error(e.stack));
+          }
+
+          resolve(stats);
+        } else {
+          reject();
+        }
+      });
     });
   });
 }
 
-export async function buildApp(): Promise<{ options: ts.CompilerOptions }> {
-  let configFile = ts.findConfigFile(resolve(cwd, "src"), ts.sys.fileExists, "tsconfig.json");
+export function buildMain(): Promise<{ options: ts.CompilerOptions }> {
+  return printStep("Build main", async () => {
+    let configFile = ts.findConfigFile(resolvePath(cwd, "src"), ts.sys.fileExists, "tsconfig.json");
 
-  if (!configFile) {
-    configFile = ts.findConfigFile(resolve(cwd, ".voxer"), ts.sys.fileExists, "tsconfig.main.json");
-  }
+    if (!configFile) {
+      configFile = ts.findConfigFile(resolvePath(cwd, ".voxer"), ts.sys.fileExists, "tsconfig.main.json");
+    }
 
-  const { config } = ts.readConfigFile(configFile!, ts.sys.readFile);
-  const { options, fileNames, errors } = ts.parseJsonConfigFileContent(config, ts.sys, resolve(cwd, "src"));
-  const program = ts.createProgram({ options, rootNames: fileNames, configFileParsingDiagnostics: errors });
-  const { diagnostics, emitSkipped } = program.emit();
-  const allDiagnostics = ts.getPreEmitDiagnostics(program).concat(diagnostics, errors);
+    printLog("Compiling...");
+    const { config } = ts.readConfigFile(configFile!, ts.sys.readFile);
+    const { options, fileNames, errors } = ts.parseJsonConfigFileContent(config, ts.sys, resolvePath(cwd, "src"));
+    const program = ts.createProgram({ options, rootNames: fileNames, configFileParsingDiagnostics: errors });
+    const { diagnostics, emitSkipped } = program.emit();
+    const allDiagnostics = ts.getPreEmitDiagnostics(program).concat(diagnostics, errors);
 
-  if (allDiagnostics.length) {
-    const formatHost: ts.FormatDiagnosticsHost = {
-      getCanonicalFileName: (path) => path,
-      getCurrentDirectory: ts.sys.getCurrentDirectory,
-      getNewLine: () => ts.sys.newLine,
-    };
-    const message = ts.formatDiagnostics(allDiagnostics, formatHost);
+    if (allDiagnostics.length) {
+      const formatHost: ts.FormatDiagnosticsHost = {
+        getCanonicalFileName: (path) => path,
+        getCurrentDirectory: ts.sys.getCurrentDirectory,
+        getNewLine: () => ts.sys.newLine,
+      };
+      const message = ts.formatDiagnostics(allDiagnostics, formatHost);
 
-    console.warn(message);
-  }
+      console.warn(message);
+    }
 
-  if (emitSkipped) {
-    process.exit(1);
-  }
+    if (emitSkipped) {
+      process.exit(1);
+    }
 
-  return { options };
-}
-
-export async function buildVite(config: UserConfig): Promise<RollupOutput | RollupOutput[] | RollupWatcher> {
-  mkdir(".voxer");
-
-  return await _buildVite({
-    configFile: false,
-    root: cwd + "/view",
-    base: "./",
-    build: {
-      outDir: resolve(cwd, ".voxer"),
-    },
-    ...config.vite,
+    return { options };
   });
 }
 
-export async function buildElectron(config: UserConfig): Promise<string[]> {
-  mkdir(".voxer");
+export function buildVite(config: UserConfig): Promise<RollupOutput | RollupOutput[] | RollupWatcher> {
+  return printStep("Build vite", () => {
+    mkdir(".voxer");
 
-  return await _buildElectron({
-    config: {
-      files: [".voxer/**/*"],
-      directories: {
-        output: resolve(cwd, "voxer_release"),
+    return _buildVite({
+      configFile: false,
+      root: cwd + "/view",
+      base: "./",
+      build: {
+        outDir: resolvePath(cwd, ".voxer"),
       },
-      ...config.build,
-    },
+      ...config.vite,
+    });
   });
 }
 
-export async function buildRelease(options: any): Promise<void> {
-  const config = await installVoxer();
+export function buildElectron(config: UserConfig): Promise<string[]> {
+  return printStep("Build electron", () => {
+    mkdir(".voxer");
 
-  if (options.vite) {
-    await buildVite(config);
-  }
-
-  if (options.electron) {
-    await buildElectron(config);
-  }
+    return _buildElectron({
+      config: {
+        files: [".voxer/**/*"],
+        directories: {
+          output: resolvePath(cwd, "voxer_release"),
+        },
+        ...config.build,
+      },
+    });
+  });
 }
 
-export function installRuntime(): void {
-  consoleStart("Installing voxer runtimes...");
+export function buildRelease(options: BuildOptions): Promise<void> {
+  return printStep("Build for release", async () => {
+    const config = await installVoxer(options);
 
-  duplicateResource("res", "tsconfig.json");
-  duplicateResource("res", "tsconfig.main.json");
-  duplicateResource("res", "tsconfig.preload.json");
-  duplicateResource("dist", "runtime");
+    if (options.targets?.vite) {
+      await buildVite(config);
+    }
+
+    if (options.targets?.electron) {
+      await buildElectron(config);
+    }
+  });
 }
 
-export async function installVoxer(): Promise<UserConfig> {
+export function installRuntime(): Promise<void> {
+  return printStep("Install voxer runtime", () => {
+    duplicateResource("res", "tsconfig.json");
+    duplicateResource("res", "tsconfig.main.json");
+    duplicateResource("dist", "runtime");
+
+    if (isPreloadDefined()) {
+      duplicateResource("res", "tsconfig.preload.json");
+    } else {
+      duplicateResource("res", "tsconfig.preload-skip.json", "tsconfig.preload.json");
+      fs.writeFileSync(resolvePath(cwd, EMPTY_TS_FILE), "");
+    }
+  });
+}
+
+export async function installVoxer(options: BuildOptions): Promise<UserConfig> {
   cleanVoxer();
-  installRuntime();
-  await buildApp();
-  await buildPreload();
+  await installRuntime();
+  await buildMain();
+  await buildPreload(options);
   resolveAlias();
   transform();
 

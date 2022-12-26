@@ -2,7 +2,7 @@ import { BrowserWindow, Menu, MenuItemConstructorOptions, BrowserWindowConstruct
 import { voxer } from "../voxer.main";
 import { resolve } from "path";
 
-type MenuTemplate = Array<MenuItemConstructorOptions | MenuItem>;
+export type MenuTemplate = Array<MenuItemConstructorOptions | MenuItem>;
 
 export class MainWindow {
   handle: BrowserWindow;

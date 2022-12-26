@@ -7,12 +7,13 @@ import {
   INJECTABLE_COMMANDS_METADATA,
   INJECTABLE_EXPOSED_METHODS_METADATA,
   INJECTABLE_INSTANCE_METADATA,
+  INJECTABLE_INVOKE_HOOK_METADATA,
   INJECTABLE_MENU_ITEMS_METADATA,
   INJECTABLE_OPTIONS_METADATA,
 } from "./core/constants";
 import { voxer } from "./core/voxer.main";
 import { camelcase, asExposeEvent, asMenuEvent, asGetter, asSetter, asAsync, asCommandEvent } from "./core/utils";
-import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler } from "./core/decorators";
+import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/decorators";
 import { InjectableMetadata } from "./injectable";
 
 declare global {
@@ -21,37 +22,40 @@ declare global {
 
 global.__VOXER_MAIN__ = true;
 
-function connectExposedMethods<T extends Object>(injectable: Function, instance: T) {
-  const methods: ExposedMethod<T>[] = Reflect.getMetadata(INJECTABLE_EXPOSED_METHODS_METADATA, injectable) || [];
+function connectToRenderer<T extends Object>(
+  instance: T,
+  { methodName, isAsync }: MethodMetadata<T>,
+  eventName: string
+) {
+  const method = (instance[methodName] as Function).bind(instance);
 
-  for (const { methodName, isAsync } of methods) {
-    const eventName = asExposeEvent(injectable, methodName);
-    const method = (instance[methodName] as Function).bind(instance);
-
-    if (isAsync) {
-      ipcMain.handle(eventName, async (event, ...args) => {
-        return await method(...args);
-      });
-    } else {
-      ipcMain.on(eventName, (event, ...args) => {
-        event.returnValue = method(...args);
-      });
-      ipcMain.handle(asAsync(eventName), async (event, ...args) => {
-        return await method(...args);
-      });
-    }
+  if (isAsync) {
+    ipcMain.handle(eventName, async (_event, ...args) => await method(...args));
+  } else {
+    ipcMain.on(eventName, (event, ...args) => (event.returnValue = method(...args)));
+    ipcMain.handle(asAsync(eventName), async (_event, ...args) => await method(...args));
   }
 }
 
-function connectMenus<T extends Object>(injectable: Function, instance: T) {
+function connectExposedMethods<T extends Object>(injectable: Function, instance: T) {
+  const methods: ExposedMethod<T>[] = Reflect.getMetadata(INJECTABLE_EXPOSED_METHODS_METADATA, injectable) || [];
+
+  for (const method of methods) {
+    const eventName = asExposeEvent(injectable, method.methodName);
+
+    connectToRenderer(instance, method, eventName);
+  }
+}
+
+function connectMenuItems<T extends Object>(injectable: Function, instance: T) {
   const methods: MenuItemHandler<T>[] = Reflect.getMetadata(INJECTABLE_MENU_ITEMS_METADATA, injectable) || [];
 
   for (const { methodName, selector } of methods) {
-    const eventNames = (Array.isArray(selector) ? selector : [selector]).map((x) => asMenuEvent(x));
+    const selectors = Array.isArray(selector) ? selector : [selector];
     const method = (instance[methodName] as Function).bind(instance);
 
-    for (const eventName of eventNames) {
-      ipcMain.on(eventName, () => method());
+    for (const selector of selectors) {
+      ipcMain.on(asMenuEvent(selector), (_event, ...args) => method(...args));
     }
   }
 }
@@ -59,19 +63,10 @@ function connectMenus<T extends Object>(injectable: Function, instance: T) {
 function connectCommands<T extends Object>(injectable: Function, instance: T) {
   const methods: CommandHandler<T>[] = Reflect.getMetadata(INJECTABLE_COMMANDS_METADATA, injectable) || [];
 
-  for (const { methodName, isAsync } of methods) {
-    const eventName = asCommandEvent(injectable, methodName);
-    const method = (instance[methodName] as Function).bind(instance);
+  for (const method of methods) {
+    const eventName = asCommandEvent(injectable, method.methodName);
 
-    if (isAsync) {
-      ipcMain.handle(eventName, async (event) => {
-        return await method();
-      });
-    } else {
-      ipcMain.on(eventName, (event) => {
-        event.returnValue = method();
-      });
-    }
+    connectToRenderer(instance, method, eventName);
   }
 }
 
@@ -109,10 +104,10 @@ function extendAppMenu(items: MenuItem[]) {
       const oldClick = item.click;
 
       item.click = function () {
-        item.role && ipcMain.emit(`$voxer:menu:$${item.role}`, item);
-        item.accelerator && ipcMain.emit(`$voxer:menu::${item.accelerator}`);
-        item.id && ipcMain.emit(`$voxer:menu:#${item.id}`);
-        item.label && ipcMain.emit(`$voxer:menu:${item.label}`, item);
+        item.role && ipcMain.emit(asMenuEvent(`$${item.role}`), item);
+        item.accelerator && ipcMain.emit(asMenuEvent(`:${item.accelerator}`));
+        item.id && ipcMain.emit(asMenuEvent(`#${item.id}`));
+        item.label && ipcMain.emit(asMenuEvent(item.label), item);
 
         return oldClick?.call(item, ...arguments);
       };
@@ -138,6 +133,7 @@ function initVoxerEvents() {
       const options = Reflect.getMetadata(INJECTABLE_OPTIONS_METADATA, injectable) || {};
       const apiKey = options.as || camelcase(injectable.name);
       const methods = Reflect.getMetadata(INJECTABLE_EXPOSED_METHODS_METADATA, injectable) || [];
+      const hooks = Reflect.getMetadata(INJECTABLE_INVOKE_HOOK_METADATA, injectable) || [];
       const commands = Reflect.getMetadata(INJECTABLE_COMMANDS_METADATA, injectable) || [];
       const accessors = Reflect.getMetadata(INJECTABLE_ACCESSORS_METADATA, injectable) || [];
 
@@ -145,6 +141,7 @@ function initVoxerEvents() {
         name: injectable.name,
         apiKey,
         methods,
+        hooks,
         commands,
         accessors,
       });
@@ -161,7 +158,7 @@ async function injectDependencies() {
     connectExposedMethods(injectable, instance);
     connectAccessors(injectable, instance);
     connectCommands(injectable, instance);
-    connectMenus(injectable, instance);
+    connectMenuItems(injectable, instance);
   }
 }
 

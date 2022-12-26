@@ -1,0 +1,80 @@
+2022-12-26T05:50:33.045Z INFO @wdio/local-runner: Run worker command: run
+2022-12-26T05:50:33.391Z INFO webdriver: Initiate new session using the WebDriver protocol
+2022-12-26T05:50:33.493Z INFO webdriver: [POST] http://127.0.0.1:9519/session
+2022-12-26T05:50:33.493Z INFO webdriver: DATA {
+  capabilities: {
+    alwaysMatch: { browserName: 'chrome', 'goog:chromeOptions': [Object] },
+    firstMatch: [ {} ]
+  },
+  desiredCapabilities: {
+    browserName: 'chrome',
+    'goog:chromeOptions': {
+      binary: '/home/ahas/repos/ahas/voxer/packages/test/voxer_release/linux-unpacked/voxer-test',
+      args: [],
+      windowTypes: [Array]
+    }
+  }
+}
+2022-12-26T05:50:33.986Z INFO webdriver: COMMAND electronApp("getName")
+2022-12-26T05:50:33.987Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+    if (window.wdioElectron === undefined) {
+        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
+    }
+    if (window.wdioElectron[bridgePropName] === undefined) {
+        throw new Error(`"${bridgePropName}" API not found on ContextBridge`);
+    }
+    done(await window.wdioElectron[bridgePropName].invoke(...args));
+}).apply(null, arguments)", <object>)
+2022-12-26T05:50:33.987Z INFO webdriver: [POST] http://127.0.0.1:9519/session/b2ee18e4872e60c7850e91fd91657472/execute/async
+2022-12-26T05:50:33.987Z INFO webdriver: DATA {
+  script: 'return (async function callApi(bridgePropName, args, done) {\n' +
+    '    if (window.wdioElectron === undefined) {\n' +
+    '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
+    '    }\n' +
+    '    if (window.wdioElectron[bridgePropName] === undefined) {\n' +
+    '        throw new Error(`"${bridgePropName}" API not found on ContextBridge`);\n' +
+    '    }\n' +
+    '    done(await window.wdioElectron[bridgePropName].invoke(...args));\n' +
+    '}).apply(null, arguments)',
+  args: [ 'app', [ 'getName' ] ]
+}
+2022-12-26T05:50:33.997Z INFO webdriver: RESULT voxer-test
+2022-12-26T05:50:33.997Z INFO webdriver: RESULT voxer-test
+2022-12-26T05:50:33.998Z INFO webdriver: COMMAND electronApp("getVersion")
+2022-12-26T05:50:33.998Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+    if (window.wdioElectron === undefined) {
+        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
+    }
+    if (window.wdioElectron[bridgePropName] === undefined) {
+        throw new Error(`"${bridgePropName}" API not found on ContextBridge`);
+    }
+    done(await window.wdioElectron[bridgePropName].invoke(...args));
+}).apply(null, arguments)", <object>)
+2022-12-26T05:50:33.998Z INFO webdriver: [POST] http://127.0.0.1:9519/session/b2ee18e4872e60c7850e91fd91657472/execute/async
+2022-12-26T05:50:33.998Z INFO webdriver: DATA {
+  script: 'return (async function callApi(bridgePropName, args, done) {\n' +
+    '    if (window.wdioElectron === undefined) {\n' +
+    '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
+    '    }\n' +
+    '    if (window.wdioElectron[bridgePropName] === undefined) {\n' +
+    '        throw new Error(`"${bridgePropName}" API not found on ContextBridge`);\n' +
+    '    }\n' +
+    '    done(await window.wdioElectron[bridgePropName].invoke(...args));\n' +
+    '}).apply(null, arguments)',
+  args: [ 'app', [ 'getVersion' ] ]
+}
+2022-12-26T05:50:34.006Z INFO webdriver: RESULT 1.0.0
+2022-12-26T05:50:34.006Z INFO webdriver: RESULT 1.0.0
+2022-12-26T05:50:34.009Z INFO webdriver: COMMAND getLogTypes()
+2022-12-26T05:50:34.009Z INFO webdriver: [GET] http://127.0.0.1:9519/session/b2ee18e4872e60c7850e91fd91657472/se/log/types
+2022-12-26T05:50:34.012Z INFO webdriver: RESULT [ 'browser', 'driver' ]
+2022-12-26T05:50:34.012Z INFO webdriver: COMMAND getLogs("driver")
+2022-12-26T05:50:34.012Z INFO webdriver: COMMAND getLogs("browser")
+2022-12-26T05:50:34.013Z INFO webdriver: [POST] http://127.0.0.1:9519/session/b2ee18e4872e60c7850e91fd91657472/se/log
+2022-12-26T05:50:34.013Z INFO webdriver: DATA { type: 'driver' }
+2022-12-26T05:50:34.013Z INFO webdriver: [POST] http://127.0.0.1:9519/session/b2ee18e4872e60c7850e91fd91657472/se/log
+2022-12-26T05:50:34.013Z INFO webdriver: DATA { type: 'browser' }
+2022-12-26T05:50:34.016Z INFO webdriver: RESULT []
+2022-12-26T05:50:34.017Z INFO webdriver: RESULT []
+2022-12-26T05:50:34.017Z INFO webdriver: COMMAND deleteSession()
+2022-12-26T05:50:34.017Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/b2ee18e4872e60c7850e91fd91657472

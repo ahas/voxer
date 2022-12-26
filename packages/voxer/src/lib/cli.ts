@@ -1,10 +1,13 @@
 #!/usr/bin/env node
+import * as cornsol from "cornsol";
 import { Command, Option } from "commander";
 import { electronFlags } from "./electron-flags";
 import { buildRelease, installVoxer } from "./build";
 
 import { runDevApp } from "./dev";
-import { cleanRelease, cleanVoxer, isTs, resolveAlias } from "./utils";
+import { cleanRelease, cleanVoxer } from "./utils";
+
+cornsol.register();
 
 const pkg = require("../../package.json");
 
@@ -50,8 +53,13 @@ function getElectronArgs(options: any, optionDefs: Option[]) {
 withElectronFlags(program.command("start"))
   .description("[default] Run application in a development")
   .action(async (options, command) => {
-    cleanVoxer();
-    await runDevApp(getElectronArgs(options, command.options));
+    await runDevApp(
+      {
+        mode: "development",
+        targets: { vite: true, electron: true },
+      },
+      getElectronArgs(options, command.options)
+    );
   });
 
 program
@@ -59,8 +67,10 @@ program
   .description("Install voxer resources")
   .option("-d, --dev")
   .option("--no-src", "Run typescript build")
-  .action(async () => {
-    await installVoxer();
+  .action(async (options) => {
+    await installVoxer({
+      mode: options.dev ? "development" : "production",
+    });
   });
 
 program
@@ -69,14 +79,14 @@ program
   .option("--no-src", "Run typescript build")
   .option("--no-vite", "Run vite build")
   .option("--no-electron", "Run electron build")
-  .option("-m, --mac")
-  .option("-w, --win")
-  .option("-l, --linux")
-  .option("--portable")
-  .option("--ia32")
-  .option("--x64")
   .action(async (options) => {
-    await buildRelease(options);
+    await buildRelease({
+      mode: "production",
+      targets: {
+        vite: options.vite,
+        electron: options.electron,
+      },
+    });
   });
 
 program
@@ -99,7 +109,6 @@ program
   .option("--ia32")
   .option("--x64")
   .action(async (options) => {
-    cleanVoxer();
     cleanRelease();
     await buildRelease(options);
   });

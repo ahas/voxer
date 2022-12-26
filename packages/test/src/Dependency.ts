@@ -1,9 +1,16 @@
-import { voxer, Expose, Injectable } from "#voxer";
+import { voxer, Expose, Injectable, Invoke } from "#voxer";
 
 @Injectable({ as: "dep" })
 export class Dependency {
   @Expose()
-  async foo() {
-    await voxer.invoke("message", "Message from Dependency");
+  @Invoke("message")
+  async getAsyncMessage() {
+    return "Asynchronous message from Dependency";
+  }
+
+  @Expose()
+  @Invoke("message")
+  getSyncMessage() {
+    return "Synchronous message from Dependency";
   }
 }
