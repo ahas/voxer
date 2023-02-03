@@ -18,26 +18,41 @@ function isInterfaceType(type: ts.Type): boolean {
   return type.symbol?.declarations?.[0].kind === ts.SyntaxKind.InterfaceDeclaration;
 }
 
-function isPromise(type?: ts.TypeNode | string) {
-  if (type && ts.isTypeReferenceNode(type as ts.TypeNode)) {
-    const typeNode = type as ts.TypeNode;
-
-    return typeNode.getFirstToken()?.getText() === "Promise";
-  }
-
-  return false;
+function isPromiseTypeNode(tsChecker: ts.TypeChecker, type?: ts.Type | string) {
+  return typeof type === "string" ? type === "Promise" : type && tsChecker.typeToString(type) === "Promise";
 }
 
-function getTypeAnyway(type?: ts.TypeNode | string) {
-  return typeof type === "string" ? f.createTypeReferenceNode(type) : type || f.createTypeReferenceNode("any");
-}
+function getReturnType(tsChecker: ts.TypeChecker, decl: ts.SignatureDeclaration): ts.Type | undefined {
+  const signature = tsChecker.getSignatureFromDeclaration(decl);
 
-function asPromise(type?: ts.TypeNode | string) {
-  if (isPromise(type)) {
-    return type as ts.TypeNode as ts.TypeReferenceNode;
+  if (signature) {
+    return tsChecker.getReturnTypeOfSignature(signature);
   }
 
-  return f.createTypeReferenceNode("Promise", [getTypeAnyway()]);
+  return undefined;
+}
+
+function typeToTypeNodeOrAny(tsChecker: ts.TypeChecker, type?: ts.Type | string) {
+  const typeName = typeof type === "string" ? type : type ? tsChecker.typeToString(type) : undefined;
+
+  switch (typeName) {
+    case "Buffer":
+      return f.createTypeReferenceNode("Uint8Array");
+  }
+
+  return typeof type === "string"
+    ? f.createTypeReferenceNode(type)
+    : type
+    ? tsChecker.typeToTypeNode(type, undefined, undefined) || f.createTypeReferenceNode("any")
+    : f.createTypeReferenceNode("any");
+}
+
+function asPromiseTypeNode(tsChecker: ts.TypeChecker, type?: ts.Type | string) {
+  if (isPromiseTypeNode(tsChecker, type)) {
+    return typeToTypeNodeOrAny(tsChecker, type);
+  }
+
+  return f.createTypeReferenceNode("Promise", [typeToTypeNodeOrAny(tsChecker, type)]);
 }
 
 function camelcase(s: string, ...strs: string[]) {
@@ -233,7 +248,10 @@ export class Extractor {
     if (!decl || !ts.isMethodDeclaration(decl)) {
       return [];
     }
-    const isAsync = !!ts.getModifiers(decl)?.find((x) => x.getText() === "async") || isPromise(decl.type);
+
+    const returnType = getReturnType(this._tsChecker, decl);
+    const isAsync =
+      !!ts.getModifiers(decl)?.find((x) => x.getText() === "async") || isPromiseTypeNode(this._tsChecker, returnType);
     const modifiers: readonly ts.Modifier[] | undefined = ts.getModifiers(decl)?.filter((x) => x.getText() !== "async");
     const questionToken: ts.QuestionToken | undefined = decl.questionToken;
     const decorator = this.getDecorator(decl, EXPOSE_DECORATOR_NAME);
@@ -247,7 +265,7 @@ export class Extractor {
           questionToken,
           decl.typeParameters,
           decl.parameters,
-          asPromise(decl.type)
+          asPromiseTypeNode(this._tsChecker, returnType)
         ),
       ];
     } else {
@@ -258,7 +276,7 @@ export class Extractor {
           questionToken,
           decl.typeParameters,
           decl.parameters,
-          getTypeAnyway(decl.type)
+          typeToTypeNodeOrAny(this._tsChecker, returnType)
         ),
         f.createMethodSignature(
           modifiers,
@@ -266,7 +284,7 @@ export class Extractor {
           questionToken,
           decl.typeParameters,
           decl.parameters,
-          asPromise(decl.type)
+          asPromiseTypeNode(this._tsChecker, returnType)
         ),
       ];
     }
@@ -290,7 +308,7 @@ export class Extractor {
         undefined,
         undefined,
         [],
-        getTypeAnyway(decl.type)
+        typeToTypeNodeOrAny(this._tsChecker, this._tsChecker.getTypeAtLocation(decl))
       ),
       f.createMethodSignature(
         undefined,
@@ -298,7 +316,7 @@ export class Extractor {
         undefined,
         undefined,
         [],
-        asPromise(decl.type)
+        asPromiseTypeNode(this._tsChecker, this._tsChecker.getTypeAtLocation(decl))
       ),
       f.createMethodSignature(
         undefined,
@@ -313,17 +331,8 @@ export class Extractor {
         exposeOptions.setter || camelcase("set", exposeOptions.as || declNameText, "async"),
         undefined,
         undefined,
-        [
-          f.createParameterDeclaration(
-            undefined,
-            undefined,
-            decl.name.getText(),
-            undefined,
-            decl.type,
-            undefined
-          ),
-        ],
-        asPromise("void")
+        [f.createParameterDeclaration(undefined, undefined, decl.name.getText(), undefined, decl.type, undefined)],
+        asPromiseTypeNode(this._tsChecker, "void")
       ),
     ];
   }

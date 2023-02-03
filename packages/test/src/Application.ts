@@ -90,4 +90,9 @@ export class Application extends MainWindow {
   callDepSync() {
     this.dep.getSyncMessage();
   }
+
+  @Expose()
+  createBuffer(): Buffer {
+    return Buffer.allocUnsafe(1000);
+  }
 }

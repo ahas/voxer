@@ -27,5 +27,7 @@ const count = ref(0);
 voxer.handle("count", (v) => (count.value = v));
 voxer.handle("message", (v) => (msg.value = v));
 
-onMounted(async () => {});
+onMounted(async () => {
+  console.log(app.createBuffer().buffer);
+});
 </script>
