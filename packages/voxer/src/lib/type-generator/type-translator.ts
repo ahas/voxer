@@ -163,8 +163,29 @@ export class TypeTranslator {
 
     if (ts.isArrayTypeNode(typeNode)) {
       this.visitTypeReference(typeNode.elementType);
+    } else if (ts.isTupleTypeNode(typeNode)) {
+      typeNode.elements.forEach((e) => this.visitTypeReference(e));
     } else if (symbol && this._inferer.isSymbolInTsLib(symbol)) {
       return;
+    } else if (ts.isOptionalTypeNode(typeNode)) {
+      this.visitTypeReference(typeNode.type);
+    } else if (ts.isTypeOperatorNode(typeNode)) {
+      this.visitTypeReference(typeNode.type);
+    } else if (ts.isTypePredicateNode(typeNode)) {
+      this.visitTypeReference(typeNode.type);
+    } else if (ts.isRestTypeNode(typeNode)) {
+      this.visitTypeReference(typeNode.type);
+    } else if (ts.isInferTypeNode(typeNode)) {
+      this.visitTypeParameter(typeNode.typeParameter);
+    } else if (ts.isMappedTypeNode(typeNode)) {
+      this.visitTypeReference(typeNode.nameType);
+      this.visitTypeParameter(typeNode.typeParameter);
+      this.visitTypeReference(typeNode.type);
+    } else if (ts.isIndexedAccessTypeNode(typeNode)) {
+      this.visitTypeReference(typeNode.indexType);
+      this.visitTypeReference(typeNode.objectType);
+    } else if (ts.isParenthesizedTypeNode(typeNode)) {
+      this.visitTypeReference(typeNode.type);
     } else if (ts.isUnionTypeNode(typeNode) || ts.isIntersectionTypeNode(typeNode)) {
       this.visitUnionOrIntersectionType(typeNode);
     } else if (ts.isConditionalTypeNode(typeNode)) {
