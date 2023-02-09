@@ -6,7 +6,7 @@ import { build as _buildElectron } from "electron-builder";
 import { cleanVoxer, isPreloadDefined, mkdir, resolveAlias } from "./utils";
 import { duplicateResource } from "./resources";
 import { printLog, printStep } from "cornsol";
-import { transform } from "./transform";
+import { translate } from "./type-generator";
 import fs from "fs";
 import type { RollupOutput, RollupWatcher } from "rollup";
 
@@ -197,7 +197,7 @@ export async function installVoxer(options: BuildOptions): Promise<UserConfig> {
   await buildMain();
   await buildPreload(options);
   resolveAlias();
-  transform();
+  translate();
 
   return readConfig();
 }

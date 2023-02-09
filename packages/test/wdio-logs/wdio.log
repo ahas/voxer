@@ -1,9 +1,12 @@
-2022-12-26T05:50:31.956Z INFO chromedriver: Start Chromedriver (/home2022-12-26T05:50:32.074Z INFO @wdio/cli:launcher: Run onWorkerStart hook
-2022-12-26T05:50:32.074Z INFO @wdio/cli:launcher: Run onWorkerStart hook
-2022-12-26T05:50:32.075Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,./wdio.conf.js
-2022-12-26T05:50:32.083Z INFO @wdio/local-runner: Start worker 0-1 with arg: run,./wdio.conf.js
-2022-12-26T05:50:34.186Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
-2022-12-26T05:50:40.566Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
-2022-12-26T05:50:40.567Z INFO @wdio/cli:launcher: Run onComplete hook
-2022-12-26T05:50:40.590Z INFO @wdio/local-runner: Shutting down spawned worker
-2022-12-26T05:50:40.841Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2023-02-07T03:08:17.096Z INFO chromedriver: Start Chromedriver (/home2023-02-07T03:08:17.211Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2023-02-07T03:08:17.211Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2023-02-07T03:08:17.211Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2023-02-07T03:08:17.212Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,./wdio.conf.js
+2023-02-07T03:08:17.220Z INFO @wdio/local-runner: Start worker 0-1 with arg: run,./wdio.conf.js
+2023-02-07T03:08:17.228Z INFO @wdio/local-runner: Start worker 0-2 with arg: run,./wdio.conf.js
+2023-02-07T03:08:19.040Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2023-02-07T03:08:20.202Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2023-02-07T03:08:25.758Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2023-02-07T03:08:25.758Z INFO @wdio/cli:launcher: Run onComplete hook
+2023-02-07T03:08:25.780Z INFO @wdio/local-runner: Shutting down spawned worker
+2023-02-07T03:08:26.032Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully

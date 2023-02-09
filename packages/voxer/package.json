@@ -1,6 +1,6 @@
 {
   "name": "voxer",
-  "version": "1.0.0-rc.12",
+  "version": "1.0.0-rc.13",
   "description": "vite + electron framework",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -42,7 +42,7 @@
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "commander": "^9.3.0",
-    "cornsol": "^1.1.1",
+    "cornsol": "^1.1.4",
     "cross-env": "^7.0.3",
     "electron": "^22.0.0",
     "electron-builder": "latest",

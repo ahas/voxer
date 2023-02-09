@@ -1,22 +1,5 @@
 import { setupBrowser } from "@testing-library/webdriverio";
-import { getBounds, waitFor } from "./utils";
-
-async function reset() {
-  const counterButton = await browser.$("button#counter");
-  const resetButton = await browser.$("button#reset");
-
-  await resetButton.click();
-  await waitFor(100);
-  expect(await counterButton.getText()).toEqual("0");
-  await expectMessage("Reset");
-  await waitFor(100);
-}
-
-async function expectMessage(msg: string) {
-  const messageP = await browser.$("p#message");
-
-  expect(await messageP.getText()).toEqual(msg);
-}
+import { reset, expectMessage, getBounds, waitFor } from "./utils";
 
 describe("application loading", () => {
   before(() => {
@@ -96,11 +79,11 @@ describe("application loading", () => {
     describe("when command pressed", () => {
       it("sends ctrl + c and ctrl + v command", async () => {
         await reset();
-        await browser.keys(["WDIO_CONTROL", "c"]);
+        await browser.keys(["Control", "c"]);
         await expectMessage("Ctrl + c pressed");
 
         await reset();
-        await browser.keys(["WDIO_CONTROL", "v"]);
+        await browser.keys(["Control", "v"]);
         await expectMessage("Ctrl + v pressed");
       });
     });

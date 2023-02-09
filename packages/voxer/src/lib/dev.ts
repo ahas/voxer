@@ -5,14 +5,14 @@ import fs from "fs";
 import { mkdir } from "./utils";
 import { UserConfig } from "./config";
 import { BuildOptions, installVoxer } from "./build";
-import { plain, printBufferSync, printInfo } from "cornsol";
+import { printChunkSync, printInfo } from "cornsol";
 
 const cwd = process.cwd();
 const watchers: chokidar.FSWatcher[] = [];
 
 export function pipeIo(child: ChildProcess): void {
   const print = async (type: "info" | "error", chunk: any) => {
-    printBufferSync(console[type], chunk);
+    printChunkSync(console[type], chunk);
   };
 
   child.stderr?.on("data", print.bind(null, "error"));
