@@ -161,7 +161,9 @@ export class TypeTranslator {
     const type = this._typeChecker.getTypeFromTypeNode(typeNode);
     const symbol = type.symbol || type.aliasSymbol;
 
-    if (symbol && this._inferer.isSymbolInTsLib(symbol)) {
+    if (ts.isArrayTypeNode(typeNode)) {
+      this.visitTypeReference(typeNode.elementType);
+    } else if (symbol && this._inferer.isSymbolInTsLib(symbol)) {
       return;
     } else if (ts.isUnionTypeNode(typeNode) || ts.isIntersectionTypeNode(typeNode)) {
       this.visitUnionOrIntersectionType(typeNode);
@@ -441,7 +443,7 @@ export class TypeTranslator {
         decl.name,
         decl.typeParameters,
         this.translateHeritageClauses(symbol),
-        decl.members.filter(x => ts.isPropertySignature(x)),
+        decl.members.filter((x) => ts.isPropertySignature(x))
       );
     }
 

@@ -30,6 +30,7 @@ export class Application extends MainWindow {
   @Expose()
   async maximize() {
     this.handle.maximize();
+
     await voxer.invoke("message", "Maximized");
   }
 

@@ -33,6 +33,10 @@ type Mat4 = [
   [number, number, number, number]
 ];
 
+class Quaternian {
+  constructor(public scalar: number, public vector: Vec3) {}
+}
+
 const origin: Vec2 = new Vec2(0, 0);
 
 @Injectable()
@@ -105,5 +109,10 @@ export class Factory {
       [9, 10, 11, 12],
       [13, 14, 15, 16],
     ] as Mat4;
+  }
+
+  @Expose()
+  createQuaternians(): Quaternian[] {
+    return new Array(5).fill(undefined).map((x) => new Quaternian(10, new Vec3(10, 20, 30)));
   }
 }
