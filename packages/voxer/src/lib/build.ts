@@ -12,7 +12,7 @@ import type { RollupOutput, RollupWatcher } from "rollup";
 
 // webpack features
 import webpack from "webpack";
-import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
+import { getWebpackConfig } from "./webpack-config";
 
 const cwd = process.cwd();
 const EMPTY_TS_FILE = ".voxer/_voxer_empty_.ts";
@@ -24,49 +24,9 @@ export interface BuildOptions {
 
 export function buildPreload(options: BuildOptions): Promise<webpack.Stats> {
   return printStep("Build preload", async () => {
-    const entry = resolvePath(__dirname, "../../src/runtime/preload.ts");
-    const configFile = resolvePath(cwd, ".voxer", "tsconfig.preload.json");
-    const outputPath = resolvePath(cwd, ".voxer/runtime");
-
     const compiler = webpack({
-      entry,
+      ...getWebpackConfig(),
       mode: options.mode,
-      externals: {
-        electron: "commonjs electron",
-      },
-      module: {
-        rules: [
-          {
-            test: /\.[jt]sx?$/,
-            use: [
-              {
-                loader: "webpack-preprocessor-loader",
-                options: {
-                  params: {
-                    IS_PRELOAD_DEFINED: isPreloadDefined(),
-                  },
-                },
-              },
-              {
-                loader: "ts-loader",
-                options: {
-                  configFile,
-                  allowTsInNodeModules: true,
-                },
-              },
-            ],
-          },
-        ],
-      },
-      resolve: {
-        plugins: [new TsconfigPathsPlugin({ configFile })],
-        extensions: [".tsx", ".ts", ".js"],
-      },
-      output: {
-        filename: "preload.js",
-        path: outputPath,
-      },
-      devtool: "inline-source-map",
     });
 
     return new Promise((resolve, reject) => {
