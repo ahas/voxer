@@ -1,4 +1,4 @@
-import { voxer, Expose, Injectable, Invoke } from "#voxer";
+import { Expose, Injectable, Invoke } from "#voxer";
 
 @Injectable({ as: "dep" })
 export class Dependency {

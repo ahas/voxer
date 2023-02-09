@@ -1,16 +1,19 @@
 import ts from "typescript";
 import { resolve } from "path";
-import { Extractor } from "./extractor";
+import { TypeExtractor } from "./type-extractor";
 import { ACCESSOR_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, INJECTABLE_DECORATOR_NAME } from "./constants";
+import { TypeInferer } from "./type-inferer";
+import { TypeUtils } from "./type-utils";
 
 const f = ts.factory;
 
-export class Translator {
+export class TypeTranslator {
   private _program: ts.Program;
   private _typeChecker: ts.TypeChecker;
   private _statements: ts.Statement[] = [];
   private _injectables: ts.Symbol[] = [];
-  private _extractor: Extractor;
+  private _extractor: TypeExtractor;
+  private _inferer: TypeInferer;
   private _memoizedSymbols: Map<string, ts.Symbol> = new Map();
   private _externalModules: Map<string, (ts.ImportSpecifier | ts.ImportClause)[]> = new Map();
 
@@ -30,7 +33,8 @@ export class Translator {
       configFileParsingDiagnostics: errors,
     });
     this._typeChecker = this._program.getTypeChecker();
-    this._extractor = new Extractor(this._program, cwd);
+    this._extractor = new TypeExtractor(this._program, cwd);
+    this._inferer = new TypeInferer(this._program);
   }
 
   private memoizeSymbol(symbol: ts.Symbol): boolean {
@@ -43,169 +47,6 @@ export class Translator {
     this._memoizedSymbols.set(symbolName, symbol);
 
     return true;
-  }
-
-  private camelcase(s: string, ...strs: string[]) {
-    let result = s[0].toLowerCase() + s.substring(1);
-
-    for (const str of strs) {
-      result += str[0].toUpperCase() + str.substring(1);
-    }
-
-    return result;
-  }
-
-  private isPromiseTypeNode(type?: ts.Type | string): boolean {
-    return typeof type === "string" ? type === "Promise" : !!type && this._typeChecker.typeToString(type) === "Promise";
-  }
-
-  private getReturnType(decl: ts.MethodDeclaration): ts.Type | undefined {
-    const signature = this._typeChecker.getSignatureFromDeclaration(decl);
-
-    if (signature) {
-      const returnType = this._typeChecker.getReturnTypeOfSignature(signature);
-
-      return returnType;
-    }
-
-    return undefined;
-  }
-
-  private inferReturnType(decl: ts.MethodDeclaration): ts.TypeNode | undefined {
-    if (decl.type) {
-      return decl.type;
-    }
-
-    const returnType = this.getReturnType(decl);
-
-    if (!returnType) {
-      return undefined;
-    }
-
-    return this._typeChecker.typeToTypeNode(returnType, decl.type, undefined) || f.createTypeReferenceNode("any");
-  }
-
-  private isAsync(decl: ts.MethodDeclaration): boolean {
-    return (
-      !!ts.getModifiers(decl)?.find((x) => x.getText() === "async") || this.isPromiseTypeNode(this.getReturnType(decl))
-    );
-  }
-
-  private isPromise(typeNode: ts.TypeNode | undefined): boolean {
-    if (!typeNode) {
-      return false;
-    }
-
-    if (ts.isTypeReferenceNode(typeNode)) {
-      if (ts.isIdentifier(typeNode.typeName)) {
-        return typeNode.typeName.escapedText === "Promise";
-      }
-    }
-
-    return false;
-  }
-
-  private asPromise(typeNode: ts.TypeNode | undefined): ts.TypeNode {
-    if (typeNode && this.isPromise(typeNode)) {
-      return typeNode;
-    }
-
-    return f.createTypeReferenceNode("Promise", [typeNode || f.createTypeReferenceNode("any")]);
-  }
-
-  private translateType(typeNode: ts.TypeNode | undefined): ts.TypeNode {
-    if (!typeNode) {
-      return f.createTypeReferenceNode("any");
-    }
-
-    if (ts.isTypeReferenceNode(typeNode)) {
-      if (typeNode.typeArguments) {
-        return f.createTypeReferenceNode(
-          typeNode.typeName,
-          typeNode.typeArguments.map((t) => this.translateType(t))
-        );
-      }
-
-      if (ts.isIdentifier(typeNode.typeName)) {
-        const typeName = typeNode.typeName.escapedText;
-
-        switch (typeName) {
-          case "Buffer":
-            return f.createTypeReferenceNode("Uint8Array");
-        }
-      }
-    }
-
-    return typeNode;
-  }
-
-  private translateTypeAlias(typeAlias: ts.Symbol): ts.TypeAliasDeclaration | undefined {
-    const decl = typeAlias.declarations?.[0] as ts.TypeAliasDeclaration;
-
-    if (!this.memoizeSymbol(typeAlias) || !decl || !ts.isTypeAliasDeclaration(decl)) {
-      return undefined;
-    }
-
-    this.visitTypeParameters(decl.typeParameters);
-    this.visitTypeReference(decl.type);
-
-    return decl;
-  }
-
-  private isSymbolInLib(symbol: ts.Symbol): boolean {
-    return (
-      symbol?.getDeclarations()?.some((s) => {
-        const { fileName } = s.getSourceFile();
-
-        return fileName.includes("/node_modules/typescript/lib/") || fileName.includes("/node_modules/@types/node/");
-      }) ?? false
-    );
-  }
-
-  private isExternalModule(decl: ts.Declaration) {
-    const sourceFile = decl.getSourceFile();
-
-    return !sourceFile || sourceFile.isDeclarationFile || sourceFile.fileName.includes("/node_modules/");
-  }
-
-  private visitSymbol(symbol: ts.Symbol) {
-    const decl = symbol.valueDeclaration || symbol.declarations?.[0];
-
-    if (!decl || this.isExternalModule(decl)) {
-      return;
-    }
-
-    if (ts.isClassDeclaration(decl)) {
-      const classDecl = this.translateClass(symbol);
-
-      classDecl && this._statements.push(classDecl);
-    } else if (ts.isInterfaceDeclaration(decl)) {
-      const interfaceDecl = this.translateInterface(symbol);
-
-      interfaceDecl && this._statements.push(interfaceDecl);
-    } else if (ts.isTypeAliasDeclaration(decl)) {
-      const aliasTypeDecl = this.translateTypeAlias(symbol);
-
-      aliasTypeDecl && this._statements.push(aliasTypeDecl);
-    }
-  }
-
-  private getModuleSpecifier(decl: ts.ImportSpecifier | ts.ImportClause): string | undefined {
-    let moduleSpecifier: ts.Expression | undefined;
-
-    if (ts.isImportClause(decl)) {
-      moduleSpecifier = decl.parent.moduleSpecifier;
-    } else if (ts.isImportSpecifier(decl)) {
-      moduleSpecifier = decl.parent.parent.parent.moduleSpecifier;
-    } else {
-      moduleSpecifier = undefined;
-    }
-
-    if (moduleSpecifier && ts.isStringLiteral(moduleSpecifier)) {
-      return moduleSpecifier.text;
-    }
-
-    return undefined;
   }
 
   private pushExternalModule(module: string, decl: ts.ImportSpecifier | ts.ImportClause): void {
@@ -238,13 +79,77 @@ export class Translator {
     }
   }
 
+  private visitTypeParameter(tp: ts.TypeParameterDeclaration) {
+    this.visitTypeReference(tp.constraint);
+    this.visitTypeReference(tp.default);
+
+    if (tp.expression && ts.isExpressionWithTypeArguments(tp.expression)) {
+      this.visitTypeReference(tp.expression);
+    }
+  }
+
+  private visitTypeParameters(typeParams: ts.NodeArray<ts.TypeParameterDeclaration> | undefined): void {
+    typeParams?.forEach((tp) => this.visitTypeParameter(tp));
+  }
+
+  private visitTypeArguments(args: ts.NodeArray<ts.TypeNode> | undefined) {
+    args?.forEach((arg) => this.visitTypeReference(arg));
+  }
+
+  private visitSymbol(symbol: ts.Symbol) {
+    const decl = symbol.valueDeclaration || symbol.declarations?.[0];
+
+    if (!decl || this._inferer.isExternalModule(decl)) {
+      return;
+    }
+
+    if (ts.isClassDeclaration(decl)) {
+      const classDecl = this.translateClass(symbol);
+
+      classDecl && this._statements.push(classDecl);
+    } else if (ts.isInterfaceDeclaration(decl)) {
+      const interfaceDecl = this.translateInterface(symbol);
+
+      interfaceDecl && this._statements.push(interfaceDecl);
+    } else if (ts.isTypeAliasDeclaration(decl)) {
+      const aliasTypeDecl = this.translateTypeAlias(symbol);
+
+      aliasTypeDecl && this._statements.push(aliasTypeDecl);
+    }
+  }
+
   private visitExternalTypeReference(typeNode: ts.TypeReferenceNode) {
     const decl = this._typeChecker.getSymbolAtLocation(typeNode.typeName)?.declarations?.[0];
 
     if (decl && (ts.isImportSpecifier(decl) || ts.isImportClause(decl))) {
-      const from = this.getModuleSpecifier(decl);
+      const from = this._extractor.getModuleSpecifier(decl);
 
       from && this.pushExternalModule(from, decl);
+    }
+  }
+
+  private visitUnionOrIntersectionType(t: ts.UnionOrIntersectionTypeNode) {
+    t.types.forEach((x) => this.visitTypeReference(x));
+  }
+
+  private visitConditionalType(ct: ts.ConditionalTypeNode) {
+    this.visitTypeReference(ct.checkType);
+    this.visitTypeReference(ct.extendsType);
+    this.visitTypeReference(ct.trueType);
+    this.visitTypeReference(ct.falseType);
+  }
+
+  private visitTypeQuery(tq: ts.TypeQueryNode): void {
+    this.visitTypeArguments(tq.typeArguments);
+
+    const type = this._typeChecker.getTypeAtLocation(tq);
+
+    if (type) {
+      const typeNode = this._typeChecker.typeToTypeNode(type, undefined, undefined);
+
+      if (typeNode) {
+        this.visitTypeReference(typeNode);
+      }
     }
   }
 
@@ -256,15 +161,21 @@ export class Translator {
     const type = this._typeChecker.getTypeFromTypeNode(typeNode);
     const symbol = type.symbol || type.aliasSymbol;
 
-    if (symbol && this.isSymbolInLib(symbol)) {
+    if (symbol && this._inferer.isSymbolInTsLib(symbol)) {
       return;
     } else if (ts.isUnionTypeNode(typeNode) || ts.isIntersectionTypeNode(typeNode)) {
-      typeNode.types.forEach((x) => this.visitTypeReference(x));
+      this.visitUnionOrIntersectionType(typeNode);
+    } else if (ts.isConditionalTypeNode(typeNode)) {
+      this.visitConditionalType(typeNode);
+    } else if (ts.isInferTypeNode(typeNode)) {
+      this.visitTypeParameter(typeNode.typeParameter);
+    } else if (ts.isTypeQueryNode(typeNode)) {
+      this.visitTypeQuery(typeNode);
     } else if (ts.isTypeReferenceNode(typeNode)) {
       if (symbol) {
         const symbolDecl = symbol.valueDeclaration || symbol.declarations?.[0];
 
-        if (symbolDecl && this.isExternalModule(symbolDecl)) {
+        if (symbolDecl && this._inferer.isExternalModule(symbolDecl)) {
           this.visitExternalTypeReference(typeNode);
         }
       }
@@ -275,6 +186,74 @@ export class Translator {
     symbol && this.visitSymbol(symbol);
   }
 
+  private visitParameters(params: ts.NodeArray<ts.ParameterDeclaration> | undefined): void {
+    params?.forEach((p) => {
+      this.visitTypeReference(p.type);
+    });
+  }
+
+  private translateTypeAlias(typeAlias: ts.Symbol): ts.TypeAliasDeclaration | undefined {
+    const decl = typeAlias.declarations?.[0] as ts.TypeAliasDeclaration;
+
+    if (!this.memoizeSymbol(typeAlias) || !decl || !ts.isTypeAliasDeclaration(decl)) {
+      return undefined;
+    }
+
+    this.visitTypeParameters(decl.typeParameters);
+    this.visitTypeReference(decl.type);
+
+    return f.createTypeAliasDeclaration(
+      TypeUtils.withExportModifier(ts.getModifiers(decl)),
+      decl.name,
+      decl.typeParameters,
+      decl.type
+    );
+  }
+
+  private createAlternativeType(typeName: ts.__String): ts.TypeReferenceNode | undefined {
+    switch (typeName) {
+      case "Buffer":
+        return f.createTypeReferenceNode("Uint8Array");
+    }
+
+    return undefined;
+  }
+
+  private translateAlternativeType(typeRef: ts.TypeReferenceNode | undefined): ts.TypeReferenceNode {
+    if (!typeRef) {
+      return f.createTypeReferenceNode("any");
+    }
+
+    if (!ts.isIdentifier(typeRef.typeName)) {
+      return typeRef;
+    }
+
+    const typeName = typeRef.typeName.escapedText;
+
+    return this.createAlternativeType(typeName) || typeRef;
+  }
+
+  private translateType(typeNode: ts.TypeNode | undefined): ts.TypeNode {
+    if (!typeNode) {
+      return f.createTypeReferenceNode("any");
+    }
+
+    if (ts.isTypeReferenceNode(typeNode)) {
+      if (typeNode.typeArguments) {
+        return f.createTypeReferenceNode(
+          typeNode.typeName,
+          typeNode.typeArguments.map((t) => this.translateType(t))
+        );
+      }
+
+      if (ts.isIdentifier(typeNode.typeName)) {
+        return this.translateAlternativeType(typeNode);
+      }
+    }
+
+    return typeNode;
+  }
+
   private translateMethod(method: ts.Symbol): ts.MethodSignature[] | undefined {
     const decl = method.valueDeclaration as ts.MethodDeclaration;
 
@@ -282,15 +261,16 @@ export class Translator {
       return undefined;
     }
 
-    const isAsync = this.isAsync(decl);
+    const isAsync = this._inferer.isAsync(decl);
     const decorator = this._extractor.getDecorator(method, EXPOSE_DECORATOR_NAME);
     const exposeOptions = this._extractor.getDecoratorOptions(decorator);
     const modifiers = ts.getModifiers(decl) || [];
     this.visitTypeParameters(decl.typeParameters);
     this.visitParameters(decl.parameters);
-    const returnType = this.inferReturnType(decl);
 
-    this.visitTypeReference(returnType);
+    const returnType = this._inferer.inferReturnType(decl);
+
+    decl.type ? this.visitTypeReference(decl.type) : this.visitTypeReference(returnType);
 
     if (isAsync) {
       return [
@@ -300,7 +280,7 @@ export class Translator {
           decl.questionToken,
           decl.typeParameters,
           decl.parameters,
-          this.translateType(this.asPromise(returnType))
+          this.translateType(this._inferer.asPromise(returnType))
         ),
       ];
     } else {
@@ -319,7 +299,7 @@ export class Translator {
           decl.questionToken,
           decl.typeParameters,
           decl.parameters,
-          this.translateType(this.asPromise(returnType))
+          this.translateType(this._inferer.asPromise(returnType))
         ),
       ];
     }
@@ -339,7 +319,7 @@ export class Translator {
     return [
       f.createMethodSignature(
         undefined,
-        exposeOptions.getter || this.camelcase("get", declNameText),
+        exposeOptions.getter || TypeUtils.camelcase("get", declNameText),
         undefined,
         undefined,
         [],
@@ -347,15 +327,15 @@ export class Translator {
       ),
       f.createMethodSignature(
         undefined,
-        exposeOptions.getter || this.camelcase("get", declNameText, "async"),
+        exposeOptions.getter || TypeUtils.camelcase("get", declNameText, "async"),
         undefined,
         undefined,
         [],
-        this.translateType(this.asPromise(decl.type))
+        this.translateType(this._inferer.asPromise(decl.type))
       ),
       f.createMethodSignature(
         undefined,
-        exposeOptions.setter || this.camelcase("set", declNameText),
+        exposeOptions.setter || TypeUtils.camelcase("set", declNameText),
         undefined,
         undefined,
         [f.createParameterDeclaration(undefined, undefined, declNameText, undefined, decl.type, undefined)],
@@ -363,11 +343,11 @@ export class Translator {
       ),
       f.createMethodSignature(
         undefined,
-        exposeOptions.setter || this.camelcase("set", declNameText, "async"),
+        exposeOptions.setter || TypeUtils.camelcase("set", declNameText, "async"),
         undefined,
         undefined,
         [f.createParameterDeclaration(undefined, undefined, declNameText, undefined, decl.type, undefined)],
-        this.asPromise(f.createTypeReferenceNode("void"))
+        this._inferer.asPromise(f.createTypeReferenceNode("void"))
       ),
     ];
   }
@@ -412,62 +392,57 @@ export class Translator {
     return result;
   }
 
-  private visitTypeParameters(typeParams: ts.NodeArray<ts.TypeParameterDeclaration> | undefined): void {
-    typeParams?.forEach((tp) => {
-      this.visitTypeReference(tp.constraint);
-      this.visitTypeReference(tp.default);
-
-      if (tp.expression && ts.isExpressionWithTypeArguments(tp.expression)) {
-        this.visitTypeReference(tp.expression);
-      }
-    });
-  }
-
-  private visitParameters(params: ts.NodeArray<ts.ParameterDeclaration> | undefined): void {
-    params?.forEach((p) => {
-      this.visitTypeReference(p.type);
-    });
-  }
-
   private translateHeritageClauses(c: ts.Symbol): ts.HeritageClause[] {
     const decl = c.valueDeclaration as ts.ClassDeclaration;
 
-    if (!decl || !ts.isClassDeclaration(decl)) {
+    if (!decl || !(ts.isClassDeclaration(decl) || ts.isInterfaceDeclaration(decl))) {
       return [];
     }
 
     const heritageClauses: ts.HeritageClause[] = [];
-    const heritageClauseTypes: ts.ExpressionWithTypeArguments[] = [];
     const isInjectable = this._extractor.hasDecorator(c, INJECTABLE_DECORATOR_NAME);
 
     for (const heritageClause of decl?.heritageClauses || []) {
+      if (heritageClause.token !== ts.SyntaxKind.ExtendsKeyword) {
+        continue;
+      }
+
+      const heritageClauseTypes: ts.ExpressionWithTypeArguments[] = [];
+
       for (const expression of heritageClause.types) {
         const type = this._typeChecker.getTypeAtLocation(expression);
 
-        if (
-          !isInjectable ||
-          (isInjectable && type?.symbol && this._extractor.hasDecorator(type.symbol, INJECTABLE_DECORATOR_NAME))
-        ) {
+        if (!isInjectable || (isInjectable && this._extractor.hasDecorator(type.symbol, INJECTABLE_DECORATOR_NAME))) {
           this.visitTypeReference(expression);
           heritageClauseTypes.push(expression);
         }
       }
-    }
 
-    if (heritageClauseTypes.length) {
-      heritageClauses.push(f.createHeritageClause(ts.SyntaxKind.ExtendsKeyword, heritageClauseTypes));
+      if (heritageClauseTypes.length) {
+        heritageClauses.push(f.createHeritageClause(heritageClause.token, heritageClauseTypes));
+      }
     }
 
     return heritageClauses;
   }
 
   private translateInterface(symbol: ts.Symbol): ts.InterfaceDeclaration | undefined {
-    const decl = symbol.valueDeclaration as ts.InterfaceDeclaration;
+    const decl = (symbol.valueDeclaration || symbol.declarations?.[0]) as ts.InterfaceDeclaration;
+
+    if (!decl) {
+      return undefined;
+    }
 
     this.visitTypeParameters(decl.typeParameters);
 
     if (this.memoizeSymbol(symbol)) {
-      return decl;
+      return f.createInterfaceDeclaration(
+        TypeUtils.withExportModifier(ts.getModifiers(decl)),
+        decl.name,
+        decl.typeParameters,
+        this.translateHeritageClauses(symbol),
+        decl.members.filter(x => ts.isPropertySignature(x)),
+      );
     }
 
     return undefined;
@@ -480,7 +455,7 @@ export class Translator {
       return undefined;
     }
 
-    const modifiers: readonly ts.Modifier[] = ts.getModifiers(decl) || [];
+    const modifiers: readonly ts.Modifier[] = TypeUtils.withExportModifier(ts.getModifiers(decl));
     const heritageClauses: ts.HeritageClause[] = this.translateHeritageClauses(c);
     const members = this.translateMembers(this._extractor.getClassMembers(c));
 
@@ -500,7 +475,7 @@ export class Translator {
 
           return f.createVariableStatement(undefined, [
             f.createVariableDeclaration(
-              options.as || this.camelcase(x.name),
+              options.as || TypeUtils.camelcase(x.name),
               undefined,
               f.createTypeReferenceNode(x.name),
               undefined

@@ -1,4 +1,4 @@
-import { Translator } from "./translator";
+import { TypeTranslator } from "./type-translator";
 import fs from "fs";
 import { dirname, resolve } from "path";
 import prettier from "prettier";
@@ -12,7 +12,7 @@ if (fs.existsSync(outputFileName)) {
   fs.unlinkSync(outputFileName);
 }
 
-const translator = new Translator(cwd);
+const translator = new TypeTranslator(cwd);
 
 
 console.log(outputFileName);

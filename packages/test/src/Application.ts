@@ -1,26 +1,9 @@
 import { MainWindow, voxer, Expose, Command, Injectable, Accessor, MenuItem } from "#voxer";
 import { Dependency } from "./Dependency";
-import { BrowserWindow } from "electron";
-
-class Vec2 {
-  constructor(public x: number, public y: number) {}
-}
-
-class A {}
-class B {}
-class C<T = H> {}
-class D {}
-class E {}
-class F {}
-class G {}
-class H {}
-class I {}
-
-type AA = A | B;
-type AB<T = I> = C<G> & D;
+import { Factory } from "./Factory";
 
 @Injectable({
-  inject: [Dependency],
+  inject: [Dependency, Factory],
   as: "app",
 })
 export class Application extends MainWindow {
@@ -113,46 +96,4 @@ export class Application extends MainWindow {
   callFunction(fn: Function) {
     fn();
   }
-
-  @Expose()
-  create(type: any) {
-    return new type();
-  }
-
-  @Expose()
-  createObject(): Object {
-    return Object.create(null);
-  }
-
-  @Expose()
-  createBuffer(): Buffer {
-    return Buffer.allocUnsafe(1000);
-  }
-
-  @Expose()
-  createDate(): Date {
-    return new Date();
-  }
-
-  @Expose()
-  createVec2(): Vec2 {
-    return new Vec2(10, 20);
-  }
-
-  @Expose()
-  getBrowser(): BrowserWindow {
-    return null as any;
-  }
-
-  @Expose()
-  testAlias_1<T = E & F>() {}
-
-  @Expose()
-  testAlias_2<T = E | F>() {}
-
-  @Expose()
-  testAlias_3<T = AA>() {}
-
-  @Expose()
-  testAlias_4<T = AB>() {}
 }

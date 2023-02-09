@@ -1,7 +1,7 @@
-2023-02-07T03:08:17.998Z INFO @wdio/local-runner: Run worker command: run
-2023-02-07T03:08:18.292Z INFO webdriver: Initiate new session using the WebDriver protocol
-2023-02-07T03:08:18.367Z INFO webdriver: [POST] http://127.0.0.1:9519/session
-2023-02-07T03:08:18.367Z INFO webdriver: DATA {
+2023-02-09T15:55:16.789Z INFO @wdio/local-runner: Run worker command: run
+2023-02-09T15:55:17.170Z INFO webdriver: Initiate new session using the WebDriver protocol
+2023-02-09T15:55:17.282Z INFO webdriver: [POST] http://127.0.0.1:9519/session
+2023-02-09T15:55:17.283Z INFO webdriver: DATA {
   capabilities: {
     alwaysMatch: { browserName: 'chrome', 'goog:chromeOptions': [Object] },
     firstMatch: [ {} ]
@@ -15,8 +15,8 @@
     }
   }
 }
-2023-02-07T03:08:18.793Z INFO webdriver: COMMAND electronApp("getName")
-2023-02-07T03:08:18.795Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:17.792Z INFO webdriver: COMMAND electronApp("getName")
+2023-02-09T15:55:17.794Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -25,8 +25,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:18.796Z INFO webdriver: [POST] http://127.0.0.1:9519/session/005e19d2c758d2e3dee9ce0e1d498ca5/execute/async
-2023-02-07T03:08:18.797Z INFO webdriver: DATA {
+2023-02-09T15:55:17.795Z INFO webdriver: [POST] http://127.0.0.1:9519/session/a7b67b9ad0dbdb40c3f51ba809d805ef/execute/async
+2023-02-09T15:55:17.795Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -38,10 +38,10 @@
     '}).apply(null, arguments)',
   args: [ 'app', [ 'getName' ] ]
 }
-2023-02-07T03:08:18.810Z INFO webdriver: RESULT voxer-test
-2023-02-07T03:08:18.811Z INFO webdriver: RESULT voxer-test
-2023-02-07T03:08:18.811Z INFO webdriver: COMMAND electronApp("getVersion")
-2023-02-07T03:08:18.811Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:17.815Z INFO webdriver: RESULT voxer-test
+2023-02-09T15:55:17.817Z INFO webdriver: RESULT voxer-test
+2023-02-09T15:55:17.817Z INFO webdriver: COMMAND electronApp("getVersion")
+2023-02-09T15:55:17.818Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -50,8 +50,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:18.812Z INFO webdriver: [POST] http://127.0.0.1:9519/session/005e19d2c758d2e3dee9ce0e1d498ca5/execute/async
-2023-02-07T03:08:18.812Z INFO webdriver: DATA {
+2023-02-09T15:55:17.818Z INFO webdriver: [POST] http://127.0.0.1:9519/session/a7b67b9ad0dbdb40c3f51ba809d805ef/execute/async
+2023-02-09T15:55:17.819Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -63,19 +63,19 @@
     '}).apply(null, arguments)',
   args: [ 'app', [ 'getVersion' ] ]
 }
-2023-02-07T03:08:18.831Z INFO webdriver: RESULT 1.0.0
-2023-02-07T03:08:18.832Z INFO webdriver: RESULT 1.0.0
-2023-02-07T03:08:18.838Z INFO webdriver: COMMAND getLogTypes()
-2023-02-07T03:08:18.839Z INFO webdriver: [GET] http://127.0.0.1:9519/session/005e19d2c758d2e3dee9ce0e1d498ca5/se/log/types
-2023-02-07T03:08:18.843Z INFO webdriver: RESULT [ 'browser', 'driver' ]
-2023-02-07T03:08:18.844Z INFO webdriver: COMMAND getLogs("driver")
-2023-02-07T03:08:18.844Z INFO webdriver: COMMAND getLogs("browser")
-2023-02-07T03:08:18.844Z INFO webdriver: [POST] http://127.0.0.1:9519/session/005e19d2c758d2e3dee9ce0e1d498ca5/se/log
-2023-02-07T03:08:18.844Z INFO webdriver: DATA { type: 'driver' }
-2023-02-07T03:08:18.845Z INFO webdriver: [POST] http://127.0.0.1:9519/session/005e19d2c758d2e3dee9ce0e1d498ca5/se/log
-2023-02-07T03:08:18.845Z INFO webdriver: DATA { type: 'browser' }
-2023-02-07T03:08:18.853Z INFO webdriver: RESULT []
-2023-02-07T03:08:18.855Z INFO webdriver: RESULT []
-2023-02-07T03:08:18.857Z INFO webdriver: COMMAND deleteSession()
-2023-02-07T03:08:18.857Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/005e19d2c758d2e3dee9ce0e1d498ca5
-2023-02-07T03:08:18.912Z INFO webdriver: RESULT null
+2023-02-09T15:55:17.839Z INFO webdriver: RESULT 1.0.0
+2023-02-09T15:55:17.840Z INFO webdriver: RESULT 1.0.0
+2023-02-09T15:55:17.846Z INFO webdriver: COMMAND getLogTypes()
+2023-02-09T15:55:17.846Z INFO webdriver: [GET] http://127.0.0.1:9519/session/a7b67b9ad0dbdb40c3f51ba809d805ef/se/log/types
+2023-02-09T15:55:17.850Z INFO webdriver: RESULT [ 'browser', 'driver' ]
+2023-02-09T15:55:17.850Z INFO webdriver: COMMAND getLogs("driver")
+2023-02-09T15:55:17.851Z INFO webdriver: COMMAND getLogs("browser")
+2023-02-09T15:55:17.851Z INFO webdriver: [POST] http://127.0.0.1:9519/session/a7b67b9ad0dbdb40c3f51ba809d805ef/se/log
+2023-02-09T15:55:17.851Z INFO webdriver: DATA { type: 'driver' }
+2023-02-09T15:55:17.852Z INFO webdriver: [POST] http://127.0.0.1:9519/session/a7b67b9ad0dbdb40c3f51ba809d805ef/se/log
+2023-02-09T15:55:17.852Z INFO webdriver: DATA { type: 'browser' }
+2023-02-09T15:55:17.857Z INFO webdriver: RESULT []
+2023-02-09T15:55:17.859Z INFO webdriver: RESULT []
+2023-02-09T15:55:17.860Z INFO webdriver: COMMAND deleteSession()
+2023-02-09T15:55:17.860Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/a7b67b9ad0dbdb40c3f51ba809d805ef
+2023-02-09T15:55:17.914Z INFO webdriver: RESULT null

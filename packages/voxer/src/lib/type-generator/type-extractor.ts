@@ -2,9 +2,7 @@ import ts from "typescript";
 import { resolve } from "path";
 import { INJECTABLE_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, ACCESSOR_DECORATOR_NAME } from "./constants";
 
-const cwd = process.cwd();
-
-export class Extractor {
+export class TypeExtractor {
   private _program: ts.Program;
   private _typeChecker: ts.TypeChecker;
   private _DECORATORS_FILE_NAME: string;
@@ -155,13 +153,13 @@ export class Extractor {
     return this.getSymbolsByDecorators(members, EXPOSE_DECORATOR_NAME, ACCESSOR_DECORATOR_NAME);
   }
 
-  private getPublicMembers(c: ts.Symbol): ts.Symbol[] {
+  private getPublicProperties(c: ts.Symbol): ts.Symbol[] {
     const members: ts.Symbol[] = [];
 
     c.members?.forEach((m) => {
       const decl = m.valueDeclaration;
 
-      if (!decl || !ts.canHaveModifiers(decl) || ts.isConstructorDeclaration(decl)) {
+      if (!decl || !(ts.isPropertyDeclaration(decl) || ts.isParameter(decl))) {
         return;
       }
 
@@ -180,6 +178,24 @@ export class Extractor {
   getClassMembers(c: ts.Symbol): ts.Symbol[] {
     const isInjectable = this.hasDecorator(c, INJECTABLE_DECORATOR_NAME);
 
-    return isInjectable ? this.getExposedMembers(c) : this.getPublicMembers(c);
+    return isInjectable ? this.getExposedMembers(c) : this.getPublicProperties(c);
+  }
+
+  getModuleSpecifier(decl: ts.ImportSpecifier | ts.ImportClause): string | undefined {
+    let moduleSpecifier: ts.Expression | undefined;
+
+    if (ts.isImportClause(decl)) {
+      moduleSpecifier = decl.parent.moduleSpecifier;
+    } else if (ts.isImportSpecifier(decl)) {
+      moduleSpecifier = decl.parent.parent.parent.moduleSpecifier;
+    } else {
+      moduleSpecifier = undefined;
+    }
+
+    if (moduleSpecifier && ts.isStringLiteral(moduleSpecifier)) {
+      return moduleSpecifier.text;
+    }
+
+    return undefined;
   }
 }

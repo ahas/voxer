@@ -1,7 +1,7 @@
-2023-02-07T03:08:17.961Z INFO @wdio/local-runner: Run worker command: run
-2023-02-07T03:08:18.344Z INFO webdriver: Initiate new session using the WebDriver protocol
-2023-02-07T03:08:18.426Z INFO webdriver: [POST] http://127.0.0.1:9519/session
-2023-02-07T03:08:18.426Z INFO webdriver: DATA {
+2023-02-09T15:55:16.796Z INFO @wdio/local-runner: Run worker command: run
+2023-02-09T15:55:17.299Z INFO webdriver: Initiate new session using the WebDriver protocol
+2023-02-09T15:55:17.410Z INFO webdriver: [POST] http://127.0.0.1:9519/session
+2023-02-09T15:55:17.411Z INFO webdriver: DATA {
   capabilities: {
     alwaysMatch: { browserName: 'chrome', 'goog:chromeOptions': [Object] },
     firstMatch: [ {} ]
@@ -15,53 +15,53 @@
     }
   }
 }
-2023-02-07T03:08:18.947Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:18.949Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:18.949Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:18.973Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:17.987Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:17.988Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:17.988Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:18.009Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:18.983Z INFO webdriver: COMMAND elementClick("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:18.983Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/click
-2023-02-07T03:08:19.038Z INFO webdriver: RESULT null
-2023-02-07T03:08:19.040Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:19.042Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:19.063Z INFO webdriver: RESULT 0
-2023-02-07T03:08:19.066Z INFO webdriver: COMMAND elementClick("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:19.067Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/click
-2023-02-07T03:08:19.100Z INFO webdriver: RESULT null
-2023-02-07T03:08:19.101Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:19.102Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:19.117Z INFO webdriver: RESULT 1
-2023-02-07T03:08:19.119Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:19.120Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.120Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:19.157Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:18.018Z INFO webdriver: COMMAND elementClick("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:18.019Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/click
+2023-02-09T15:55:18.066Z INFO webdriver: RESULT null
+2023-02-09T15:55:18.067Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:18.067Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:18.091Z INFO webdriver: RESULT 0
+2023-02-09T15:55:18.093Z INFO webdriver: COMMAND elementClick("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:18.093Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/click
+2023-02-09T15:55:18.118Z INFO webdriver: RESULT null
+2023-02-09T15:55:18.118Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:18.118Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:18.128Z INFO webdriver: RESULT 1
+2023-02-09T15:55:18.129Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:18.129Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.129Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:18.138Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:19.165Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:19.165Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.165Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:19.193Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:18.147Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:18.147Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.147Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:18.160Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:19.200Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:19.200Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:19.270Z INFO webdriver: RESULT null
-2023-02-07T03:08:19.371Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:19.372Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:19.386Z INFO webdriver: RESULT 0
-2023-02-07T03:08:19.387Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:19.387Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.387Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:19.402Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:18.164Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:18.164Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:18.196Z INFO webdriver: RESULT null
+2023-02-09T15:55:18.297Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:18.297Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:18.310Z INFO webdriver: RESULT 0
+2023-02-09T15:55:18.311Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:18.311Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.312Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:18.325Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:19.409Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:19.409Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:19.430Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:19.533Z INFO webdriver: COMMAND electronBrowserWindow("getBounds")
-2023-02-07T03:08:19.534Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:18.333Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:18.333Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:18.355Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:18.456Z INFO webdriver: COMMAND electronBrowserWindow("getBounds")
+2023-02-09T15:55:18.457Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -70,8 +70,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:19.534Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:19.535Z INFO webdriver: DATA {
+2023-02-09T15:55:18.458Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:18.458Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -83,25 +83,25 @@
     '}).apply(null, arguments)',
   args: [ 'browserWindow', [ 'getBounds' ] ]
 }
-2023-02-07T03:08:19.549Z INFO webdriver: RESULT { height: 600, width: 800, x: 880, y: 457 }
-2023-02-07T03:08:19.549Z INFO webdriver: RESULT { height: 600, width: 800, x: 880, y: 457 }
-2023-02-07T03:08:19.550Z INFO webdriver: COMMAND findElement("css selector", "button#maximize")
-2023-02-07T03:08:19.550Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.551Z INFO webdriver: DATA { using: 'css selector', value: 'button#maximize' }
-2023-02-07T03:08:19.572Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '1d47de49-3ebe-48c6-923d-f24a35d9e99c'
+2023-02-09T15:55:18.474Z INFO webdriver: RESULT { height: 600, width: 800, x: 880, y: 457 }
+2023-02-09T15:55:18.475Z INFO webdriver: RESULT { height: 600, width: 800, x: 880, y: 457 }
+2023-02-09T15:55:18.475Z INFO webdriver: COMMAND findElement("css selector", "button#maximize")
+2023-02-09T15:55:18.476Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.476Z INFO webdriver: DATA { using: 'css selector', value: 'button#maximize' }
+2023-02-09T15:55:18.496Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'd2deadeb-0d25-4ffa-8769-d6660dd52d2b'
 }
-2023-02-07T03:08:19.577Z INFO webdriver: COMMAND findElement("css selector", "button#unmaximize")
-2023-02-07T03:08:19.578Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.578Z INFO webdriver: DATA { using: 'css selector', value: 'button#unmaximize' }
-2023-02-07T03:08:19.601Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '439b4048-4a17-4222-b8e8-618058237383'
+2023-02-09T15:55:18.500Z INFO webdriver: COMMAND findElement("css selector", "button#unmaximize")
+2023-02-09T15:55:18.501Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.501Z INFO webdriver: DATA { using: 'css selector', value: 'button#unmaximize' }
+2023-02-09T15:55:18.520Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '950a19ee-a2dd-40a1-9528-0185143fbb70'
 }
-2023-02-07T03:08:19.607Z INFO webdriver: COMMAND elementClick("1d47de49-3ebe-48c6-923d-f24a35d9e99c")
-2023-02-07T03:08:19.607Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/1d47de49-3ebe-48c6-923d-f24a35d9e99c/click
-2023-02-07T03:08:19.656Z INFO webdriver: RESULT null
-2023-02-07T03:08:19.757Z INFO webdriver: COMMAND electronBrowserWindow("getBounds")
-2023-02-07T03:08:19.758Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:18.524Z INFO webdriver: COMMAND elementClick("d2deadeb-0d25-4ffa-8769-d6660dd52d2b")
+2023-02-09T15:55:18.524Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/d2deadeb-0d25-4ffa-8769-d6660dd52d2b/click
+2023-02-09T15:55:18.572Z INFO webdriver: RESULT null
+2023-02-09T15:55:18.673Z INFO webdriver: COMMAND electronBrowserWindow("getBounds")
+2023-02-09T15:55:18.673Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -110,8 +110,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:19.758Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:19.758Z INFO webdriver: DATA {
+2023-02-09T15:55:18.674Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:18.674Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -123,22 +123,22 @@
     '}).apply(null, arguments)',
   args: [ 'browserWindow', [ 'getBounds' ] ]
 }
-2023-02-07T03:08:19.772Z INFO webdriver: RESULT { height: 1365, width: 2560, x: 0, y: 75 }
-2023-02-07T03:08:19.773Z INFO webdriver: RESULT { height: 1365, width: 2560, x: 0, y: 75 }
-2023-02-07T03:08:19.774Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:19.774Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.774Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:19.789Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:18.688Z INFO webdriver: RESULT { height: 1365, width: 2560, x: 0, y: 75 }
+2023-02-09T15:55:18.688Z INFO webdriver: RESULT { height: 1365, width: 2560, x: 0, y: 75 }
+2023-02-09T15:55:18.688Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:18.689Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.689Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:18.703Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:19.797Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:19.798Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:19.811Z INFO webdriver: RESULT Maximized
-2023-02-07T03:08:19.813Z INFO webdriver: COMMAND elementClick("439b4048-4a17-4222-b8e8-618058237383")
-2023-02-07T03:08:19.813Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/439b4048-4a17-4222-b8e8-618058237383/click
-2023-02-07T03:08:19.845Z INFO webdriver: RESULT null
-2023-02-07T03:08:19.946Z INFO webdriver: COMMAND electronBrowserWindow("getBounds")
-2023-02-07T03:08:19.946Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:18.711Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:18.711Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:18.726Z INFO webdriver: RESULT Maximized
+2023-02-09T15:55:18.728Z INFO webdriver: COMMAND elementClick("950a19ee-a2dd-40a1-9528-0185143fbb70")
+2023-02-09T15:55:18.728Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/950a19ee-a2dd-40a1-9528-0185143fbb70/click
+2023-02-09T15:55:18.783Z INFO webdriver: RESULT null
+2023-02-09T15:55:18.883Z INFO webdriver: COMMAND electronBrowserWindow("getBounds")
+2023-02-09T15:55:18.883Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -147,8 +147,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:19.946Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:19.946Z INFO webdriver: DATA {
+2023-02-09T15:55:18.883Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:18.883Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -160,34 +160,34 @@
     '}).apply(null, arguments)',
   args: [ 'browserWindow', [ 'getBounds' ] ]
 }
-2023-02-07T03:08:19.956Z INFO webdriver: RESULT { height: 600, width: 800, x: 880, y: 457 }
-2023-02-07T03:08:19.957Z INFO webdriver: RESULT { height: 600, width: 800, x: 880, y: 457 }
-2023-02-07T03:08:19.957Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:19.957Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.957Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:19.971Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:18.894Z INFO webdriver: RESULT { height: 600, width: 800, x: 9, y: 82 }
+2023-02-09T15:55:18.894Z INFO webdriver: RESULT { height: 600, width: 800, x: 9, y: 82 }
+2023-02-09T15:55:18.894Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:18.894Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.894Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:18.905Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:19.975Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:19.976Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:19.990Z INFO webdriver: RESULT Unmaximized
-2023-02-07T03:08:19.993Z INFO webdriver: COMMAND findElement("css selector", "button#show_menu")
-2023-02-07T03:08:19.993Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:19.993Z INFO webdriver: DATA { using: 'css selector', value: 'button#show_menu' }
-2023-02-07T03:08:20.015Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a8a8622d-1ade-4f0d-86fa-a3eff85da89e'
+2023-02-09T15:55:18.909Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:18.909Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:18.920Z INFO webdriver: RESULT Unmaximized
+2023-02-09T15:55:18.925Z INFO webdriver: COMMAND findElement("css selector", "button#show_menu")
+2023-02-09T15:55:18.926Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.926Z INFO webdriver: DATA { using: 'css selector', value: 'button#show_menu' }
+2023-02-09T15:55:18.943Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'e7bcc1d2-63a7-4178-97a2-8149f0a41a98'
 }
-2023-02-07T03:08:20.018Z INFO webdriver: COMMAND findElement("css selector", "button#hide_menu")
-2023-02-07T03:08:20.019Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.019Z INFO webdriver: DATA { using: 'css selector', value: 'button#hide_menu' }
-2023-02-07T03:08:20.035Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '99feca53-d820-479a-bb64-8a117308e6aa'
+2023-02-09T15:55:18.950Z INFO webdriver: COMMAND findElement("css selector", "button#hide_menu")
+2023-02-09T15:55:18.950Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:18.950Z INFO webdriver: DATA { using: 'css selector', value: 'button#hide_menu' }
+2023-02-09T15:55:18.969Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '0bab5f4f-c6a7-47aa-8961-279ca9de1287'
 }
-2023-02-07T03:08:20.040Z INFO webdriver: COMMAND elementClick("a8a8622d-1ade-4f0d-86fa-a3eff85da89e")
-2023-02-07T03:08:20.040Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a8a8622d-1ade-4f0d-86fa-a3eff85da89e/click
-2023-02-07T03:08:20.071Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.071Z INFO webdriver: COMMAND electronBrowserWindow("<Screenshot[base64]>")
-2023-02-07T03:08:20.071Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:18.977Z INFO webdriver: COMMAND elementClick("e7bcc1d2-63a7-4178-97a2-8149f0a41a98")
+2023-02-09T15:55:18.977Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/e7bcc1d2-63a7-4178-97a2-8149f0a41a98/click
+2023-02-09T15:55:19.026Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.026Z INFO webdriver: COMMAND electronBrowserWindow("<Screenshot[base64]>")
+2023-02-09T15:55:19.026Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -196,8 +196,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:20.072Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:20.072Z INFO webdriver: DATA {
+2023-02-09T15:55:19.026Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:19.026Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -209,13 +209,13 @@
     '}).apply(null, arguments)',
   args: [ 'browserWindow', [ 'isMenuBarVisible' ] ]
 }
-2023-02-07T03:08:20.079Z INFO webdriver: RESULT true
-2023-02-07T03:08:20.079Z INFO webdriver: RESULT true
-2023-02-07T03:08:20.079Z INFO webdriver: COMMAND elementClick("99feca53-d820-479a-bb64-8a117308e6aa")
-2023-02-07T03:08:20.080Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/99feca53-d820-479a-bb64-8a117308e6aa/click
-2023-02-07T03:08:20.105Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.106Z INFO webdriver: COMMAND electronBrowserWindow("<Screenshot[base64]>")
-2023-02-07T03:08:20.106Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:19.036Z INFO webdriver: RESULT true
+2023-02-09T15:55:19.036Z INFO webdriver: RESULT true
+2023-02-09T15:55:19.036Z INFO webdriver: COMMAND elementClick("0bab5f4f-c6a7-47aa-8961-279ca9de1287")
+2023-02-09T15:55:19.036Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/0bab5f4f-c6a7-47aa-8961-279ca9de1287/click
+2023-02-09T15:55:19.081Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.081Z INFO webdriver: COMMAND electronBrowserWindow("<Screenshot[base64]>")
+2023-02-09T15:55:19.081Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -224,8 +224,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:20.106Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:20.106Z INFO webdriver: DATA {
+2023-02-09T15:55:19.081Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:19.081Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -237,13 +237,13 @@
     '}).apply(null, arguments)',
   args: [ 'browserWindow', [ 'isMenuBarVisible' ] ]
 }
-2023-02-07T03:08:20.111Z INFO webdriver: RESULT false
-2023-02-07T03:08:20.112Z INFO webdriver: RESULT false
-2023-02-07T03:08:20.112Z INFO webdriver: COMMAND elementClick("a8a8622d-1ade-4f0d-86fa-a3eff85da89e")
-2023-02-07T03:08:20.113Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a8a8622d-1ade-4f0d-86fa-a3eff85da89e/click
-2023-02-07T03:08:20.130Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.130Z INFO webdriver: COMMAND electronBrowserWindow("<Screenshot[base64]>")
-2023-02-07T03:08:20.130Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:19.091Z INFO webdriver: RESULT false
+2023-02-09T15:55:19.091Z INFO webdriver: RESULT false
+2023-02-09T15:55:19.091Z INFO webdriver: COMMAND elementClick("e7bcc1d2-63a7-4178-97a2-8149f0a41a98")
+2023-02-09T15:55:19.091Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/e7bcc1d2-63a7-4178-97a2-8149f0a41a98/click
+2023-02-09T15:55:19.124Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.124Z INFO webdriver: COMMAND electronBrowserWindow("<Screenshot[base64]>")
+2023-02-09T15:55:19.124Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -252,8 +252,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:20.131Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:20.131Z INFO webdriver: DATA {
+2023-02-09T15:55:19.124Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:19.124Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -265,37 +265,37 @@
     '}).apply(null, arguments)',
   args: [ 'browserWindow', [ 'isMenuBarVisible' ] ]
 }
-2023-02-07T03:08:20.137Z INFO webdriver: RESULT true
-2023-02-07T03:08:20.137Z INFO webdriver: RESULT true
-2023-02-07T03:08:20.138Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:20.139Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.139Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:20.146Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:19.132Z INFO webdriver: RESULT true
+2023-02-09T15:55:19.132Z INFO webdriver: RESULT true
+2023-02-09T15:55:19.133Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:19.133Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:19.133Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:19.143Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:20.148Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:20.148Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.148Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:20.154Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:19.145Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:19.145Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:19.145Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:19.154Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:20.158Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:20.158Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:20.175Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.276Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:20.277Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:20.290Z INFO webdriver: RESULT 0
-2023-02-07T03:08:20.291Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:20.292Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.292Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:20.304Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:19.156Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:19.157Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:19.184Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.285Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:19.286Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:19.301Z INFO webdriver: RESULT 0
+2023-02-09T15:55:19.302Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:19.302Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:19.302Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:19.315Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:20.308Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:20.309Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:20.322Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:20.422Z INFO webdriver: COMMAND electronAPI("MenuItem_Label")
-2023-02-07T03:08:20.422Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:19.320Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:19.320Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:19.333Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:19.434Z INFO webdriver: COMMAND electronAPI("MenuItem_Label")
+2023-02-09T15:55:19.435Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -304,8 +304,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:20.422Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:20.422Z INFO webdriver: DATA {
+2023-02-09T15:55:19.435Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:19.435Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -317,46 +317,46 @@
     '}).apply(null, arguments)',
   args: [ 'custom', [ 'MenuItem_Label' ] ]
 }
-2023-02-07T03:08:20.440Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.440Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.542Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:20.542Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.542Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:20.554Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:19.447Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.448Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.549Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:19.550Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:19.550Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:19.567Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:20.558Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:20.559Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:20.567Z INFO webdriver: RESULT MenuItem_Label
-2023-02-07T03:08:20.568Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:20.568Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.568Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:20.580Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:19.572Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:19.573Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:19.590Z INFO webdriver: RESULT MenuItem_Label
+2023-02-09T15:55:19.592Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:19.592Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:19.593Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:19.603Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:20.585Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:20.585Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.585Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:20.597Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:19.606Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:19.606Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:19.607Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:19.618Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:20.601Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:20.602Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:20.634Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.735Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:20.736Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:20.750Z INFO webdriver: RESULT 0
-2023-02-07T03:08:20.751Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:20.752Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.752Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:20.765Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:19.623Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:19.624Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:19.658Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.759Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:19.760Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:19.773Z INFO webdriver: RESULT 0
+2023-02-09T15:55:19.776Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:19.777Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:19.777Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:19.790Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:20.772Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:20.772Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:20.785Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:20.886Z INFO webdriver: COMMAND electronAPI("MenuItem_Id")
-2023-02-07T03:08:20.887Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:19.798Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:19.799Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:19.813Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:19.914Z INFO webdriver: COMMAND electronAPI("MenuItem_Id")
+2023-02-09T15:55:19.914Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -365,8 +365,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:20.887Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:20.887Z INFO webdriver: DATA {
+2023-02-09T15:55:19.915Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:19.915Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -378,46 +378,46 @@
     '}).apply(null, arguments)',
   args: [ 'custom', [ 'MenuItem_Id' ] ]
 }
-2023-02-07T03:08:20.896Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.896Z INFO webdriver: RESULT null
-2023-02-07T03:08:20.998Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:20.998Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:20.999Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:21.013Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:19.926Z INFO webdriver: RESULT null
+2023-02-09T15:55:19.926Z INFO webdriver: RESULT null
+2023-02-09T15:55:20.027Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:20.028Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.029Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:20.041Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:21.016Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:21.016Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:21.029Z INFO webdriver: RESULT MenuItem_Id
-2023-02-07T03:08:21.030Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:21.030Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.030Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:21.043Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:20.043Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:20.044Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:20.054Z INFO webdriver: RESULT MenuItem_Id
+2023-02-09T15:55:20.055Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:20.055Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.055Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:20.065Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:21.047Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:21.047Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.048Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:21.060Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:20.068Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:20.068Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.068Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:20.078Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:21.064Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:21.065Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:21.099Z INFO webdriver: RESULT null
-2023-02-07T03:08:21.200Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:21.201Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:21.215Z INFO webdriver: RESULT 0
-2023-02-07T03:08:21.215Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:21.216Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.216Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:21.228Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:20.081Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:20.081Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:20.105Z INFO webdriver: RESULT null
+2023-02-09T15:55:20.206Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:20.207Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:20.220Z INFO webdriver: RESULT 0
+2023-02-09T15:55:20.221Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:20.221Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.221Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:20.231Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:21.232Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:21.233Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:21.245Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:21.346Z INFO webdriver: COMMAND electronAPI("MenuItem_Accel")
-2023-02-07T03:08:21.347Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:20.233Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:20.234Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:20.247Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:20.348Z INFO webdriver: COMMAND electronAPI("MenuItem_Accel")
+2023-02-09T15:55:20.348Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -426,8 +426,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:21.347Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:21.347Z INFO webdriver: DATA {
+2023-02-09T15:55:20.348Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:20.348Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -439,46 +439,46 @@
     '}).apply(null, arguments)',
   args: [ 'custom', [ 'MenuItem_Accel' ] ]
 }
-2023-02-07T03:08:21.362Z INFO webdriver: RESULT null
-2023-02-07T03:08:21.362Z INFO webdriver: RESULT null
-2023-02-07T03:08:21.463Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:21.464Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.464Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:21.476Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:20.361Z INFO webdriver: RESULT null
+2023-02-09T15:55:20.361Z INFO webdriver: RESULT null
+2023-02-09T15:55:20.462Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:20.463Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.463Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:20.475Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:21.481Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:21.481Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:21.494Z INFO webdriver: RESULT MenuItem_Accel
-2023-02-07T03:08:21.494Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:21.495Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.495Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:21.507Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:20.479Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:20.480Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:20.493Z INFO webdriver: RESULT MenuItem_Accel
+2023-02-09T15:55:20.494Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:20.494Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.494Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:20.506Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:21.511Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:21.511Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.511Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:21.523Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:20.510Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:20.511Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.511Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:20.524Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:21.527Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:21.528Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:21.563Z INFO webdriver: RESULT null
-2023-02-07T03:08:21.664Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:21.664Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:21.678Z INFO webdriver: RESULT 0
-2023-02-07T03:08:21.679Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:21.679Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.679Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:21.692Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:20.531Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:20.531Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:20.565Z INFO webdriver: RESULT null
+2023-02-09T15:55:20.666Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:20.667Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:20.679Z INFO webdriver: RESULT 0
+2023-02-09T15:55:20.680Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:20.680Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.680Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:20.693Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:21.696Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:21.696Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:21.709Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:21.810Z INFO webdriver: COMMAND electronAPI("MenuItem_Role")
-2023-02-07T03:08:21.811Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
+2023-02-09T15:55:20.697Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:20.697Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:20.709Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:20.810Z INFO webdriver: COMMAND electronAPI("MenuItem_Role")
+2023-02-09T15:55:20.810Z INFO webdriver: COMMAND executeAsyncScript("return (async function callApi(bridgePropName, args, done) {
     if (window.wdioElectron === undefined) {
         throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);
     }
@@ -487,8 +487,8 @@
     }
     done(await window.wdioElectron[bridgePropName].invoke(...args));
 }).apply(null, arguments)", <object>)
-2023-02-07T03:08:21.811Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/execute/async
-2023-02-07T03:08:21.811Z INFO webdriver: DATA {
+2023-02-09T15:55:20.811Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/execute/async
+2023-02-09T15:55:20.811Z INFO webdriver: DATA {
   script: 'return (async function callApi(bridgePropName, args, done) {\n' +
     '    if (window.wdioElectron === undefined) {\n' +
     '        throw new Error(`ContextBridge not available for invocation of "${bridgePropName}" API`);\n' +
@@ -500,415 +500,415 @@
     '}).apply(null, arguments)',
   args: [ 'custom', [ 'MenuItem_Role' ] ]
 }
-2023-02-07T03:08:21.824Z INFO webdriver: RESULT null
-2023-02-07T03:08:21.824Z INFO webdriver: RESULT null
-2023-02-07T03:08:21.925Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:21.926Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.926Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:21.939Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:20.823Z INFO webdriver: RESULT null
+2023-02-09T15:55:20.823Z INFO webdriver: RESULT null
+2023-02-09T15:55:20.924Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:20.925Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.925Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:20.937Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:21.944Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:21.944Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:21.957Z INFO webdriver: RESULT MenuItem_Role
-2023-02-07T03:08:21.958Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:21.958Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.959Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:21.972Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:20.942Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:20.942Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:20.955Z INFO webdriver: RESULT MenuItem_Role
+2023-02-09T15:55:20.956Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:20.956Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.956Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:20.969Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:21.976Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:21.977Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:21.977Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:21.989Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:20.973Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:20.974Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:20.974Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:20.985Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:21.993Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:21.994Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:22.030Z INFO webdriver: RESULT null
-2023-02-07T03:08:22.131Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:22.131Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:22.145Z INFO webdriver: RESULT 0
-2023-02-07T03:08:22.146Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:22.146Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.146Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:22.158Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:20.990Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:20.990Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:21.022Z INFO webdriver: RESULT null
+2023-02-09T15:55:21.123Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:21.124Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:21.137Z INFO webdriver: RESULT 0
+2023-02-09T15:55:21.138Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:21.138Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.138Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:21.150Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:22.163Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:22.163Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:22.176Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:22.278Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:22.279Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.279Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:22.293Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:21.154Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:21.154Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:21.167Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:21.268Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:21.269Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.269Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:21.280Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:22.298Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:22.298Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.298Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:22.310Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:21.284Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:21.284Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.284Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:21.294Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:22.315Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:22.316Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:22.349Z INFO webdriver: RESULT null
-2023-02-07T03:08:22.450Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:22.450Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:22.464Z INFO webdriver: RESULT 0
-2023-02-07T03:08:22.465Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:22.465Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.465Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:22.477Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:21.298Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:21.298Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:21.317Z INFO webdriver: RESULT null
+2023-02-09T15:55:21.418Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:21.418Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:21.429Z INFO webdriver: RESULT 0
+2023-02-09T15:55:21.429Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:21.430Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.430Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:21.439Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:22.481Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:22.482Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:22.495Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:22.598Z INFO webdriver: COMMAND performActions(<object>)
-2023-02-07T03:08:22.598Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/actions
-2023-02-07T03:08:22.598Z INFO webdriver: DATA {
+2023-02-09T15:55:21.441Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:21.441Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:21.451Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:21.554Z INFO webdriver: COMMAND performActions(<object>)
+2023-02-09T15:55:21.554Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/actions
+2023-02-09T15:55:21.554Z INFO webdriver: DATA {
   actions: [ { id: 'action1', type: 'key', parameters: {}, actions: [Array] } ]
 }
-2023-02-07T03:08:22.623Z INFO webdriver: RESULT null
-2023-02-07T03:08:22.623Z INFO webdriver: COMMAND releaseActions()
-2023-02-07T03:08:22.623Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/actions
-2023-02-07T03:08:22.628Z INFO webdriver: RESULT null
-2023-02-07T03:08:22.628Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:22.628Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.628Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:22.641Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:21.576Z INFO webdriver: RESULT null
+2023-02-09T15:55:21.576Z INFO webdriver: COMMAND releaseActions()
+2023-02-09T15:55:21.576Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/actions
+2023-02-09T15:55:21.580Z INFO webdriver: RESULT null
+2023-02-09T15:55:21.580Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:21.581Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.581Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:21.590Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:22.645Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:22.646Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:22.659Z INFO webdriver: RESULT Ctrl + c pressed
-2023-02-07T03:08:22.659Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:22.660Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.660Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:22.673Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:21.595Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:21.595Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:21.605Z INFO webdriver: RESULT Ctrl + c pressed
+2023-02-09T15:55:21.606Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:21.606Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.606Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:21.618Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:22.678Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:22.678Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.678Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:22.687Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:21.622Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:21.623Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.623Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:21.633Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:22.692Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:22.692Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:22.716Z INFO webdriver: RESULT null
-2023-02-07T03:08:22.817Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:22.817Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:22.831Z INFO webdriver: RESULT 0
-2023-02-07T03:08:22.832Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:22.832Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.832Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:22.844Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:21.637Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:21.637Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:21.667Z INFO webdriver: RESULT null
+2023-02-09T15:55:21.768Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:21.768Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:21.780Z INFO webdriver: RESULT 0
+2023-02-09T15:55:21.781Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:21.781Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.781Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:21.792Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:22.849Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:22.849Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:22.862Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:22.964Z INFO webdriver: COMMAND performActions(<object>)
-2023-02-07T03:08:22.964Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/actions
-2023-02-07T03:08:22.964Z INFO webdriver: DATA {
+2023-02-09T15:55:21.797Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:21.798Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:21.808Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:21.909Z INFO webdriver: COMMAND performActions(<object>)
+2023-02-09T15:55:21.910Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/actions
+2023-02-09T15:55:21.910Z INFO webdriver: DATA {
   actions: [ { id: 'action2', type: 'key', parameters: {}, actions: [Array] } ]
 }
-2023-02-07T03:08:22.990Z INFO webdriver: RESULT null
-2023-02-07T03:08:22.990Z INFO webdriver: COMMAND releaseActions()
-2023-02-07T03:08:22.991Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/actions
-2023-02-07T03:08:22.996Z INFO webdriver: RESULT null
-2023-02-07T03:08:22.996Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:22.996Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:22.996Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:23.009Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:21.931Z INFO webdriver: RESULT null
+2023-02-09T15:55:21.932Z INFO webdriver: COMMAND releaseActions()
+2023-02-09T15:55:21.932Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/actions
+2023-02-09T15:55:21.935Z INFO webdriver: RESULT null
+2023-02-09T15:55:21.936Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:21.936Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.936Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:21.947Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:23.014Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:23.014Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:23.028Z INFO webdriver: RESULT Ctrl + v pressed
-2023-02-07T03:08:23.029Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-async")
-2023-02-07T03:08:23.030Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.030Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-async' }
-2023-02-07T03:08:23.049Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '16cc02e4-0f84-4213-be51-167f23138672'
+2023-02-09T15:55:21.950Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:21.950Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:21.961Z INFO webdriver: RESULT Ctrl + v pressed
+2023-02-09T15:55:21.963Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-async")
+2023-02-09T15:55:21.964Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.964Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-async' }
+2023-02-09T15:55:21.980Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '608fb542-4830-474d-87b4-197db4b983f5'
 }
-2023-02-07T03:08:23.053Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-async-directly")
-2023-02-07T03:08:23.054Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.054Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-async-directly' }
-2023-02-07T03:08:23.073Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '1c3c36d4-6f56-4e62-ba89-c50bb05ec443'
+2023-02-09T15:55:21.984Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-async-directly")
+2023-02-09T15:55:21.984Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:21.984Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-async-directly' }
+2023-02-09T15:55:22.000Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '711e4fac-3897-4161-8381-ef27c2b9809b'
 }
-2023-02-07T03:08:23.077Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:23.077Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.077Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:23.090Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:22.004Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:22.005Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.005Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:22.016Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:23.095Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:23.095Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.095Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:23.108Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:22.020Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:22.021Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.021Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:22.031Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:23.112Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:23.113Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:23.147Z INFO webdriver: RESULT null
-2023-02-07T03:08:23.248Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:23.248Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:23.262Z INFO webdriver: RESULT 0
-2023-02-07T03:08:23.262Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:23.263Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.263Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:23.275Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:22.036Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:22.037Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:22.066Z INFO webdriver: RESULT null
+2023-02-09T15:55:22.167Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:22.168Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:22.179Z INFO webdriver: RESULT 0
+2023-02-09T15:55:22.180Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:22.180Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.180Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:22.190Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:23.279Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:23.280Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:23.293Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:23.395Z INFO webdriver: COMMAND elementClick("16cc02e4-0f84-4213-be51-167f23138672")
-2023-02-07T03:08:23.395Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/16cc02e4-0f84-4213-be51-167f23138672/click
-2023-02-07T03:08:23.448Z INFO webdriver: RESULT null
-2023-02-07T03:08:23.448Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:23.449Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.449Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:23.462Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:22.195Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:22.195Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:22.208Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:22.309Z INFO webdriver: COMMAND elementClick("608fb542-4830-474d-87b4-197db4b983f5")
+2023-02-09T15:55:22.310Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/608fb542-4830-474d-87b4-197db4b983f5/click
+2023-02-09T15:55:22.357Z INFO webdriver: RESULT null
+2023-02-09T15:55:22.358Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:22.358Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.358Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:22.367Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:23.466Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:23.466Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:23.479Z INFO webdriver: RESULT Asynchronous message from Dependency
-2023-02-07T03:08:23.479Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:23.480Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.480Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:23.492Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:22.371Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:22.372Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:22.381Z INFO webdriver: RESULT Asynchronous message from Dependency
+2023-02-09T15:55:22.381Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:22.382Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.382Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:22.392Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:23.496Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:23.497Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.497Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:23.509Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:22.397Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:22.397Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.397Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:22.408Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:23.513Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:23.513Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:23.548Z INFO webdriver: RESULT null
-2023-02-07T03:08:23.649Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:23.649Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:23.663Z INFO webdriver: RESULT 0
-2023-02-07T03:08:23.664Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:23.665Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.665Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:23.680Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:22.413Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:22.413Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:22.446Z INFO webdriver: RESULT null
+2023-02-09T15:55:22.547Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:22.547Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:22.560Z INFO webdriver: RESULT 0
+2023-02-09T15:55:22.562Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:22.562Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.562Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:22.577Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:23.684Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:23.685Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:23.698Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:23.799Z INFO webdriver: COMMAND elementClick("1c3c36d4-6f56-4e62-ba89-c50bb05ec443")
-2023-02-07T03:08:23.800Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/1c3c36d4-6f56-4e62-ba89-c50bb05ec443/click
-2023-02-07T03:08:23.851Z INFO webdriver: RESULT null
-2023-02-07T03:08:23.852Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:23.852Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.852Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:23.865Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:22.583Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:22.584Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:22.597Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:22.697Z INFO webdriver: COMMAND elementClick("711e4fac-3897-4161-8381-ef27c2b9809b")
+2023-02-09T15:55:22.697Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/711e4fac-3897-4161-8381-ef27c2b9809b/click
+2023-02-09T15:55:22.749Z INFO webdriver: RESULT null
+2023-02-09T15:55:22.749Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:22.749Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.749Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:22.760Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:23.869Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:23.870Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:23.884Z INFO webdriver: RESULT Asynchronous message from Dependency
-2023-02-07T03:08:23.886Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync")
-2023-02-07T03:08:23.886Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.886Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync' }
-2023-02-07T03:08:23.906Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '4aa7df56-3a58-4b3a-9b6c-fe77c20c331e'
+2023-02-09T15:55:22.762Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:22.762Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:22.775Z INFO webdriver: RESULT Asynchronous message from Dependency
+2023-02-09T15:55:22.776Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync")
+2023-02-09T15:55:22.777Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.777Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync' }
+2023-02-09T15:55:22.796Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': '61a632c2-6d0a-489b-8122-0772d1b9ef86'
 }
-2023-02-07T03:08:23.908Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync-directly")
-2023-02-07T03:08:23.908Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.908Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync-directly' }
-2023-02-07T03:08:23.925Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'fcfefa65-f3f6-4ce0-9138-e5dc81bb784c'
+2023-02-09T15:55:22.800Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync-directly")
+2023-02-09T15:55:22.800Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.801Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync-directly' }
+2023-02-09T15:55:22.820Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'b3b3bba4-969e-4d89-81c5-cc2a6c53dcd2'
 }
-2023-02-07T03:08:23.930Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:23.930Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.930Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:23.941Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:22.822Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:22.822Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.822Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:22.831Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:23.945Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:23.946Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:23.946Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:23.956Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:22.833Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:22.833Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.833Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:22.842Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:23.960Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:23.961Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:23.994Z INFO webdriver: RESULT null
-2023-02-07T03:08:24.095Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:24.095Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:24.109Z INFO webdriver: RESULT 0
-2023-02-07T03:08:24.110Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:24.110Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.110Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:24.122Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:22.844Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:22.844Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:22.872Z INFO webdriver: RESULT null
+2023-02-09T15:55:22.973Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:22.973Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:22.985Z INFO webdriver: RESULT 0
+2023-02-09T15:55:22.985Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:22.986Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:22.986Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:22.996Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:24.126Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:24.127Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:24.140Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:24.240Z INFO webdriver: COMMAND elementClick("4aa7df56-3a58-4b3a-9b6c-fe77c20c331e")
-2023-02-07T03:08:24.241Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/4aa7df56-3a58-4b3a-9b6c-fe77c20c331e/click
-2023-02-07T03:08:24.293Z INFO webdriver: RESULT null
-2023-02-07T03:08:24.294Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:24.294Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.294Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:24.307Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:23.000Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:23.001Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:23.012Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:23.113Z INFO webdriver: COMMAND elementClick("61a632c2-6d0a-489b-8122-0772d1b9ef86")
+2023-02-09T15:55:23.113Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/61a632c2-6d0a-489b-8122-0772d1b9ef86/click
+2023-02-09T15:55:23.170Z INFO webdriver: RESULT null
+2023-02-09T15:55:23.171Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:23.171Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.171Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:23.181Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:24.312Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:24.312Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:24.325Z INFO webdriver: RESULT Synchronous message from Dependency
-2023-02-07T03:08:24.326Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:24.326Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.326Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:24.337Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:23.186Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:23.187Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:23.200Z INFO webdriver: RESULT Synchronous message from Dependency
+2023-02-09T15:55:23.201Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:23.202Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.202Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:23.211Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:24.342Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:24.342Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.342Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:24.354Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:23.216Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:23.217Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.217Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:23.229Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:24.358Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:24.359Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:24.396Z INFO webdriver: RESULT null
-2023-02-07T03:08:24.496Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:24.497Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:24.511Z INFO webdriver: RESULT 0
-2023-02-07T03:08:24.512Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:24.512Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.512Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:24.524Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:23.232Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:23.233Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:23.274Z INFO webdriver: RESULT null
+2023-02-09T15:55:23.376Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:23.376Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:23.384Z INFO webdriver: RESULT 0
+2023-02-09T15:55:23.384Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:23.385Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.385Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:23.391Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:24.528Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:24.529Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:24.541Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:24.643Z INFO webdriver: COMMAND elementClick("fcfefa65-f3f6-4ce0-9138-e5dc81bb784c")
-2023-02-07T03:08:24.643Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/fcfefa65-f3f6-4ce0-9138-e5dc81bb784c/click
-2023-02-07T03:08:24.697Z INFO webdriver: RESULT null
-2023-02-07T03:08:24.697Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:24.698Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.698Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:24.710Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:23.393Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:23.393Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:23.401Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:23.502Z INFO webdriver: COMMAND elementClick("b3b3bba4-969e-4d89-81c5-cc2a6c53dcd2")
+2023-02-09T15:55:23.502Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/b3b3bba4-969e-4d89-81c5-cc2a6c53dcd2/click
+2023-02-09T15:55:23.552Z INFO webdriver: RESULT null
+2023-02-09T15:55:23.552Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:23.553Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.553Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:23.561Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:24.713Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:24.714Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:24.727Z INFO webdriver: RESULT Synchronous message from Dependency
-2023-02-07T03:08:24.728Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync-async")
-2023-02-07T03:08:24.728Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.728Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync-async' }
-2023-02-07T03:08:24.747Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0dff00b4-adb9-46cb-8ac6-9c2b76f1009b'
+2023-02-09T15:55:23.562Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:23.562Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:23.571Z INFO webdriver: RESULT Synchronous message from Dependency
+2023-02-09T15:55:23.573Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync-async")
+2023-02-09T15:55:23.573Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.573Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync-async' }
+2023-02-09T15:55:23.592Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c1d62a81-6664-4a8b-9b0b-293c415fdcde'
 }
-2023-02-07T03:08:24.752Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync-directly-async")
-2023-02-07T03:08:24.752Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.752Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync-directly-async' }
-2023-02-07T03:08:24.772Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '925ff5b1-75a3-4b3d-aab8-b09e44554b3e'
+2023-02-09T15:55:23.596Z INFO webdriver: COMMAND findElement("css selector", "#call-dep-sync-directly-async")
+2023-02-09T15:55:23.596Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.596Z INFO webdriver: DATA { using: 'css selector', value: '#call-dep-sync-directly-async' }
+2023-02-09T15:55:23.616Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c79dd3ba-60f2-47b1-9fe0-5cdb4f25a141'
 }
-2023-02-07T03:08:24.776Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:24.777Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.777Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:24.789Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:23.620Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:23.621Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.621Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:23.633Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:24.793Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:24.794Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.794Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:24.804Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:23.637Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:23.637Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.637Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:23.649Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:24.809Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:24.809Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:24.830Z INFO webdriver: RESULT null
-2023-02-07T03:08:24.930Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:24.931Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:24.945Z INFO webdriver: RESULT 0
-2023-02-07T03:08:24.945Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:24.946Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:24.946Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:24.957Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:23.654Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:23.654Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:23.689Z INFO webdriver: RESULT null
+2023-02-09T15:55:23.790Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:23.791Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:23.807Z INFO webdriver: RESULT 0
+2023-02-09T15:55:23.808Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:23.808Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.808Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:23.820Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:24.962Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:24.963Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:24.975Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:25.077Z INFO webdriver: COMMAND elementClick("0dff00b4-adb9-46cb-8ac6-9c2b76f1009b")
-2023-02-07T03:08:25.077Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0dff00b4-adb9-46cb-8ac6-9c2b76f1009b/click
-2023-02-07T03:08:25.133Z INFO webdriver: RESULT null
-2023-02-07T03:08:25.133Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:25.133Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:25.133Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:25.146Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:23.825Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:23.825Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:23.836Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:23.937Z INFO webdriver: COMMAND elementClick("c1d62a81-6664-4a8b-9b0b-293c415fdcde")
+2023-02-09T15:55:23.937Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c1d62a81-6664-4a8b-9b0b-293c415fdcde/click
+2023-02-09T15:55:23.983Z INFO webdriver: RESULT null
+2023-02-09T15:55:23.984Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:23.984Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:23.984Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:23.994Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:25.150Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:25.151Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:25.163Z INFO webdriver: RESULT Synchronous message from Dependency
-2023-02-07T03:08:25.164Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
-2023-02-07T03:08:25.164Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:25.164Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
-2023-02-07T03:08:25.176Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'a036ac38-e260-4f6e-ad19-4570b4f05f34'
+2023-02-09T15:55:23.998Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:23.998Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:24.009Z INFO webdriver: RESULT Synchronous message from Dependency
+2023-02-09T15:55:24.009Z INFO webdriver: COMMAND findElement("css selector", "button#counter")
+2023-02-09T15:55:24.009Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:24.010Z INFO webdriver: DATA { using: 'css selector', value: 'button#counter' }
+2023-02-09T15:55:24.018Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'ed1bb4ae-1afe-4e6e-a468-602185d2cb44'
 }
-2023-02-07T03:08:25.180Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
-2023-02-07T03:08:25.181Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:25.181Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
-2023-02-07T03:08:25.192Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': '0b27ab77-0f81-42c6-8543-c6feeb2daa66'
+2023-02-09T15:55:24.021Z INFO webdriver: COMMAND findElement("css selector", "button#reset")
+2023-02-09T15:55:24.021Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:24.022Z INFO webdriver: DATA { using: 'css selector', value: 'button#reset' }
+2023-02-09T15:55:24.030Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'fbd12165-52ad-45a3-aa69-0b40c8a37ecf'
 }
-2023-02-07T03:08:25.197Z INFO webdriver: COMMAND elementClick("0b27ab77-0f81-42c6-8543-c6feeb2daa66")
-2023-02-07T03:08:25.197Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/0b27ab77-0f81-42c6-8543-c6feeb2daa66/click
-2023-02-07T03:08:25.233Z INFO webdriver: RESULT null
-2023-02-07T03:08:25.334Z INFO webdriver: COMMAND getElementText("a036ac38-e260-4f6e-ad19-4570b4f05f34")
-2023-02-07T03:08:25.334Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/a036ac38-e260-4f6e-ad19-4570b4f05f34/text
-2023-02-07T03:08:25.348Z INFO webdriver: RESULT 0
-2023-02-07T03:08:25.348Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:25.349Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:25.349Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:25.361Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:24.033Z INFO webdriver: COMMAND elementClick("fbd12165-52ad-45a3-aa69-0b40c8a37ecf")
+2023-02-09T15:55:24.033Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/fbd12165-52ad-45a3-aa69-0b40c8a37ecf/click
+2023-02-09T15:55:24.056Z INFO webdriver: RESULT null
+2023-02-09T15:55:24.157Z INFO webdriver: COMMAND getElementText("ed1bb4ae-1afe-4e6e-a468-602185d2cb44")
+2023-02-09T15:55:24.158Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/ed1bb4ae-1afe-4e6e-a468-602185d2cb44/text
+2023-02-09T15:55:24.171Z INFO webdriver: RESULT 0
+2023-02-09T15:55:24.172Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:24.172Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:24.172Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:24.185Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:25.365Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:25.365Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:25.378Z INFO webdriver: RESULT Reset
-2023-02-07T03:08:25.480Z INFO webdriver: COMMAND elementClick("925ff5b1-75a3-4b3d-aab8-b09e44554b3e")
-2023-02-07T03:08:25.481Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/925ff5b1-75a3-4b3d-aab8-b09e44554b3e/click
-2023-02-07T03:08:25.534Z INFO webdriver: RESULT null
-2023-02-07T03:08:25.534Z INFO webdriver: COMMAND findElement("css selector", "p#message")
-2023-02-07T03:08:25.535Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element
-2023-02-07T03:08:25.535Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
-2023-02-07T03:08:25.548Z INFO webdriver: RESULT {
-  'element-6066-11e4-a52e-4f735466cecf': 'e6b53657-5774-45e4-91b8-7fced0cd6ecb'
+2023-02-09T15:55:24.189Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:24.189Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:24.202Z INFO webdriver: RESULT Reset
+2023-02-09T15:55:24.304Z INFO webdriver: COMMAND elementClick("c79dd3ba-60f2-47b1-9fe0-5cdb4f25a141")
+2023-02-09T15:55:24.305Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c79dd3ba-60f2-47b1-9fe0-5cdb4f25a141/click
+2023-02-09T15:55:24.358Z INFO webdriver: RESULT null
+2023-02-09T15:55:24.358Z INFO webdriver: COMMAND findElement("css selector", "p#message")
+2023-02-09T15:55:24.358Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element
+2023-02-09T15:55:24.358Z INFO webdriver: DATA { using: 'css selector', value: 'p#message' }
+2023-02-09T15:55:24.368Z INFO webdriver: RESULT {
+  'element-6066-11e4-a52e-4f735466cecf': 'c30e3e8d-be24-49bd-be9f-7061c799d9f5'
 }
-2023-02-07T03:08:25.552Z INFO webdriver: COMMAND getElementText("e6b53657-5774-45e4-91b8-7fced0cd6ecb")
-2023-02-07T03:08:25.552Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/element/e6b53657-5774-45e4-91b8-7fced0cd6ecb/text
-2023-02-07T03:08:25.565Z INFO webdriver: RESULT Synchronous message from Dependency
-2023-02-07T03:08:25.566Z INFO webdriver: COMMAND getLogTypes()
-2023-02-07T03:08:25.567Z INFO webdriver: [GET] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/se/log/types
-2023-02-07T03:08:25.570Z INFO webdriver: RESULT [ 'browser', 'driver' ]
-2023-02-07T03:08:25.570Z INFO webdriver: COMMAND getLogs("driver")
-2023-02-07T03:08:25.570Z INFO webdriver: COMMAND getLogs("browser")
-2023-02-07T03:08:25.571Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/se/log
-2023-02-07T03:08:25.571Z INFO webdriver: DATA { type: 'driver' }
-2023-02-07T03:08:25.571Z INFO webdriver: [POST] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888/se/log
-2023-02-07T03:08:25.571Z INFO webdriver: DATA { type: 'browser' }
-2023-02-07T03:08:25.579Z INFO webdriver: RESULT []
-2023-02-07T03:08:25.581Z INFO webdriver: RESULT []
-2023-02-07T03:08:25.581Z INFO webdriver: COMMAND deleteSession()
-2023-02-07T03:08:25.581Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/d24086c19a4182c8b0e5854b1c1e2888
-2023-02-07T03:08:25.635Z INFO webdriver: RESULT null
+2023-02-09T15:55:24.372Z INFO webdriver: COMMAND getElementText("c30e3e8d-be24-49bd-be9f-7061c799d9f5")
+2023-02-09T15:55:24.372Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/element/c30e3e8d-be24-49bd-be9f-7061c799d9f5/text
+2023-02-09T15:55:24.383Z INFO webdriver: RESULT Synchronous message from Dependency
+2023-02-09T15:55:24.384Z INFO webdriver: COMMAND getLogTypes()
+2023-02-09T15:55:24.384Z INFO webdriver: [GET] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/se/log/types
+2023-02-09T15:55:24.387Z INFO webdriver: RESULT [ 'browser', 'driver' ]
+2023-02-09T15:55:24.388Z INFO webdriver: COMMAND getLogs("driver")
+2023-02-09T15:55:24.388Z INFO webdriver: COMMAND getLogs("browser")
+2023-02-09T15:55:24.388Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/se/log
+2023-02-09T15:55:24.388Z INFO webdriver: DATA { type: 'driver' }
+2023-02-09T15:55:24.389Z INFO webdriver: [POST] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc/se/log
+2023-02-09T15:55:24.389Z INFO webdriver: DATA { type: 'browser' }
+2023-02-09T15:55:24.393Z INFO webdriver: RESULT []
+2023-02-09T15:55:24.394Z INFO webdriver: RESULT []
+2023-02-09T15:55:24.395Z INFO webdriver: COMMAND deleteSession()
+2023-02-09T15:55:24.395Z INFO webdriver: [DELETE] http://127.0.0.1:9519/session/530c29301f86a1a83f7c0e32e1ca19bc
+2023-02-09T15:55:24.448Z INFO webdriver: RESULT null

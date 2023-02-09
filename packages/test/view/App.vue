@@ -27,18 +27,30 @@ const buttons = reactive([
   { id: "call-dep-sync-directly", click: () => dep.getSyncMessage(), },
   { id: "call-dep-sync-async", click: () => app.callDepSyncAsync(), },
   { id: "call-dep-sync-directly-async", click: () => dep.getSyncMessageAsync() },
-  { id: "print-object-type", click: () => printInstanceOf(app.createObject(), Object), },
-  { id: "print-buffer-type", click: () => printInstanceOf(app.createBuffer(), Uint8Array) },
-  { id: "print-date-type", click: () => printInstanceOf(app.createDate(), Date) },
-  { id: "print-vec2-type", click: () => console.log(app.createVec2()) },
+  { id: "print-object-type", click: () => instanceOf(factory.createObject(), Object), },
+  { id: "print-buffer-type", click: () => instanceOf(factory.createBuffer(), Uint8Array) },
+  { id: "print-date-type", click: () => instanceOf(factory.createDate(), Date) },
+  { id: "print-vec2-type", click: () => hasProperties(factory.createVec2(), ["x", "y"]) },
 ]);
 
 // Methods
 voxer.handle("count", (v) => (count.value = v));
 voxer.handle("message", (v) => (msg.value = v));
 
-function printInstanceOf(value: any, type: any) {
+function instanceOf(value: any, type: any) {
   msg.value = (value instanceof type).toString();
+}
+
+function hasProperties(obj: any, properties: string[]) {
+  for (const prop of properties) {
+    if (!(prop in obj)) {
+      msg.value = "false";
+
+      return;
+    }
+  }
+
+  msg.value = "true";
 }
 
 // Hooks

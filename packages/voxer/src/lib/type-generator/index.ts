@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import fs from "fs";
-import { Translator } from "./translator";
+import { TypeTranslator } from "./type-translator";
 import prettier from "prettier";
 
 const cwd = process.cwd();
@@ -12,7 +12,7 @@ export function translate(): void {
     fs.unlinkSync(outputFileName);
   }
 
-  const translator = new Translator(cwd);
+  const translator = new TypeTranslator(cwd);
   const source = translator.execute();
 
   fs.writeFileSync(outputFileName, prettier.format(source, { parser: "typescript" }));

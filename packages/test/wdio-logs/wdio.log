@@ -1,12 +1,12 @@
-2023-02-07T03:08:17.096Z INFO chromedriver: Start Chromedriver (/home2023-02-07T03:08:17.211Z INFO @wdio/cli:launcher: Run onWorkerStart hook
-2023-02-07T03:08:17.211Z INFO @wdio/cli:launcher: Run onWorkerStart hook
-2023-02-07T03:08:17.211Z INFO @wdio/cli:launcher: Run onWorkerStart hook
-2023-02-07T03:08:17.212Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,./wdio.conf.js
-2023-02-07T03:08:17.220Z INFO @wdio/local-runner: Start worker 0-1 with arg: run,./wdio.conf.js
-2023-02-07T03:08:17.228Z INFO @wdio/local-runner: Start worker 0-2 with arg: run,./wdio.conf.js
-2023-02-07T03:08:19.040Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
-2023-02-07T03:08:20.202Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
-2023-02-07T03:08:25.758Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
-2023-02-07T03:08:25.758Z INFO @wdio/cli:launcher: Run onComplete hook
-2023-02-07T03:08:25.780Z INFO @wdio/local-runner: Shutting down spawned worker
-2023-02-07T03:08:26.032Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2023-02-09T15:55:15.651Z INFO chromedriver: Start Chromedriver (/home2023-02-09T15:55:15.771Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2023-02-09T15:55:15.771Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2023-02-09T15:55:15.771Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2023-02-09T15:55:15.771Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,./wdio.conf.js
+2023-02-09T15:55:15.781Z INFO @wdio/local-runner: Start worker 0-1 with arg: run,./wdio.conf.js
+2023-02-09T15:55:15.790Z INFO @wdio/local-runner: Start worker 0-2 with arg: run,./wdio.conf.js
+2023-02-09T15:55:18.041Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2023-02-09T15:55:18.956Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2023-02-09T15:55:24.574Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2023-02-09T15:55:24.574Z INFO @wdio/cli:launcher: Run onComplete hook
+2023-02-09T15:55:24.598Z INFO @wdio/local-runner: Shutting down spawned worker
+2023-02-09T15:55:24.849Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
