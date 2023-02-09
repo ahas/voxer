@@ -33,7 +33,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tsc -p tsconfig.json",
+    "build": "yarn clean && tsc -p tsconfig.json",
     "start": "node dist/dev.js",
     "dev": "yarn tsc && yarn start",
     "format": "prettier --write ."

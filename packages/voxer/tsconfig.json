@@ -13,5 +13,5 @@
     "skipLibCheck": true
   },
   "include": ["src/lib/**/*.ts", "src/runtime/**/*.ts"],
-  "exclude": ["src/runtime/preload.ts"]
+  "exclude": ["src/runtime/preload.ts", "**/__test__.ts"]
 }
