@@ -3,7 +3,7 @@ import fs from "fs";
 import { dirname, resolve } from "path";
 import prettier from "prettier";
 
-const cwd = "/home/ahas/repos/ahas/voxer/packages/test/";
+const cwd = resolve(__dirname, "../../../../test");
 const outputFileName = resolve(cwd, ".voxer/api.d.ts");
 
 fs.mkdirSync(dirname(cwd), { recursive: true });
