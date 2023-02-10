@@ -12,7 +12,6 @@
   "dependencies": {
     "mousetrap": "^1.6.5",
     "reflect-metadata": "^0.1.13",
-    "ts-loader": "^9.4.2",
     "vue": "^3.2.45"
   },
   "devDependencies": {

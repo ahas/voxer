@@ -8,6 +8,7 @@
   "include": [
     "node_modules/voxer/src/runtime/preload.ts",
     "node_modules/voxer/src/runtime/injectable.ts",
+    "node_modules/voxer/src/runtime/core/types.ts",
     "node_modules/voxer/src/runtime/core/utils.ts",
     "node_modules/voxer/src/runtime/core/voxer.renderer.ts",
     "../src/preload.*",

@@ -3,6 +3,7 @@ import type { InjectableMetadata } from "./injectable";
 import { ipcRenderer, contextBridge } from "electron";
 import { voxer } from "./core/voxer.renderer";
 import { camelcase, asExposeEvent, asGetter, asSetter, asAsync, asCommandEvent } from "./core/utils";
+import type { Mousetrap } from "mousetrap";
 
 declare global {
   var __VOXER_PRELOAD__: boolean;
@@ -40,12 +41,12 @@ function connectExposedMethods(injectable: InjectableMetadata) {
   return api;
 }
 
-async function connectCommandMethods(injectable: InjectableMetadata) {
+function connectCommandMethods(injectable: InjectableMetadata) {
   const api = {};
   const methods = injectable.commands;
 
   if (methods.length > 0) {
-    const Mousetrap = (await import("mousetrap")).default;
+    const Mousetrap = require("mousetrap").default as Mousetrap;
 
     for (const { methodName, isAsync, combinations } of methods) {
       const eventName = asCommandEvent(injectable, methodName);
@@ -78,13 +79,13 @@ function connectAccessors(injectable: InjectableMetadata) {
   return api;
 }
 
-async function exposeInjectables() {
+function exposeInjectables() {
   const injectables: InjectableMetadata[] = ipcRenderer.sendSync("$voxer:injectables");
 
   for (const injectable of injectables) {
     const api = {
       ...connectExposedMethods(injectable),
-      ...await connectAccessors(injectable),
+      ...connectAccessors(injectable),
       ...connectCommandMethods(injectable),
     };
 
@@ -104,5 +105,5 @@ async function exposeInjectables() {
   }
   // #!endif
 
-  await exposeInjectables();
+  exposeInjectables();
 })();
