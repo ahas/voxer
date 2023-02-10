@@ -25,7 +25,8 @@
     "src/runtime/preload.ts",
     "src/runtime/injectable.ts",
     "src/runtime/core/voxer.renderer.ts",
-    "src/runtime/core/utils.ts"
+    "src/runtime/core/utils.ts",
+    "src/runtime/core/types.ts"
   ],
   "keywords": [
     "vite",
