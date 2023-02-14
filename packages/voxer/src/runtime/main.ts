@@ -13,7 +13,7 @@ import {
 } from "./core/constants";
 import { voxer } from "./core/voxer.main";
 import { camelcase, asExposeEvent, asMenuEvent, asGetter, asSetter, asAsync, asCommandEvent } from "./core/utils";
-import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/decorators";
+import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/types";
 import { InjectableMetadata } from "./injectable";
 
 declare global {

@@ -220,11 +220,6 @@ export class TypeTranslator extends TypeInjector {
 
   private translateProperty(property: ts.Symbol): ts.PropertySignature | undefined {
     const decl = property.valueDeclaration as ts.PropertyDeclaration | ts.ParameterDeclaration;
-
-    if (!this.memoizeSymbol(property) || !decl) {
-      return undefined;
-    }
-
     const modifiers = ts.getModifiers(decl);
 
     this.inject(decl.type);
@@ -232,7 +227,7 @@ export class TypeTranslator extends TypeInjector {
     return f.createPropertySignature(modifiers, property.name, decl.questionToken, this._replacer.replace(decl.type));
   }
 
-  private translateMembers(isInjectable: boolean, members: ts.Symbol[]) {
+  private translateMembers(isInjectable: boolean, members: ts.Symbol[]): ts.TypeElement[] {
     const result: ts.TypeElement[] = [];
 
     for (const member of members) {
@@ -301,7 +296,9 @@ export class TypeTranslator extends TypeInjector {
 
     this.visitTypeParameters(decl.typeParameters);
 
-    const members = decl.members.filter((x) => ts.isPropertySignature(x));
+    const props = decl.members.filter((x) => ts.isPropertySignature(x));
+    const propSymbols = props.map((x) => (x?.name ? this._typeChecker.getSymbolAtLocation(x.name) : undefined));
+    const members = propSymbols.map((x) => (x ? this.translateProperty(x) : undefined));
 
     if (this.memoizeSymbol(symbol)) {
       return f.createInterfaceDeclaration(
@@ -309,7 +306,7 @@ export class TypeTranslator extends TypeInjector {
         decl.name,
         this._replacer.visitTypeParameters(decl.typeParameters),
         this.translateHeritageClauses(symbol),
-        members
+        members.filter((x) => !!x) as ts.PropertySignature[]
       );
     }
 
