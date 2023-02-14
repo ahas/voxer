@@ -1,10 +1,13 @@
 import { Expose, Injectable } from "#voxer";
+import { BrowserWindow as BW } from "electron";
+import Mousetrap, { MousetrapInstance } from "mousetrap";
 
 interface Translatable {
   translate(x: number, y: number): void;
 }
 
 class Vec2 implements Translatable {
+  type: "vec4" = "vec4";
   constructor(public x: number, public y: number) {}
 
   translate(dx: number, dy: number): void {
@@ -27,6 +30,7 @@ interface Vec4 {
 }
 
 type Mat4 = [
+  Buffer,
   [number, number, number, number],
   [number, number, number, number],
   [number, number, number, number],
@@ -83,17 +87,18 @@ export class Factory {
 
   @Expose()
   createVec4(): Vec4 {
-    return { x: 0, y: 1, z: 2, w: 3 };
+    return {  x: 0, y: 1, z: 2, w: 3 };
   }
 
   @Expose()
   createAsVec4() {
-    return { x: 0, y: 1, z: 2, w: 3 } as Vec4;
+    return {  x: 0, y: 1, z: 2, w: 3 } as Vec4;
   }
 
   @Expose()
   createMat4(): Mat4 {
     return [
+      Buffer.allocUnsafe(10),
       [1, 2, 3, 4],
       [5, 6, 7, 8],
       [9, 10, 11, 12],
@@ -104,6 +109,7 @@ export class Factory {
   @Expose()
   createAsMat4() {
     return [
+      Buffer.allocUnsafe(10),
       [1, 2, 3, 4],
       [5, 6, 7, 8],
       [9, 10, 11, 12],
@@ -114,5 +120,15 @@ export class Factory {
   @Expose()
   createQuaternians(): Quaternian[] {
     return new Array(5).fill(undefined).map((x) => new Quaternian(10, new Vec3(10, 20, 30)));
+  }
+
+  @Expose()
+  getBrowserWindow() {
+    return BW.getAllWindows()[0];
+  }
+
+  @Expose()
+  getMousetrapInstance() {
+    return Mousetrap.reset();
   }
 }

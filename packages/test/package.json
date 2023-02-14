@@ -23,6 +23,7 @@
   "devDependencies": {
     "@testing-library/webdriverio": "^3.2.0",
     "@types/mocha": "^10.0.1",
+    "@types/mousetrap": "^1.6.11",
     "@types/node": "^18.11.9",
     "@vitejs/plugin-vue": "^3.2.0",
     "@wdio/cli": "^8.0.6",

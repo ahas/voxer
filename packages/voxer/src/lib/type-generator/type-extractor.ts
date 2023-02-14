@@ -181,21 +181,4 @@ export class TypeExtractor {
     return isInjectable ? this.getExposedMembers(c) : this.getPublicProperties(c);
   }
 
-  getModuleSpecifier(decl: ts.ImportSpecifier | ts.ImportClause): string | undefined {
-    let moduleSpecifier: ts.Expression | undefined;
-
-    if (ts.isImportClause(decl)) {
-      moduleSpecifier = decl.parent.moduleSpecifier;
-    } else if (ts.isImportSpecifier(decl)) {
-      moduleSpecifier = decl.parent.parent.parent.moduleSpecifier;
-    } else {
-      moduleSpecifier = undefined;
-    }
-
-    if (moduleSpecifier && ts.isStringLiteral(moduleSpecifier)) {
-      return moduleSpecifier.text;
-    }
-
-    return undefined;
-  }
 }

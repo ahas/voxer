@@ -582,6 +582,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mousetrap@npm:^1.6.11":
+  version: 1.6.11
+  resolution: "@types/mousetrap@npm:1.6.11"
+  checksum: 4465d16b7c20ab52d2f6b7fe8087e8f16101472f2e8758f01c63591015c1b0a67c9e6c371d978f24d5f37c4b83457515571489284bf7c7c844eb6c8f2527685b
+  languageName: node
+  linkType: hard
+
 "@types/ms@npm:*":
   version: 0.7.31
   resolution: "@types/ms@npm:0.7.31"
@@ -7432,7 +7439,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4, typescript@npm:^4.9.3":
+"typescript@npm:^4.6.4, typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -7442,7 +7449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
@@ -7625,6 +7632,7 @@ __metadata:
   dependencies:
     "@testing-library/webdriverio": ^3.2.0
     "@types/mocha": ^10.0.1
+    "@types/mousetrap": ^1.6.11
     "@types/node": ^18.11.9
     "@vitejs/plugin-vue": ^3.2.0
     "@wdio/cli": ^8.0.6
@@ -7663,7 +7671,7 @@ __metadata:
     rimraf: ^3.0.2
     ts-loader: ^9.4.2
     tsconfig-paths-webpack-plugin: ^4.0.0
-    typescript: ^4.9.3
+    typescript: ^4.9.5
     vite: ^3.2.4
     webpack: ^5.75.0
     webpack-preprocessor-loader: ^1.2.0
