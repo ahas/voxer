@@ -7875,9 +7875,6 @@ __metadata:
 "voxer-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "voxer-monorepo@workspace:."
-  dependencies:
-    "@yarnpkg/sdks": ^3.0.0-rc.44
-    typescript: ^5.0.4
   languageName: unknown
   linkType: soft
 

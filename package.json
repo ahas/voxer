@@ -9,9 +9,5 @@
   ],
   "scripts": {
     "build": "yarn workspace voxer run build && yarn workspace create-voxer run build"
-  },
-  "devDependencies": {
-    "@yarnpkg/sdks": "^3.0.0-rc.44",
-    "typescript": "^5.0.4"
   }
 }
