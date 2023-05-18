@@ -15,6 +15,5 @@ if (fs.existsSync(outputFileName)) {
 
 const translator = new TypeTranslator(cwd);
 
-
 console.log(outputFileName);
 fs.writeFileSync(outputFileName, prettier.format(translator.execute(), { parser: "typescript" }));

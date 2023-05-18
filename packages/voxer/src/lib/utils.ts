@@ -1,6 +1,6 @@
 import fs from "fs";
 import { relative, dirname, join, resolve, basename } from "path";
-import glob from "glob";
+import { globSync } from "glob";
 import ts, { MapLike } from "typescript";
 import { printDel } from "cornsol";
 
@@ -80,9 +80,7 @@ export function resolveAlias(): void {
   const IMPORT_REGEX = /(?:import|from)\s+['"]([^'"]*)['"]/g;
   const REQUIRE_REGEX = /(?:import|require)\s*\(\s*['"]([^'"]*)['"]\s*\)/g;
   const exts = ["js", "jsx", "ts", "tsx", "d.ts"];
-  const files = glob
-    .sync(`**/*.{${exts.join()}}`, { cwd: options.outDir })
-    .map((x) => resolve(options.outDir || "", x));
+  const files = globSync(`**/*.{${exts.join()}}`, { cwd: options.outDir }).map((x) => resolve(options.outDir || "", x));
   const aliases = getAliases(options.paths || {});
 
   const replace = (matched: string, pathText: string, file: string) => {
@@ -123,5 +121,5 @@ export function formatDuration(duration: number) {
 }
 
 export function isPreloadDefined() {
-  return glob.sync(resolve(cwd, "src/preload.{js,ts,jsx,tsx}")).length > 0;
+  return globSync(resolve(cwd, "src/preload.{js,ts,jsx,tsx}")).length > 0;
 }

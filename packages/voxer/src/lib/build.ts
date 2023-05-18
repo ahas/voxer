@@ -101,6 +101,7 @@ export function buildVite(config: UserConfig): Promise<RollupOutput | RollupOutp
       build: {
         outDir: resolvePath(cwd, ".voxer"),
       },
+      logLevel: "silent",
       ...config.vite,
     });
   });

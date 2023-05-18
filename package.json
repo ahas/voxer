@@ -2,12 +2,16 @@
   "name": "voxer-monorepo",
   "private": true,
   "license": "MIT",
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "yarn@3.5.1",
   "workspaces": [
     "packages/*",
     "packages/examples/*"
   ],
   "scripts": {
     "build": "yarn workspace voxer run build && yarn workspace create-voxer run build"
+  },
+  "devDependencies": {
+    "@yarnpkg/sdks": "^3.0.0-rc.44",
+    "typescript": "^5.0.4"
   }
 }

@@ -11,7 +11,9 @@ export interface TypeVisitor<T = ts.TypeNode> {
   visitTypePredicate(typeNode: ts.TypePredicateNode): TypeNodeOrVoid<ts.TypePredicateNode, T>;
   visitRestType(typeNode: ts.RestTypeNode): TypeNodeOrVoid<ts.RestTypeNode, T>;
   visitTypeQuery(typeNode: ts.TypeQueryNode): TypeNodeOrVoid<ts.TypeQueryNode, T>;
-  visitTypeParameter(typeNode: ts.TypeParameterDeclaration): T extends ts.TypeNode ? ts.TypeParameterDeclaration | undefined : void;
+  visitTypeParameter(
+    typeNode: ts.TypeParameterDeclaration
+  ): T extends ts.TypeNode ? ts.TypeParameterDeclaration | undefined : void;
   visitTypeParameters(
     typeParameters: ts.NodeArray<ts.TypeParameterDeclaration> | undefined
   ): T extends ts.TypeNode ? ts.TypeParameterDeclaration[] | undefined : void;

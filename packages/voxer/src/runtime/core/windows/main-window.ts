@@ -21,7 +21,6 @@ export class MainWindow {
     });
   }
 
-
   getApplicationMenu() {
     return Menu.getApplicationMenu();
   }

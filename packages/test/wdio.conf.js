@@ -1,4 +1,5 @@
 const { join } = require("path");
+const packageJSON = require("./package.json");
 
 const voxerConfig = require("./.voxer/dist/voxer.config").default;
 const {
@@ -19,6 +20,7 @@ const config = {
           port: 9519,
           logFileName: "wdio-chromedriver.log",
         },
+        electronVersion: packageJSON.devDependencies.electron,
       },
     ],
   ],

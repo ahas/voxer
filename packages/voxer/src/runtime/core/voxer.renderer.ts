@@ -9,7 +9,7 @@ export interface VoxerRendererProcess {
   sendSync<T = void>(channel: string, ...args: any[]): T;
   invoke(channel: string, ...args: any[]): Promise<any>;
   openFileDialog(options?: Electron.OpenDialogSyncOptions): string;
-};
+}
 
 export const voxer: VoxerRendererProcess = {
   dependencies: [],
@@ -56,5 +56,5 @@ export const voxer: VoxerRendererProcess = {
   },
   openFileDialog(options) {
     return ipcRenderer.sendSync(`$voxer:main:open-file`, options);
-  }
+  },
 };

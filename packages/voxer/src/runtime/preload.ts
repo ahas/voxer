@@ -51,7 +51,9 @@ async function connectCommandMethods(injectable: InjectableMetadata) {
       const eventName = asCommandEvent(injectable, methodName);
 
       if (isAsync) {
-        Mousetrap.bind(combinations, () => ipcRenderer.invoke(eventName));
+        Mousetrap.bind(combinations, () => {
+          ipcRenderer.invoke(eventName);
+        });
       } else {
         Mousetrap.bind(combinations, () => ipcRenderer.sendSync(eventName));
       }

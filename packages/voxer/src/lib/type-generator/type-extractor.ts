@@ -180,5 +180,4 @@ export class TypeExtractor {
 
     return isInjectable ? this.getExposedMembers(c) : this.getPublicProperties(c);
   }
-
 }

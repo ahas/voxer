@@ -26,7 +26,7 @@
     "allowJs": true,
     "checkJs": true,
     "noEmit": true,
-    "types": ["node", "mocha", "@wdio/globals/types", "expect-webdriverio"],
+    "types": ["node", "mocha", "@wdio/globals/types", "expect-webdriverio", "wdio-electron-service"],
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["**/*.ts"],

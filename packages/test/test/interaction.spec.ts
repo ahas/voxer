@@ -52,13 +52,13 @@ describe("application loading", () => {
         const hideMenuButton = await browser.$("button#hide_menu");
 
         await showMenuButton.click();
-        expect(await browser.electronBrowserWindow("isMenuBarVisible")).toEqual(true);
+        expect(await browser.electron.browserWindow("isMenuBarVisible")).toEqual(true);
 
         await hideMenuButton.click();
-        expect(await browser.electronBrowserWindow("isMenuBarVisible")).toEqual(false);
+        expect(await browser.electron.browserWindow("isMenuBarVisible")).toEqual(false);
 
         await showMenuButton.click();
-        expect(await browser.electronBrowserWindow("isMenuBarVisible")).toEqual(true);
+        expect(await browser.electron.browserWindow("isMenuBarVisible")).toEqual(true);
       });
 
       it("triggers application menu click events", async () => {
@@ -66,7 +66,7 @@ describe("application loading", () => {
         const apis = ["MenuItem_Label", "MenuItem_Id", "MenuItem_Accel", "MenuItem_Role"];
 
         for (const api of apis) {
-          await browser.electronAPI(api);
+          await browser.electron.api(api);
           await waitFor(100);
           await expectMessage(api);
           await reset();

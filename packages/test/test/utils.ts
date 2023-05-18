@@ -1,7 +1,7 @@
 type Bounds = { width: number; height: number };
 
 export const waitFor = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
-export const getBounds = (): Promise<Bounds> => browser.electronBrowserWindow("getBounds") as Promise<Bounds>;
+export const getBounds = (): Promise<Bounds> => browser.electron.browserWindow("getBounds") as Promise<Bounds>;
 
 export async function reset() {
   const counterButton = await browser.$("button#counter");
