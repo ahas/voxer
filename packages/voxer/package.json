@@ -39,6 +39,9 @@
     "dev": "yarn tsc && yarn start",
     "format": "prettier --write ."
   },
+  "peerDependencies": {
+    "vite": "^4.3.8"
+  },
   "dependencies": {
     "chalk": "^5.2.0",
     "chokidar": "^3.5.3",
