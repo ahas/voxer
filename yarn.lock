@@ -2625,12 +2625,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cornsol@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "cornsol@npm:1.1.4"
+"cornsol@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "cornsol@npm:1.1.5"
   dependencies:
     chalk: ^4.1.2
-  checksum: 8e1f3c254ee916cb054074def05ebb26861880a48c344cf30966747c6d2f3f4364ba6d5d53c03dc0cb41cc69ed5c0f75bc7361cd332054b869c389b401c1cfb8
+  checksum: f9f06c70d4f9c70c4bf8cc2826c48bbd51edff8e3245c2aca885c911e47aa2504e1e534a861e6361e2a2a2b9253dc2ff52fe953eeac0e26708ce0496b1c7f5e4
   languageName: node
   linkType: hard
 
@@ -3183,6 +3183,19 @@ __metadata:
   bin:
     electron: cli.js
   checksum: 502f822c9f9de381dcb0668436813f3552159b86dfd0563d8cda923bc7d26949f25231a5a008ea4564a0ec4bd70da6d01f95e343ba422a6b3614e93bb219ffd0
+  languageName: node
+  linkType: hard
+
+"electron@npm:25.0.1":
+  version: 25.0.1
+  resolution: "electron@npm:25.0.1"
+  dependencies:
+    "@electron/get": ^2.0.0
+    "@types/node": ^18.11.18
+    extract-zip: ^2.0.1
+  bin:
+    electron: cli.js
+  checksum: ddf72cfe1fca113bd99649df0b9df23fc939eeeb72cb3939e2e5a2ee613789e39d511f083fd42ad9da8adc4ed2dbc6ab75d0af58a51db376d1d2b89e1da6d9b4
   languageName: node
   linkType: hard
 
@@ -7913,9 +7926,9 @@ __metadata:
     chalk: ^5.2.0
     chokidar: ^3.5.3
     commander: ^10.0.1
-    cornsol: ^1.1.4
+    cornsol: ^1.1.5
     cross-env: ^7.0.3
-    electron: 24.3.1
+    electron: 25.0.1
     electron-builder: ^23.6.0
     glob: ^10.2.5
     mousetrap: ^1.6.5
@@ -7929,6 +7942,8 @@ __metadata:
     vite: ^4.3.8
     webpack: ^5.83.1
     webpack-preprocessor-loader: ^1.3.0
+  peerDependencies:
+    vite: ^4.3.8
   bin:
     voxer: ./dist/lib/cli.js
   languageName: unknown

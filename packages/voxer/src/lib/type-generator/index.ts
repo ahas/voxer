@@ -1,7 +1,7 @@
+import * as fs from "fs";
+import * as prettier from "prettier";
 import { resolve } from "path";
-import fs from "fs";
 import { TypeTranslator } from "./type-translator";
-import prettier from "prettier";
 
 const cwd = process.cwd();
 

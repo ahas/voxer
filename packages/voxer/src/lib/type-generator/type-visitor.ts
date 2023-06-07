@@ -1,4 +1,4 @@
-import ts from "typescript";
+import * as ts from "typescript";
 
 type TypeNodeOrVoid<T2 extends ts.TypeNode, T1 = ts.TypeNode | void> = T1 extends ts.TypeNode ? T2 : void;
 

@@ -1,12 +1,7 @@
-import type { EventEmitter } from "node:events";
-
 declare global {
   class Voxer {
     title: string;
     injectables: Function[];
-    on: InstanceType<typeof EventEmitter>["on"];
-    once: InstanceType<typeof EventEmitter>["once"];
-    off: InstanceType<typeof EventEmitter>["off"];
     send(channel: string, ...args: any[]): void;
     sendSync<T = void>(channel: string, ...args: any[]): T;
     invoke<T = void>(channel: string, ...args: any[]): Promise<T>;

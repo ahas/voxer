@@ -4,8 +4,8 @@ import { Command, Option } from "commander";
 import { electronFlags } from "./electron-flags";
 import { buildRelease, installVoxer } from "./build";
 
-import { runDevApp } from "./dev";
-import { cleanRelease, cleanVoxer } from "./utils";
+import { pipeIo, runChildProcesses, runDevApp } from "./dev";
+import { cleanRelease, cleanVoxer, isVoxerPackage } from "./utils";
 
 cornsol.register();
 
@@ -31,6 +31,7 @@ function getElectronArgs(options: any, optionDefs: Option[]) {
       (required && val && typeof val !== "boolean")
     ) {
       let exp = long;
+
       if (required) {
         exp += "=" + val;
       }
@@ -51,20 +52,33 @@ function getElectronArgs(options: any, optionDefs: Option[]) {
 }
 
 withElectronFlags(program.command("start"))
+  .option("--with <commands...>")
   .description("[default] Run application in a development")
   .action(async (options, command) => {
+    if (!isVoxerPackage()) {
+      console.error("Cannot find voxer configuration !");
+      process.exit();
+    }
+
+    await runChildProcesses(options.with);
     await runDevApp(
       {
         mode: "development",
         targets: { vite: true, electron: true },
       },
-      getElectronArgs(options, command.options)
+      getElectronArgs(
+        options,
+        (command.options as Option[]).filter((x) => {
+          const attrName = x.attributeName();
+          return attrName !== "with";
+        })
+      )
     );
   });
 
 program
-  .command("install")
-  .description("Install voxer resources")
+  .command("prepare")
+  .description("Prepare voxer resources")
   .option("-d, --dev")
   .option("--no-src", "Run typescript build")
   .action(async (options) => {

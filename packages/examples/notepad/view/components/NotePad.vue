@@ -13,7 +13,8 @@ import { ref, computed } from "vue";
 const content = ref("");
 const lines = computed(() => content.value.split(/\r\n|\r|\n/).length || 1);
 
-voxer.serve("content", () => content.value).handle("set-content", (v) => (content.value = v));
+voxer.serve("content", () => content.value);
+voxer.handle("set-content", (v) => (content.value = v));
 </script>
 
 <style scoped>

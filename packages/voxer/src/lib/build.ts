@@ -1,4 +1,5 @@
-import ts from "typescript";
+import * as fs from "fs";
+import * as ts from "typescript";
 import { resolve as resolvePath } from "path";
 import { readConfig, type UserConfig } from "./config";
 import { build as _buildVite } from "vite";
@@ -7,11 +8,10 @@ import { cleanVoxer, isPreloadDefined, mkdir, resolveAlias } from "./utils";
 import { duplicateResource } from "./resources";
 import { printLog, printStep } from "cornsol";
 import { translate } from "./type-generator";
-import fs from "fs";
 import type { RollupOutput, RollupWatcher } from "rollup";
 
 // webpack features
-import webpack from "webpack";
+import * as webpack from "webpack";
 import { getWebpackConfig } from "./webpack-config";
 
 const cwd = process.cwd();

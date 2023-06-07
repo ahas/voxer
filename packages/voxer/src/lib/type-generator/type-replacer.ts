@@ -1,4 +1,4 @@
-import ts from "typescript";
+import * as ts from "typescript";
 import { TypeVisitor } from "./type-visitor";
 
 const f = ts.factory;

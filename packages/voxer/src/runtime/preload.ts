@@ -28,12 +28,28 @@ function connectExposedMethods(injectable: InjectableMetadata) {
     const eventName = asExposeEvent(injectable, methodName);
 
     if (isAsync) {
-      api[methodName] = (...args: any[]) => {
-        ipcRenderer.invoke(eventName, ...args);
+      api[methodName] = async (...args: any[]) => {
+        try {
+          return await ipcRenderer.invoke(eventName, ...args);
+        } catch (e) {
+          throw e;
+        }
       };
     } else {
-      api[methodName] = (...args: any[]) => ipcRenderer.sendSync(eventName, ...args);
-      api[String(methodName) + "Async"] = (...args: any[]) => ipcRenderer.invoke(asAsync(eventName), ...args);
+      api[methodName] = (...args: any[]) => {
+        try {
+          return ipcRenderer.sendSync(eventName, ...args);
+        } catch (e) {
+          throw e;
+        }
+      };
+      api[String(methodName) + "Async"] = async (...args: any[]) => {
+        try {
+          return await ipcRenderer.invoke(asAsync(eventName), ...args);
+        } catch (e) {
+          throw e;
+        }
+      };
     }
   }
 
@@ -52,10 +68,18 @@ async function connectCommandMethods(injectable: InjectableMetadata) {
 
       if (isAsync) {
         Mousetrap.bind(combinations, () => {
-          ipcRenderer.invoke(eventName);
+          ipcRenderer.invoke(eventName).catch((e) => {
+            throw e;
+          });
         });
       } else {
-        Mousetrap.bind(combinations, () => ipcRenderer.sendSync(eventName));
+        Mousetrap.bind(combinations, () => {
+          try {
+            ipcRenderer.sendSync(eventName);
+          } catch (e) {
+            throw e;
+          }
+        });
       }
     }
   }
@@ -71,10 +95,34 @@ function connectAccessors(injectable: InjectableMetadata) {
     const getterName = options?.getter || camelcase("get", String(options?.as || propertyKey || ""));
     const setterName = options?.setter || camelcase("set", String(options?.as || propertyKey || ""));
 
-    api[getterName] = () => ipcRenderer.sendSync(asGetter(injectable, propertyKey));
-    api[getterName + "Async"] = () => ipcRenderer.invoke(asAsync(asGetter(injectable, propertyKey)));
-    api[setterName] = (v: any) => ipcRenderer.sendSync(asSetter(injectable, propertyKey), v);
-    api[setterName + "Async"] = (v: any) => ipcRenderer.invoke(asAsync(asSetter(injectable, propertyKey)), v);
+    api[getterName] = () => {
+      try {
+        return ipcRenderer.sendSync(asGetter(injectable, propertyKey));
+      } catch (e) {
+        throw e;
+      }
+    };
+    api[getterName + "Async"] = async () => {
+      try {
+        return await ipcRenderer.invoke(asAsync(asGetter(injectable, propertyKey)));
+      } catch (e) {
+        throw e;
+      }
+    };
+    api[setterName] = (v: any) => {
+      try {
+        return ipcRenderer.sendSync(asSetter(injectable, propertyKey), v);
+      } catch (e) {
+        throw e;
+      }
+    };
+    api[setterName + "Async"] = async (v: any) => {
+      try {
+        return ipcRenderer.invoke(asAsync(asSetter(injectable, propertyKey)), v);
+      } catch (e) {
+        throw e;
+      }
+    };
   }
 
   return api;

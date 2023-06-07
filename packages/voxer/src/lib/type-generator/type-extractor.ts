@@ -1,4 +1,4 @@
-import ts from "typescript";
+import * as ts from "typescript";
 import { resolve } from "path";
 import { INJECTABLE_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, ACCESSOR_DECORATOR_NAME } from "./constants";
 

@@ -1,4 +1,4 @@
-import ts from "typescript";
+import * as ts from "typescript";
 import { resolve } from "path";
 import { TypeExtractor } from "./type-extractor";
 import { ACCESSOR_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, INJECTABLE_DECORATOR_NAME } from "./constants";

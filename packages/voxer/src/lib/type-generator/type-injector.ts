@@ -1,6 +1,5 @@
-import ts from "typescript";
+import * as ts from "typescript";
 import { TypeVisitor } from "./type-visitor";
-import { TypeUtils } from "./type-utils";
 
 const f = ts.factory;
 

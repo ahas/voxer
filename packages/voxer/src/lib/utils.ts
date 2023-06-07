@@ -1,7 +1,7 @@
-import fs from "fs";
+import * as fs from "fs";
+import * as ts from "typescript";
 import { relative, dirname, join, resolve, basename } from "path";
 import { globSync } from "glob";
-import ts, { MapLike } from "typescript";
 import { printDel } from "cornsol";
 
 const cwd = process.cwd();
@@ -32,7 +32,7 @@ export function isTs(): boolean {
   return exists(resolve(cwd, "voxer.config.ts"));
 }
 
-function getAliases(paths: MapLike<string[]>): Map<string, string> {
+function getAliases(paths: ts.MapLike<string[]>): Map<string, string> {
   const baseDir = resolve(cwd, ".voxer");
   const map = new Map<string, string>();
 
@@ -122,4 +122,8 @@ export function formatDuration(duration: number) {
 
 export function isPreloadDefined() {
   return globSync(resolve(cwd, "src/preload.{js,ts,jsx,tsx}")).length > 0;
+}
+
+export function isVoxerPackage() {
+  return exists(resolve(cwd, "voxer.config.ts")) || exists(resolve(cwd, "voxer.config.js"));
 }

@@ -1,7 +1,8 @@
+import * as chokidar from "chokidar";
+import * as fs from "fs";
+import * as child_process from "child_process";
 import { exec, ChildProcess } from "child_process";
 import { createServer, ViteDevServer } from "vite";
-import chokidar from "chokidar";
-import fs from "fs";
 import { mkdir } from "./utils";
 import { UserConfig } from "./config";
 import { BuildOptions, installVoxer } from "./build";
@@ -41,6 +42,15 @@ export async function runVite(config: UserConfig): Promise<ViteDevServer> {
   server.printUrls();
 
   return server;
+}
+
+export async function runChildProcesses(commands: string[]) {
+  for (const command of commands) {
+    console.info("Execute child process: %s", command);
+    const args = command.split(" ");
+    const child = child_process.spawn(args[0], args.slice(1), { cwd: process.cwd() });
+    pipeIo(child);
+  }
 }
 
 export async function runDevApp(options: BuildOptions, electronArgs: string[]): Promise<void> {

@@ -1,5 +1,5 @@
+import * as fs from "fs";
 import { resolve, relative } from "path";
-import fs from "fs";
 import { printLog } from "cornsol";
 
 const cwd = process.cwd();
