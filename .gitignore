@@ -1,5 +1,12 @@
 node_modules
-.yarn
+.yarn/*
+.yarn-integrity
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 dist
 .voxer
 voxer_release
