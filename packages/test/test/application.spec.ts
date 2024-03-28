@@ -1,6 +1,8 @@
-import fs from "fs";
+import fs from "node:fs";
 
-const packageJson = JSON.parse(fs.readFileSync("./package.json", { encoding: "utf-8" })) as Partial<{
+const packageJson = JSON.parse(
+  fs.readFileSync("./package.json", { encoding: "utf-8" })
+) as Partial<{
   name: string;
   version: string;
 }>;

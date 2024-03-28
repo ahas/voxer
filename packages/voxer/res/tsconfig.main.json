@@ -2,6 +2,10 @@
 // and extended by src/tsconfig.json
 {
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "types": ["node"],
+  },
   "include": ["../src/**/*", "../voxer.config.ts"],
   "exclude": ["../src/preload.*", "../src/preload/**/*"]
 }

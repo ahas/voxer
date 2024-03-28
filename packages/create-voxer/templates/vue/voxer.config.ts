@@ -1,9 +1,12 @@
-import type { UserConfig } from "voxer";
 import vue from "@vitejs/plugin-vue";
+import type { UserConfig } from "voxer";
 
-export default <UserConfig>{
+export default {
   vite: {
     plugins: [vue()],
+    define: {
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+    },
   },
   build: {
     appId: "io.ahas.voxer",
@@ -23,4 +26,4 @@ export default <UserConfig>{
       allowToChangeInstallationDirectory: true,
     },
   },
-};
+} as UserConfig;

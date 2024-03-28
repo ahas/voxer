@@ -1,7 +1,8 @@
 {
-  "name": "voxer-app",
+  "name": "daqs-v2-uploader",
   "version": "0.0.1",
   "main": ".voxer/runtime/main.js",
+  "type": "module",
   "private": true,
   "scripts": {
     "clean": "voxer clean",
@@ -10,13 +11,13 @@
     "build": "voxer build"
   },
   "dependencies": {
-    "mousetrap": "^1.6.5",
     "reflect-metadata": "^0.1.13",
-    "vue": "^3.2.45"
+    "vue": "^3.2.33"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.2.0",
-    "typescript": "^4.9.4",
-    "voxer": "file:///home/ahas/repos/ahas/voxer/packages/voxer"
+    "@vitejs/plugin-vue": "^2.3.2",
+    "prettier": "^3.2.5",
+    "typescript": "^4.6.4",
+    "voxer": "link:voxer"
   }
 }

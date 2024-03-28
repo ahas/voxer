@@ -1,11 +1,11 @@
-import { resolve as res } from "path";
+import { resolve as _resolve } from "node:path";
 
-let resolve;
+let resolve: typeof _resolve;
 
 if (process.env.NODE_ENV === "development") {
-  resolve = res.bind(res, __dirname, "../view");
+  resolve = _resolve.bind(_resolve, import.meta.dirname, "../view");
 } else {
-  resolve = res.bind(res, __dirname, "../..");
+  resolve = _resolve.bind(_resolve, import.meta.dirname, "../..");
 }
 
 export { resolve };

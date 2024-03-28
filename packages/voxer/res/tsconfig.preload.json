@@ -3,7 +3,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "allowJs": true
+    "allowJs": true,
+    "moduleResolution": "Node"
   },
   "include": [
     "node_modules/voxer/src/runtime/preload.ts",

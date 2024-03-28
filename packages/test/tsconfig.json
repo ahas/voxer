@@ -22,11 +22,16 @@
     "lib": ["DOM", "ES2020"],
     "noImplicitAny": true,
     "noUnusedParameters": false,
-    "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
     "noEmit": true,
-    "types": ["node", "mocha", "@wdio/globals/types", "expect-webdriverio", "wdio-electron-service"],
+    "types": [
+      "node",
+      "mocha",
+      "@wdio/globals/types",
+      "expect-webdriverio",
+      "wdio-electron-service"
+    ],
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["**/*.ts"],

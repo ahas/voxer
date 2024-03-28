@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-import inquirer from "inquirer";
-import fs from "fs";
-import { resolve } from "path";
-import prettier from "prettier";
+
 import { exec } from "child_process";
+import inquirer from "inquirer";
+import fs from "node:fs";
+import { resolve } from "node:path";
+import prettier from "prettier";
 
 const cwd = process.cwd();
 const root = resolve(__dirname, "..");
@@ -50,10 +51,6 @@ function getDefaultProjectName(): string {
   return defaultName;
 }
 
-function mkdir(path: string): void {
-  fs.mkdirSync(path, { recursive: true });
-}
-
 function write(dir: string, filename: string, data: string | NodeJS.ArrayBufferView): void {
   fs.writeFileSync(resolve(dir, filename), data);
 }
@@ -66,9 +63,10 @@ async function copyTemplate(target: "vue", projectName: string): Promise<void> {
     recursive: true,
   });
 
-  const pkg = require(resolve(projectDir, "package.json"));
+  const pkg = JSON.parse(fs.readFileSync(resolve(projectDir, "package.json"), "utf-8"));
   pkg.name = projectName;
   pkg.devDependencies["voxer"] = "^" + (await fetchVoxerVersion());
+
   write(
     projectDir,
     "package.json",
@@ -85,8 +83,10 @@ function pkgFromUserAgent(userAgent: string | undefined) {
   if (!userAgent) {
     return undefined;
   }
+
   const pkgSpec = userAgent.split(" ")[0];
   const pkgSpecArr = pkgSpec.split("/");
+
   return {
     name: pkgSpecArr[0],
     version: pkgSpecArr[1],
@@ -120,13 +120,14 @@ function pkgFromUserAgent(userAgent: string | undefined) {
 
   const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent);
   const pkgManager = pkgInfo ? pkgInfo.name : "npm";
-  print("Done. Now run:");
 
+  print("Done. Now run:");
   print(`  cd ${projectName}`);
+
   switch (pkgManager) {
     case "yarn":
-      print("  yarn");
-      print("  yarn dev");
+      print(`  ${pkgManager}`);
+      print(`  ${pkgManager} dev`);
       break;
     default:
       print(`  ${pkgManager} install`);

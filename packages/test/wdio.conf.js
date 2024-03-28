@@ -1,7 +1,7 @@
 const { join } = require("path");
 const packageJSON = require("./package.json");
 
-const voxerConfig = require("./.voxer/dist/voxer.config").default;
+const voxerConfig = require("./.voxer/dist/voxer.config.js").default;
 const {
   build: { productName },
 } = voxerConfig;

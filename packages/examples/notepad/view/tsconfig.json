@@ -6,7 +6,6 @@
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
-    "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "baseUrl": ".",
@@ -15,5 +14,11 @@
       "#imports/*": ["../.voxer/dist/src/*"]
     }
   },
-  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "../.voxer/api.d.ts"]
+  "include": [
+    "./**/*.ts",
+    "./**/*.d.ts",
+    "./**/*.tsx",
+    "./**/*.vue",
+    "../.voxer/api.d.ts"
+  ]
 }

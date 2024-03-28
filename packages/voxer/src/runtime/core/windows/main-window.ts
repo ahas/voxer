@@ -1,6 +1,6 @@
 import { BrowserWindow, Menu, MenuItemConstructorOptions, BrowserWindowConstructorOptions, MenuItem } from "electron";
 import { voxer } from "../voxer.main";
-import { resolve } from "path";
+import { resolve } from "node:path";
 
 export type MenuTemplate = Array<MenuItemConstructorOptions | MenuItem>;
 
@@ -12,7 +12,7 @@ export class MainWindow {
 
     this.handle = new BrowserWindow({
       webPreferences: {
-        preload: resolve(__dirname, "../../preload.js"),
+        preload: resolve(import.meta.dirname, "../../preload.js"),
         nodeIntegration: false,
         contextIsolation: true,
         sandbox: true,

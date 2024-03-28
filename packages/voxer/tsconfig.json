@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "baseUrl": "lib",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
     "declaration": true,
-    "outDir": "./dist",
+    "isolatedModules": true,
     "inlineSourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/lib/**/*.ts", "src/runtime/**/*.ts"],
+  "include": ["src/compile/**/*.ts", "src/runtime/**/*.ts"],
   "exclude": ["src/runtime/preload.ts", "**/__test__.ts"]
 }
