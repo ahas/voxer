@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "dist"
+  },
+  "include": ["src/compile/**/*.ts", "src/runtime/**/*.ts"],
+  "exclude": ["src/runtime/preload.ts", "**/__test__.ts"]
+}

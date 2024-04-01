@@ -2,7 +2,6 @@ import { printLog, printStep } from "cornsol";
 import { build as _buildElectron } from "electron-builder";
 import fs from "node:fs";
 import { resolve as resolvePath } from "node:path";
-import type { RollupOutput, RollupWatcher } from "rollup";
 import ts from "typescript";
 import { build as _buildVite } from "vite";
 import { readConfig, type UserConfig } from "./config";
@@ -58,13 +57,10 @@ export function buildPreload(options: BuildOptions): Promise<webpack.Stats> {
 
 export function buildMain(): Promise<{ options: ts.CompilerOptions }> {
   return printStep("Build main", async () => {
-    // let configFile = ts.findConfigFile(resolvePath(cwd, "src"), ts.sys.fileExists, "tsconfig.json");
-
-    // if (!configFile) {
     const configFile = ts.findConfigFile(resolvePath(cwd, ".voxer"), ts.sys.fileExists, "tsconfig.main.json");
-    // }
 
     printLog("Compiling...");
+
     const { config } = ts.readConfigFile(configFile!, ts.sys.readFile);
     const { options, fileNames, errors } = ts.parseJsonConfigFileContent(config, ts.sys, resolvePath(cwd, "src"));
     const program = ts.createProgram({ options, rootNames: fileNames, configFileParsingDiagnostics: errors });
@@ -90,7 +86,7 @@ export function buildMain(): Promise<{ options: ts.CompilerOptions }> {
   });
 }
 
-export function buildVite(config: UserConfig): Promise<RollupOutput | RollupOutput[] | RollupWatcher> {
+export function buildVite(config: UserConfig) {
   return printStep("Build vite", () => {
     mkdir(".voxer");
 
@@ -113,9 +109,12 @@ export function buildElectron(config: UserConfig): Promise<string[]> {
 
     return _buildElectron({
       config: {
+        extraMetadata: {
+          main: ".voxer/runtime/main.js",
+        },
         files: [".voxer/**/*"],
         directories: {
-          output: resolvePath(cwd, "voxer_release"),
+          output: resolvePath(cwd, ".release"),
         },
         ...config.build,
       },

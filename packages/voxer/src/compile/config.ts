@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import { resolve } from "node:path";
 import { exists } from "./utils";
 
@@ -17,10 +16,14 @@ export async function readConfig(): Promise<UserConfig> {
   const configPathForTs = resolve(cwd, ".voxer/dist/voxer.config.js");
 
   if (exists(configPathForTs)) {
-    const config = await import(configPathForTs);
+    const config = require(configPathForTs);
     return config.default || config;
   }
 
-  const config = await import(resolve(cwd, "./voxer.config.js"));
+  const config = require(resolve(cwd, "./voxer.config.js"));
   return config.default || config;
+}
+
+export function defineVoxerConfig(config: UserConfig): UserConfig {
+  return config;
 }

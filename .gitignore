@@ -9,7 +9,7 @@ node_modules
 !.yarn/versions
 dist
 .voxer
-voxer_release
+.release
 packages/create-voxer/templates/**/yarn.lock
 packages/create-voxer/templates/**/bun.lockb
 packages/create-voxer/templates/**/package-lock.json

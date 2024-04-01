@@ -1,6 +1,6 @@
 import "reflect-metadata";
 
-import { app, BrowserWindow, ipcMain, Menu, dialog, MenuItem } from "electron";
+import { BrowserWindow, Menu, MenuItem, app, dialog, ipcMain } from "electron";
 import { resolve as _resolve } from "node:path";
 import {
   INJECTABLE_ACCESSORS_METADATA,
@@ -11,9 +11,9 @@ import {
   INJECTABLE_MENU_ITEMS_METADATA,
   INJECTABLE_OPTIONS_METADATA,
 } from "./core/constants";
-import { voxer } from "./core/voxer.main";
-import { camelcase, asExposeEvent, asMenuEvent, asGetter, asSetter, asAsync, asCommandEvent } from "./core/utils";
 import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/types";
+import { asAsync, asCommandEvent, asExposeEvent, asGetter, asMenuEvent, asSetter, camelcase } from "./core/utils";
+import { voxer } from "./core/voxer.main";
 import { InjectableMetadata } from "./injectable";
 
 declare global {
@@ -165,10 +165,11 @@ async function injectDependencies() {
 }
 
 async function createWindow() {
-  const resolve = await import("./loaders/resolve");
-  // @ts-expect-error
-  const { main } = await import("../dist/src/main");
+  const resolve = require("./loaders/resolve");
+  const { main } = require("../dist/src/main");
+
   voxer.ipcMain = ipcMain;
+
   injectDependencies();
   initVoxerEvents();
 
@@ -179,7 +180,7 @@ async function createWindow() {
 
   if (!voxer.win.handle.webContents.getURL()) {
     try {
-      await (await import("./loaders/load"))?.load?.(voxer.win);
+      await require("./loaders/load")?.load?.(voxer.win);
     } catch {}
   }
 }
@@ -187,8 +188,7 @@ async function createWindow() {
 (async () => {
   app.whenReady().then(async () => {
     try {
-      // @ts-expect-error
-      (await import("../dist/src/main"))?.launch?.();
+      require("../dist/src/main")?.launch?.();
     } catch {}
 
     createWindow();

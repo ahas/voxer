@@ -11,7 +11,7 @@ import { cleanRelease, cleanVoxer, isVoxerPackage } from "./utils";
 
 cornsol.register();
 
-const pkg = JSON.parse(fs.readFileSync(resolve(import.meta.dirname, "../../package.json"), "utf-8"));
+const pkg = JSON.parse(fs.readFileSync(resolve(__dirname, "../../package.json"), "utf-8"));
 
 const program = new Command();
 // prettier-ignore

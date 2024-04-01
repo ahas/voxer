@@ -13,7 +13,7 @@ const config = {
     [
       "electron",
       {
-        appPath: join(__dirname, "voxer_release"),
+        appPath: join(__dirname, ".release"),
         appName: productName,
         appArgs: [],
         chromedriver: {

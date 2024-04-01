@@ -1,7 +1,5 @@
 import ts from "typescript";
 
-const f = ts.factory;
-
 export class TypeInferer {
   private _typeChecker: ts.TypeChecker;
 

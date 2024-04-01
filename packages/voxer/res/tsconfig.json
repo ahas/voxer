@@ -4,6 +4,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
+    "allowJs": true,
     "inlineSourceMap": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
@@ -15,8 +16,6 @@
     "baseUrl": "../src",
     "outDir": "../.voxer/dist",
     "paths": {
-      "#voxer": ["../.voxer/runtime"],
-      "#voxer/*": ["../.voxer/runtime/*"],
       "~": ["./"],
       "~/*": ["./*"]
     }

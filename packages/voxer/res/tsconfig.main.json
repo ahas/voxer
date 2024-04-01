@@ -3,9 +3,17 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "types": ["node"],
+    "paths": {
+      "#voxer": ["../.voxer/runtime/index"],
+      "#voxer/*": ["../.voxer/runtime/*"],
+      "~": ["./"],
+      "~/*": ["./*"]
+    }
   },
-  "include": ["../src/**/*", "../voxer.config.ts"],
-  "exclude": ["../src/preload.*", "../src/preload/**/*"]
+  "include": ["./runtime/**/*", "../src/**/*", "../voxer.config.ts"],
+  "exclude": ["./runtime/preload.js", "../src/preload.*", "../src/preload/**/*"]
 }

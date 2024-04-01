@@ -13,7 +13,7 @@ export function cleanVoxer(): void {
 
 export function cleanRelease(): void {
   printDel("Delete voxer release folder");
-  fs.rmSync(resolve(cwd, "voxer_release"), { force: true, recursive: true });
+  fs.rmSync(resolve(cwd, ".release"), { force: true, recursive: true });
 }
 
 export function mkdir(...paths: string[]): void {
@@ -21,7 +21,7 @@ export function mkdir(...paths: string[]): void {
 }
 
 export function copySource(filename: string, dst: string): void {
-  fs.copyFileSync(resolve(import.meta.dirname, filename), resolve(cwd, dst, basename(filename)));
+  fs.copyFileSync(resolve(__dirname, filename), resolve(cwd, dst, basename(filename)));
 }
 
 export function exists(...paths: string[]): boolean {

@@ -2,6 +2,8 @@ import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import { isPreloadDefined } from "./utils";
 import { resolve as resolvePath } from "node:path";
 
+import type { Configuration } from "webpack";
+
 const cwd = process.cwd();
 
 function preprocessorLoader() {
@@ -25,15 +27,15 @@ function tsLoader(tsConfigPath: string) {
   };
 }
 
-export function getWebpackConfig() {
-  const entry = resolvePath(import.meta.dirname, "../../src/runtime/preload.ts");
-  const tsConfigPath = resolvePath(cwd, ".voxer", "tsconfig.preload.json");
+export function getWebpackConfig(): Configuration {
+  const entry = resolvePath(__dirname, "../preload/preload.js");
+  const tsConfigPath = resolvePath(cwd, ".voxer/tsconfig.preload.json");
   const outputPath = resolvePath(cwd, ".voxer/runtime");
 
   return {
     entry,
     externals: {
-      electron: "electron",
+      electron: "commonjs electron",
     },
     module: {
       rules: [

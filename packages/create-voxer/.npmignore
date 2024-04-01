@@ -2,4 +2,4 @@
 **/.yarn
 **/.voxer
 **/yarn.lock
-**/voxer_release
+**/.release
