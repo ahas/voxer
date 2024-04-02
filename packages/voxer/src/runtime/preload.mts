@@ -1,8 +1,8 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { asAsync, asCommandEvent, asExposeEvent, asGetter, asSetter, camelcase } from "./core/utils";
-import { voxer } from "./core/voxer.renderer";
+import { asAsync, asCommandEvent, asExposeEvent, asGetter, asSetter, camelcase } from "./core/utils.mjs";
+import { voxer } from "./core/voxer.renderer.mjs";
 
-import type { InjectableMetadata } from "./injectable";
+import type { InjectableMetadata } from "./injectable.mjs";
 
 declare global {
   var __VOXER_PRELOAD__: boolean;
@@ -61,7 +61,7 @@ async function connectCommandMethods(injectable: InjectableMetadata) {
   const methods = injectable.commands;
 
   if (methods.length > 0) {
-    const Mousetrap = require("mousetrap");
+    const Mousetrap = await import("mousetrap");
 
     for (const { methodName, isAsync, combinations } of methods) {
       const eventName = asCommandEvent(injectable, methodName);
@@ -145,15 +145,11 @@ async function exposeInjectables() {
 (async () => {
   exposeVoxer();
 
-  // #!if IS_PRELOAD_DEFINED
   try {
     // @ts-ignore
-    const { preload } = require("~/preload");
+    const { preload } = await import("../dist/preload");
     await preload();
-  } catch {
-    console.info("No user preload detected");
-  }
-  // #!endif
+  } catch {}
 
   await exposeInjectables();
 })();

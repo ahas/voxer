@@ -1,11 +1,12 @@
 import * as chokidar from "chokidar";
 import * as fs from "node:fs";
+import { resolve } from "node:path";
 import * as child_process from "child_process";
 import { exec, ChildProcess } from "child_process";
 import { createServer, ViteDevServer } from "vite";
-import { mkdir } from "./utils";
-import { UserConfig } from "./config";
-import { BuildOptions, installVoxer } from "./build";
+import { mkdir } from "./utils.mjs";
+import { UserConfig, readConfig } from "./config.mjs";
+import { BuildOptions, installVoxer } from "./build.mjs";
 import { printChunkSync, printInfo } from "cornsol";
 
 const cwd = process.cwd();
@@ -23,7 +24,8 @@ export function pipeIo(child: ChildProcess): void {
 export function runElectron(args: string[]): ChildProcess {
   mkdir(".voxer");
 
-  const command = `npx cross-env NODE_ENV=development electron ${args.join(" ")} .`;
+  const entry = resolve(cwd, ".voxer/runtime/main.js");
+  const command = `npx cross-env NODE_ENV=development electron ${args.join(" ")} ${entry}`;
   const electron = exec(command);
 
   pipeIo(electron);
@@ -54,10 +56,9 @@ export async function runChildProcesses(commands: string[]) {
 }
 
 export async function runDevApp(options: BuildOptions, electronArgs: string[]): Promise<void> {
-  const config = await installVoxer(options);
+  await installVoxer(options);
 
-  console.info('Installed')
-
+  const config = await readConfig();
   const viteServer = await runVite(config);
   const electron = runElectron(electronArgs);
 

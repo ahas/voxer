@@ -1,7 +1,6 @@
 import "reflect-metadata";
 
 import { BrowserWindow, Menu, MenuItem, app, dialog, ipcMain } from "electron";
-import { resolve as _resolve } from "node:path";
 import {
   INJECTABLE_ACCESSORS_METADATA,
   INJECTABLE_COMMANDS_METADATA,
@@ -10,11 +9,11 @@ import {
   INJECTABLE_INVOKE_HOOK_METADATA,
   INJECTABLE_MENU_ITEMS_METADATA,
   INJECTABLE_OPTIONS_METADATA,
-} from "./core/constants";
-import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/types";
-import { asAsync, asCommandEvent, asExposeEvent, asGetter, asMenuEvent, asSetter, camelcase } from "./core/utils";
-import { voxer } from "./core/voxer.main";
-import { InjectableMetadata } from "./injectable";
+} from "./core/constants.mjs";
+import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/types.mjs";
+import { asAsync, asCommandEvent, asExposeEvent, asGetter, asMenuEvent, asSetter, camelcase } from "./core/utils.mjs";
+import { voxer } from "./core/voxer.main.mjs";
+import { InjectableMetadata } from "./injectable.mjs";
 
 declare global {
   var __VOXER_MAIN__: boolean;
@@ -165,8 +164,9 @@ async function injectDependencies() {
 }
 
 async function createWindow() {
-  const resolve = require("./loaders/resolve");
-  const { main } = require("../dist/src/main");
+  const resolve = await import("./loaders/resolve.mjs");
+  // @ts-expect-error
+  const { main } = await import("../dist/src/main");
 
   voxer.ipcMain = ipcMain;
 
@@ -180,7 +180,7 @@ async function createWindow() {
 
   if (!voxer.win.handle.webContents.getURL()) {
     try {
-      await require("./loaders/load")?.load?.(voxer.win);
+      await (await import("./loaders/load.mjs"))?.load?.(voxer.win);
     } catch {}
   }
 }
@@ -188,7 +188,8 @@ async function createWindow() {
 (async () => {
   app.whenReady().then(async () => {
     try {
-      require("../dist/src/main")?.launch?.();
+      // @ts-expect-error
+      await (await import("../dist/main"))?.launch?.();
     } catch {}
 
     createWindow();

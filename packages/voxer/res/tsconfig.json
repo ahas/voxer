@@ -4,6 +4,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
+    "moduleResolution": "Bundler",
     "allowJs": true,
     "inlineSourceMap": true,
     "esModuleInterop": false,
@@ -13,11 +14,6 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "../src",
-    "outDir": "../.voxer/dist",
-    "paths": {
-      "~": ["./"],
-      "~/*": ["./*"]
-    }
+    "baseUrl": "../src"
   }
 }

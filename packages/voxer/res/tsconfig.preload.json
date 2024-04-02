@@ -2,17 +2,5 @@
 // and extended by src/tsconfig.json
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "moduleResolution": "Node"
-  },
-  "include": [
-    "node_modules/voxer/dist/preload/preload.js",
-    "node_modules/voxer/dist/preload/injectable.js",
-    "node_modules/voxer/dist/preload/core/types.js",
-    "node_modules/voxer/dist/preload/core/utils.js",
-    "node_modules/voxer/dist/preload/core/voxer.renderer.js",
-    "../src/preload.*",
-    "../src/preload/*"
-  ]
+  "include": ["../src/preload.*", "../src/preload/*"]
 }

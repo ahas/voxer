@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { TypeVisitor } from "./type-visitor";
+import { TypeVisitor } from "./type-visitor.mjs";
 
 const f = ts.factory;
 

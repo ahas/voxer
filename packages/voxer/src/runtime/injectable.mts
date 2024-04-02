@@ -1,4 +1,4 @@
-import type { AccessorMethod, CommandHandler, ExposedMethod, InvokeHook } from "./core/types";
+import type { AccessorMethod, CommandHandler, ExposedMethod, InvokeHook } from "./core/types.mjs";
 
 export interface InjectableMetadata<T = any> {
   name: string;

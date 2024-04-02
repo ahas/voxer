@@ -3,7 +3,7 @@ import { inject } from "#voxer";
 import { Application } from "./Application";
 
 export async function launch() {
-  process.env.TEST === "true" && require("./main/wdio/main");
+  process.env.TEST === "true" && (await import("./main/wdio/main"));
 }
 
 export async function main() {

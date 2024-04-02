@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "module": "ESNext",
-    "outDir": "dist/preload"
-  },
-  "include": ["src/runtime/preload.ts"],
-  "exclude": ["**/__test__.ts"]
-}

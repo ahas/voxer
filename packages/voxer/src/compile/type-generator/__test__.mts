@@ -1,4 +1,4 @@
-import { TypeTranslator } from "./type-translator";
+import { TypeTranslator } from "./type-translator.mjs";
 import fs from "node:fs";
 import { dirname, resolve } from "node:path";
 import prettier from "prettier";
@@ -16,4 +16,4 @@ if (fs.existsSync(outputFileName)) {
 const translator = new TypeTranslator(cwd);
 
 console.log(outputFileName);
-fs.writeFileSync(outputFileName, prettier.format(translator.execute(), { parser: "typescript" }));
+fs.writeFileSync(outputFileName, await prettier.format(translator.execute(), { parser: "typescript" }));

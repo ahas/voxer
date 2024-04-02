@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
+    "rootDir": "src",
+    "outDir": "dist",
     "declaration": true,
     "inlineSourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["**/__test__.ts"]
 }

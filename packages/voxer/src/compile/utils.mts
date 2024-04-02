@@ -21,15 +21,11 @@ export function mkdir(...paths: string[]): void {
 }
 
 export function copySource(filename: string, dst: string): void {
-  fs.copyFileSync(resolve(__dirname, filename), resolve(cwd, dst, basename(filename)));
+  fs.copyFileSync(resolve(import.meta.dirname, filename), resolve(cwd, dst, basename(filename)));
 }
 
 export function exists(...paths: string[]): boolean {
   return fs.existsSync(paths.join("\\"));
-}
-
-export function isTs(): boolean {
-  return exists(resolve(cwd, "voxer.config.ts"));
 }
 
 function getAliases(paths: ts.MapLike<string[]>): Map<string, string> {
@@ -120,10 +116,6 @@ export function formatDuration(duration: number) {
   }
 }
 
-export function isPreloadDefined() {
-  return globSync(resolve(cwd, "src/preload.{js,ts,jsx,tsx}")).length > 0;
-}
-
 export function isVoxerPackage() {
-  return exists(resolve(cwd, "voxer.config.ts")) || exists(resolve(cwd, "voxer.config.js"));
+  return exists(resolve(cwd, "voxer.config.ts"));
 }

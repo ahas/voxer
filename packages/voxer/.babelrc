@@ -1,4 +1,5 @@
 {
-  "presets": [["@babel/preset-env", {"modules": false}], "@babel/preset-typescript"],
-  "plugins": ["module-extension-resolver"]
+  "presets": [["@babel/preset-env", { "modules": false }], "@babel/preset-typescript"],
+  "plugins": [["add-import-extension", { "extension": "mjs" }]],
+  "ignore": ["**/__test__.ts"]
 }

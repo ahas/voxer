@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import { ipcRenderer, ipcMain } from "electron";
+// import { ipcRenderer, ipcMain } from "electron";
+import electron from "electron";
 import {
   INJECTABLE_MARK,
   INJECTABLE_INSTANCE_METADATA,
@@ -10,10 +11,10 @@ import {
   INJECTABLE_MENU_ITEMS_METADATA,
   INJECTABLE_EXPOSED_METHODS_METADATA,
   INJECTABLE_INVOKE_HOOK_METADATA,
-} from "./constants";
-import { isAsyncFunction } from "./utils";
-import { inject } from "./inject";
-import { voxer } from "./voxer.main";
+} from "./constants.mjs";
+import { isAsyncFunction } from "./utils.mjs";
+import { inject } from "./inject.mjs";
+import { voxer } from "./voxer.main.mjs";
 import type {
   AccessorMethod,
   AccessorOptions,
@@ -23,7 +24,9 @@ import type {
   InjectableOptions,
   InvokeHook,
   MenuItemHandler,
-} from "./types";
+} from "./types.mjs";
+
+const { ipcMain, ipcRenderer } = electron;
 
 function getMetadata<T>(key: string, target: any, defaultValue: T): T {
   if (!Reflect.hasMetadata(key, target)) {
