@@ -1,4 +1,4 @@
-import type { InjectableMetadata } from "../injectable.mjs";
+import type { InjectableMetadata } from "../injectable";
 
 type Key = string | symbol | number;
 

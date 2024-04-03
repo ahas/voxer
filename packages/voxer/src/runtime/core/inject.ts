@@ -1,6 +1,6 @@
-import { voxer } from "./voxer.main.mjs";
-import { INJECTABLE_OPTIONS_METADATA, INJECTABLE_INSTANCE_METADATA } from "./constants.mjs";
-import { consoleError } from "./console.mjs";
+import { voxer } from "./voxer.main";
+import { INJECTABLE_OPTIONS_METADATA, INJECTABLE_INSTANCE_METADATA } from "./constants";
+import { consoleError } from "./console";
 
 const circularInjection = new Map<string, boolean>();
 

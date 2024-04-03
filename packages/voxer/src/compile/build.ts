@@ -1,14 +1,15 @@
+import * as babel from "@babel/core";
 import { printLog, printStep } from "cornsol";
 import { build as _buildElectron } from "electron-builder";
-import fs from "node:fs";
-import { resolve as resolvePath } from "node:path";
+import * as glob from "glob";
+import * as fs from "node:fs/promises";
+import { basename, dirname, join, relative, resolve as resolvePath } from "node:path";
 import { rollup } from "rollup";
-import ts from "typescript";
 import { build as _buildVite } from "vite";
-import { readConfig, type UserConfig } from "./config.mjs";
-import { duplicateResource } from "./resources.mjs";
-import { translate } from "./type-generator/mod.mjs";
-import { cleanVoxer, mkdir, resolveAliases } from "./utils.mjs";
+import { readConfig, type UserConfig } from "./config";
+import { duplicateResource } from "./resources";
+import { translate } from "./type-generator";
+import { cleanVoxer, mkdir, resolveAliases } from "./utils";
 
 // Rollup Plugins
 import commonjs from "@rollup/plugin-commonjs";
@@ -30,7 +31,7 @@ export function buildPreload(options: BuildOptions): Promise<void> {
       input: resolvePath(cwd, ".voxer/runtime/preload.mjs"),
       external: ["electron"],
       plugins: [
-        nodeResolve({ preferBuiltins: false }),
+        nodeResolve(),
         commonjs(),
         typescript2({
           tsconfig: resolvePath(cwd, ".voxer/tsconfig.preload.json"),
@@ -47,46 +48,32 @@ export function buildPreload(options: BuildOptions): Promise<void> {
   });
 }
 
-export function buildMain(options: BuildOptions): Promise<void> {
-  return printStep("Build main", async () => {
-    printLog("Bundling...");
+export function buildTs(step: string, inputGlob: string, outputDir = "", baseDir = "") {
+  return printStep(`Build ${step}`, () => {
+    printLog("Transpiling...");
 
-    const bundle = await rollup({
-      input: resolvePath(cwd, "src/main.ts"),
-      external: ["electron"],
-      plugins: [
-        nodeResolve({ preferBuiltins: false }),
-        commonjs(),
-        typescript2({
-          tsconfig: resolvePath(cwd, ".voxer/tsconfig.main.json"),
-        }),
-      ],
-    });
+    const filenames = glob.sync(resolvePath(cwd, join(baseDir, inputGlob)));
 
-    await bundle.write({
-      dir: resolvePath(cwd, ".voxer/dist"),
-      format: "cjs",
-      inlineDynamicImports: true,
-    });
-    await bundle.close();
-  });
-}
+    return Promise.all(
+      filenames.map(async (x) => {
+        const result = await babel.transformFileAsync(x, {
+          presets: [
+            [import.meta.resolve("@babel/preset-env"), { modules: false }],
+            import.meta.resolve("@babel/preset-typescript"),
+          ],
+          plugins: [
+            [import.meta.resolve("@babel/plugin-proposal-decorators"), { version: "2023-11" }],
+            [import.meta.resolve("babel-plugin-add-import-extension"), { extension: "mjs" }],
+          ],
+        });
 
-export function buildConfig(): Promise<{ options: ts.CompilerOptions }> {
-  return printStep("Build main", async () => {
-    const configFile = ts.findConfigFile(resolvePath(cwd, ".voxer"), ts.sys.fileExists, "tsconfig.main.json");
-
-    printLog("Compiling...");
-
-    const { config } = ts.readConfigFile(configFile!, ts.sys.readFile);
-    const { options } = ts.parseJsonConfigFileContent(config, ts.sys, resolvePath(cwd, "src"));
-
-    fs.writeFileSync(
-      resolvePath(cwd, ".voxer/voxer.config.js"),
-      ts.transpile(fs.readFileSync(resolvePath(cwd, "voxer.config.ts"), "utf-8"), options)
+        if (result?.code) {
+          const out = join(".voxer", outputDir, dirname(relative(baseDir, x)), basename(x, ".ts") + ".mjs");
+          await fs.mkdir(dirname(out), { recursive: true });
+          await fs.writeFile(out, result.code);
+        }
+      })
     );
-
-    return { options };
   });
 }
 
@@ -114,7 +101,7 @@ export function buildElectron(config: UserConfig): Promise<string[]> {
     return _buildElectron({
       config: {
         extraMetadata: {
-          main: ".voxer/runtime/main.js",
+          main: ".voxer/runtime/main.mjs",
         },
         files: [".voxer/**/*"],
         directories: {
@@ -154,12 +141,12 @@ export async function installVoxer(options: BuildOptions): Promise<void> {
   cleanVoxer();
 
   await installRuntime();
-  await buildConfig();
-  await buildMain(options);
-  await buildPreload(options);
+  await buildTs("config", "voxer.config.ts");
+  await buildTs("main", "**/*.ts", "dist", "src");
+  // await buildPreload(options);
 
-  console.log("Resolving aliases");
-  resolveAliases();
+  // console.log("Resolving aliases");
+  // resolveAliases();
 
   console.log("Translating...");
   await translate();

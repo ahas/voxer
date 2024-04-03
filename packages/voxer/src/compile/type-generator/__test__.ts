@@ -1,5 +1,5 @@
-import { TypeTranslator } from "./type-translator.mjs";
-import fs from "node:fs";
+import { TypeTranslator } from "./type-translator";
+import * as fs from "node:fs";
 import { dirname, resolve } from "node:path";
 import prettier from "prettier";
 

@@ -1,6 +1,6 @@
 import { BrowserWindow, BrowserWindowConstructorOptions, Menu, MenuItem, MenuItemConstructorOptions } from "electron";
 import { resolve } from "node:path";
-import { voxer } from "../voxer.main.mjs";
+import { voxer } from "../voxer.main";
 
 export type MenuTemplate = Array<MenuItemConstructorOptions | MenuItem>;
 

@@ -3,10 +3,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "rootDir": "../src"
+    "rootDir": "../src",
+    "baseUrl": "../src"
   },
   "include": ["../src/**/*"],
   "exclude": ["../src/preload.ts"]

@@ -26,14 +26,25 @@
   ],
   "type": "module",
   "bin": "./dist/compile/cli.mjs",
+  "main": "dist/runtime/index.mjs",
+  "types": "dist/runtime/index.d.mts",
   "exports": {
-    ".": "./dist/runtime/mod.mjs",
+    ".": "./dist/runtime/index.mjs",
     "./config": "./dist/compile/config.mjs"
+  },
+  "typesVersions": {
+    "*": {
+      "config": [
+        "dist/compile/config.d.mts"
+      ]
+    }
   },
   "scripts": {
     "clean": "rimraf dist",
     "type-check": "tsc --noEmit",
-    "build": "bun run clean && tsc && bun link",
+    "build": "bun run clean && bun run build:types && bun run build:src && bun link",
+    "build:src": "babel src -x .ts -d dist --out-file-extension .mjs",
+    "build:types": "rimraf .types-temp && tsc && rollup -c build/rollup.types.config.mjs && rimraf .types-temp",
     "start": "node dist/compile/dev.mjs",
     "dev": "bun run build && bun run start",
     "format": "prettier --write ."
@@ -42,9 +53,15 @@
     "vite": "^5.2.6"
   },
   "dependencies": {
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.3",
+    "@babel/plugin-proposal-decorators": "^7.24.1",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-typescript": "^7.24.1",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "babel-plugin-add-import-extension": "^1.6.0",
     "chokidar": "^3.6.0",
     "commander": "^12.0.0",
     "cornsol": "^1.1.5",
@@ -52,21 +69,18 @@
     "electron": "^29.1.6",
     "electron-builder": "^24.13.3",
     "glob": "^10.3.10",
+    "micromatch": "^4.0.5",
     "prettier": "^3.2.5",
     "rollup": "^4.13.2",
+    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.4.3",
     "vite": "^5.2.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.3",
-    "@babel/preset-env": "^7.24.3",
-    "@babel/preset-typescript": "^7.24.1",
-    "@rollup/plugin-multi-entry": "^6.0.1",
+    "@types/babel__core": "^7.20.5",
     "@types/chokidar": "^2.1.3",
     "@types/prettier": "^3.0.0",
-    "babel-plugin-add-import-extension": "^1.6.0",
     "mousetrap": "^1.6.5",
     "reflect-metadata": "^0.2.1",
     "rimraf": "^5.0.5"

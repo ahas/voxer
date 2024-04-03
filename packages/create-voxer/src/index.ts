@@ -2,7 +2,7 @@
 
 import { exec } from "child_process";
 import inquirer from "inquirer";
-import fs from "node:fs";
+import * as fs from "node:fs";
 import { resolve } from "node:path";
 import prettier from "prettier";
 

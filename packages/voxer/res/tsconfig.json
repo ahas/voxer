@@ -1,10 +1,8 @@
-// this configurations file will be locate into .voxer
-// and extended by src/tsconfig.json
 {
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "allowJs": true,
     "inlineSourceMap": true,
     "esModuleInterop": false,
@@ -13,7 +11,6 @@
     "strict": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "baseUrl": "../src"
+    "emitDecoratorMetadata": true
   }
 }

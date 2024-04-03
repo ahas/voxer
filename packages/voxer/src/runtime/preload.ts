@@ -1,8 +1,8 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { asAsync, asCommandEvent, asExposeEvent, asGetter, asSetter, camelcase } from "./core/utils.mjs";
-import { voxer } from "./core/voxer.renderer.mjs";
+import { asAsync, asCommandEvent, asExposeEvent, asGetter, asSetter, camelcase } from "./core/utils";
+import { voxer } from "./core/voxer.renderer";
 
-import type { InjectableMetadata } from "./injectable.mjs";
+import type { InjectableMetadata } from "./injectable";
 
 declare global {
   var __VOXER_PRELOAD__: boolean;

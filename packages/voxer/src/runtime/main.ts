@@ -9,11 +9,11 @@ import {
   INJECTABLE_INVOKE_HOOK_METADATA,
   INJECTABLE_MENU_ITEMS_METADATA,
   INJECTABLE_OPTIONS_METADATA,
-} from "./core/constants.mjs";
-import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/types.mjs";
-import { asAsync, asCommandEvent, asExposeEvent, asGetter, asMenuEvent, asSetter, camelcase } from "./core/utils.mjs";
-import { voxer } from "./core/voxer.main.mjs";
-import { InjectableMetadata } from "./injectable.mjs";
+} from "./core/constants";
+import { AccessorMethod, CommandHandler, ExposedMethod, MenuItemHandler, MethodMetadata } from "./core/types";
+import { asAsync, asCommandEvent, asExposeEvent, asGetter, asMenuEvent, asSetter, camelcase } from "./core/utils";
+import { voxer } from "./core/voxer.main";
+import { InjectableMetadata } from "./injectable";
 
 declare global {
   var __VOXER_MAIN__: boolean;
@@ -164,7 +164,7 @@ async function injectDependencies() {
 }
 
 async function createWindow() {
-  const resolve = await import("./loaders/resolve.mjs");
+  const resolve = await import("./loaders/resolve.js");
   // @ts-expect-error
   const { main } = await import("../dist/src/main");
 
@@ -180,7 +180,7 @@ async function createWindow() {
 
   if (!voxer.win.handle.webContents.getURL()) {
     try {
-      await (await import("./loaders/load.mjs"))?.load?.(voxer.win);
+      await (await import("./loaders/load.js"))?.load?.(voxer.win);
     } catch {}
   }
 }

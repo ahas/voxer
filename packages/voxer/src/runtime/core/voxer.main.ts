@@ -1,5 +1,5 @@
 import { IpcMain } from "electron";
-import { MainWindow } from "./windows/mod.mjs";
+import { MainWindow } from "./windows";
 
 class VoxerMainProcess {
   win!: MainWindow;

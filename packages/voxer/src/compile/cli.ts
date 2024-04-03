@@ -2,12 +2,12 @@
 
 import { Command, Option } from "commander";
 import * as cornsol from "cornsol";
-import fs from "node:fs";
+import * as fs from "node:fs";
 import { resolve } from "node:path";
-import { buildRelease, installVoxer } from "./build.mjs";
-import { runChildProcesses, runDevApp } from "./dev.mjs";
-import { electronFlags } from "./electron-flags.mjs";
-import { cleanRelease, cleanVoxer, isVoxerPackage } from "./utils.mjs";
+import { buildRelease, installVoxer } from "./build";
+import { runChildProcesses, runDevApp } from "./dev";
+import { electronFlags } from "./electron-flags";
+import { cleanRelease, cleanVoxer, isVoxerPackage } from "./utils";
 
 cornsol.register();
 

@@ -1,11 +1,11 @@
 import ts from "typescript";
 import { resolve } from "node:path";
-import { TypeExtractor } from "./type-extractor.mjs";
-import { ACCESSOR_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, INJECTABLE_DECORATOR_NAME } from "./constants.mjs";
-import { TypeInferer } from "./type-inferer.mjs";
-import { TypeUtils } from "./type-utils.mjs";
-import { TypeReplacer } from "./type-replacer.mjs";
-import { TypeInjector } from "./type-injector.mjs";
+import { TypeExtractor } from "./type-extractor";
+import { ACCESSOR_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, INJECTABLE_DECORATOR_NAME } from "./constants";
+import { TypeInferer } from "./type-inferer";
+import { TypeUtils } from "./type-utils";
+import { TypeReplacer } from "./type-replacer";
+import { TypeInjector } from "./type-injector";
 
 const f = ts.factory;
 

@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { resolve } from "node:path";
-import { INJECTABLE_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, ACCESSOR_DECORATOR_NAME } from "./constants.mjs";
+import { INJECTABLE_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, ACCESSOR_DECORATOR_NAME } from "./constants";
 
 export class TypeExtractor {
   private _program: ts.Program;

@@ -1,6 +1,6 @@
 import { dialog } from "electron";
 import { voxer, Injectable, MenuItem, MainWindow } from "#voxer";
-import fs from "node:fs";
+import * as fs from "node:fs";
 
 @Injectable({
   as: "app",

@@ -1,6 +1,6 @@
 import { printDel } from "cornsol";
 import { globSync } from "glob";
-import fs from "node:fs";
+import * as fs from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import ts from "typescript";
 

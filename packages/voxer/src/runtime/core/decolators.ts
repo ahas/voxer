@@ -1,6 +1,6 @@
 import "reflect-metadata";
 // import { ipcRenderer, ipcMain } from "electron";
-import electron from "electron";
+import * as electron from "electron";
 import {
   INJECTABLE_MARK,
   INJECTABLE_INSTANCE_METADATA,
@@ -11,10 +11,10 @@ import {
   INJECTABLE_MENU_ITEMS_METADATA,
   INJECTABLE_EXPOSED_METHODS_METADATA,
   INJECTABLE_INVOKE_HOOK_METADATA,
-} from "./constants.mjs";
-import { isAsyncFunction } from "./utils.mjs";
-import { inject } from "./inject.mjs";
-import { voxer } from "./voxer.main.mjs";
+} from "./constants";
+import { isAsyncFunction } from "./utils";
+import { inject } from "./inject";
+import { voxer } from "./voxer.main";
 import type {
   AccessorMethod,
   AccessorOptions,
@@ -24,7 +24,7 @@ import type {
   InjectableOptions,
   InvokeHook,
   MenuItemHandler,
-} from "./types.mjs";
+} from "./types";
 
 const { ipcMain, ipcRenderer } = electron;
 

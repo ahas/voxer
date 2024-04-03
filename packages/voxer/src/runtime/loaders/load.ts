@@ -1,4 +1,4 @@
-import { MainWindow } from "../core/windows/main-window.mjs";
+import { MainWindow } from "../core/windows/main-window";
 
 export async function load(win: MainWindow): Promise<void> {
   if (process.env.NODE_ENV === "development") {
