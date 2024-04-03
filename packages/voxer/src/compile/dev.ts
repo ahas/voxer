@@ -25,7 +25,7 @@ export function runElectron(args: string[]): ChildProcess {
   mkdir(".voxer");
 
   const entry = resolve(cwd, ".voxer/runtime/main.mjs");
-  const command = `npx cross-env NODE_ENV=development electron ${args.join(" ")} ${entry}`;
+  const command = `npx electron ${args.join(" ")} ${entry}`;
   const electron = exec(command);
 
   pipeIo(electron);

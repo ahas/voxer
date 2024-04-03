@@ -21,11 +21,7 @@ declare global {
 
 global.__VOXER_MAIN__ = true;
 
-function connectToRenderer<T extends Object>(
-  instance: T,
-  { methodName, isAsync }: MethodMetadata<T>,
-  eventName: string
-) {
+function connectToRenderer<T extends Object>(instance: T, { context, isAsync }: MethodMetadata<T>, eventName: string) {
   const method = (instance[methodName] as Function).bind(instance);
 
   if (isAsync) {
@@ -164,9 +160,10 @@ async function injectDependencies() {
 }
 
 async function createWindow() {
-  const resolve = await import("./loaders/resolve.js");
   // @ts-expect-error
-  const { main } = await import("../dist/src/main");
+  const resolve = await import("./loaders/resolve.mjs");
+  // @ts-expect-error
+  const { main } = await import("../dist/main.mjs");
 
   voxer.ipcMain = ipcMain;
 
@@ -180,7 +177,8 @@ async function createWindow() {
 
   if (!voxer.win.handle.webContents.getURL()) {
     try {
-      await (await import("./loaders/load.js"))?.load?.(voxer.win);
+      // @ts-expect-error
+      await (await import("./loaders/load.mjs"))?.load?.(voxer.win);
     } catch {}
   }
 }
@@ -189,7 +187,7 @@ async function createWindow() {
   app.whenReady().then(async () => {
     try {
       // @ts-expect-error
-      await (await import("../dist/main"))?.launch?.();
+      await (await import("../dist/main.mjs"))?.launch?.();
     } catch {}
 
     createWindow();

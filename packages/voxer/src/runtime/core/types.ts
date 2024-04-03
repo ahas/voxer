@@ -14,7 +14,7 @@ export interface ExposeOptions {
 }
 
 export interface MethodMetadata<T> {
-  methodName: keyof T;
+  context: ClassMethodDecoratorContext;
   isAsync: boolean;
 }
 
@@ -23,13 +23,13 @@ export interface ExposedMethod<T> extends MethodMetadata<T> {
 }
 
 export interface InvokeHook<T> {
-  methodName: keyof T;
+  context: ClassMethodDecoratorContext;
   channel: string;
   rendererChannel: string;
 }
 
 export interface AccessorMethod<T> {
-  propertyKey: keyof T;
+  context: any;
   options?: AccessorOptions;
 }
 

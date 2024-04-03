@@ -1,20 +1,16 @@
-import "reflect-metadata";
-// import { ipcRenderer, ipcMain } from "electron";
 import * as electron from "electron";
+import "reflect-metadata";
 import {
-  INJECTABLE_MARK,
-  INJECTABLE_INSTANCE_METADATA,
-  INJECTABLE_OPTIONS_METADATA,
-  INJECTABLE_DEPENDENCIES_METADATA,
   INJECTABLE_ACCESSORS_METADATA,
   INJECTABLE_COMMANDS_METADATA,
-  INJECTABLE_MENU_ITEMS_METADATA,
+  INJECTABLE_DEPENDENCIES_METADATA,
   INJECTABLE_EXPOSED_METHODS_METADATA,
+  INJECTABLE_INSTANCE_METADATA,
   INJECTABLE_INVOKE_HOOK_METADATA,
+  INJECTABLE_MARK,
+  INJECTABLE_MENU_ITEMS_METADATA,
+  INJECTABLE_OPTIONS_METADATA,
 } from "./constants";
-import { isAsyncFunction } from "./utils";
-import { inject } from "./inject";
-import { voxer } from "./voxer.main";
 import type {
   AccessorMethod,
   AccessorOptions,
@@ -25,6 +21,8 @@ import type {
   InvokeHook,
   MenuItemHandler,
 } from "./types";
+import { isAsyncFunction } from "./utils";
+import { voxer } from "./voxer.main";
 
 const { ipcMain, ipcRenderer } = electron;
 
@@ -36,109 +34,108 @@ function getMetadata<T>(key: string, target: any, defaultValue: T): T {
   return Reflect.getMetadata(key, target);
 }
 
-export function Injectable(options?: InjectableOptions): ClassDecorator {
+// Class Decorator
+export function Injectable(options?: InjectableOptions) {
   return function (target: Function) {
     Reflect.defineMetadata(INJECTABLE_MARK, true, target);
     Reflect.defineMetadata(INJECTABLE_OPTIONS_METADATA, options, target);
     Reflect.defineMetadata(INJECTABLE_DEPENDENCIES_METADATA, options?.inject || [], target);
-    inject(target as any);
+    voxer.inject(target as any);
   };
 }
 
-export function Expose(options?: ExposeOptions): MethodDecorator {
+// Method Decorator
+export function Expose(options?: ExposeOptions) {
   options = options || {};
 
-  return function <T extends Object>(target: T, propertyKey: string | symbol) {
+  return function <T extends Function>(target: T, context: ClassMethodDecoratorContext) {
     const exposedMethods = getMetadata<ExposedMethod<T>[]>(INJECTABLE_EXPOSED_METHODS_METADATA, target.constructor, []);
-    const methodName = propertyKey as keyof T;
-    const isAsync = isAsyncFunction(target[methodName]);
+    const isAsync = isAsyncFunction(target);
 
     exposedMethods.push({
-      methodName,
+      context,
       isAsync,
       options,
     });
   };
 }
 
-export function Invoke(channel: string): MethodDecorator {
-  return function <T extends Object>(target: T, propertyKey: string | symbol, descriptor: any) {
+// Method Decorator
+export function Invoke(channel: string) {
+  return function <T extends Function>(target: T, context: ClassMethodDecoratorContext) {
     const invokeHooks = getMetadata<InvokeHook<T>[]>(INJECTABLE_INVOKE_HOOK_METADATA, target.constructor, []);
-    const methodName = propertyKey as keyof T;
     const hook = {
-      methodName,
+      context,
       channel,
       rendererChannel: `$voxer:renderer:${channel}`,
     };
 
     invokeHooks.push(hook);
 
-    const originalMethod = descriptor.value;
-
-    descriptor.value = function (...args: any[]) {
-      if (isAsyncFunction(originalMethod)) {
-        originalMethod.apply(target, args).then((ret: any) => {
+    return function (this: any, ...args: any[]) {
+      if (isAsyncFunction(target)) {
+        target.apply(this, args).then((ret: any) => {
           voxer.win.handle.webContents.send(hook.rendererChannel, ret);
         });
       } else {
-        const ret = originalMethod.apply(target, args);
-
+        const ret = target.apply(this, args);
         voxer.win.handle.webContents.send(hook.rendererChannel, ret);
       }
     };
   };
 }
 
-export function Accessor(options?: AccessorOptions): PropertyDecorator {
-  return function <T extends Object>(target: T, propertyKey: string | symbol) {
+// Property Decorator
+export function Accessor(options?: AccessorOptions) {
+  return function <T extends Object>(target: T, context: any) {
     const accessors = getMetadata<AccessorMethod<T>[]>(INJECTABLE_ACCESSORS_METADATA, target.constructor, []);
 
-    accessors.push({ propertyKey: propertyKey as keyof T, options });
+    accessors.push({ context, options });
   };
 }
 
-export function Command(combinations: string | string[]): MethodDecorator {
-  return function <T extends Object>(target: T, propertyKey: string | symbol) {
+// Method Decorator
+export function Command(combinations: string | string[]) {
+  return function <T extends Function>(target: T, context: ClassMethodDecoratorContext) {
     const commands = getMetadata<CommandHandler<T>[]>(INJECTABLE_COMMANDS_METADATA, target.constructor, []);
-    const methodName = propertyKey as keyof T;
-    const isAsync = isAsyncFunction(target[methodName]);
+    const isAsync = isAsyncFunction(target);
 
     commands.push({
-      methodName,
+      context,
       isAsync,
       combinations,
     });
   };
 }
 
-export function MenuItem(selector: string | string[]): MethodDecorator {
-  return function <T extends Object>(target: T, propertyKey: string | symbol) {
+// Method Decorator
+export function MenuItem(selector: string | string[]) {
+  return function <T extends Function>(target: T, context: ClassMethodDecoratorContext) {
     const menuItems = getMetadata<MenuItemHandler<T>[]>(INJECTABLE_MENU_ITEMS_METADATA, target.constructor, []);
-    const methodName = propertyKey as keyof T;
-    const isAsync = isAsyncFunction(target[methodName]);
+    const isAsync = isAsyncFunction(target);
 
     menuItems.push({
-      methodName,
+      context,
       isAsync,
       selector,
     });
   };
 }
 
-export function OnRenderer(channel: string): MethodDecorator {
-  return function (target: Object, methodName: string | symbol) {
+// Method Decorator
+export function OnRenderer(channel: string) {
+  return function <T extends Function>(target: T) {
     ipcRenderer.on(channel, (event, ...args) => {
-      const instance = Reflect.getMetadata(INJECTABLE_INSTANCE_METADATA, target.constructor);
-      instance[methodName].call(instance, ...args);
+      target(...args);
     });
   };
 }
 
-export function OnMain(channel: string): MethodDecorator {
-  return function (target: Object, methodName: string | symbol) {
+// Method Decorator
+export function OnMain(channel: string) {
+  return function <T extends Function>(target: T) {
     ipcMain.on(channel, (event, ...args) => {
-      const instance = Reflect.getMetadata(INJECTABLE_INSTANCE_METADATA, target.constructor);
-      instance[methodName].call(instance, ...args);
+      target(...args);
     });
   };
 }
