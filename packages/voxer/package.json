@@ -27,7 +27,8 @@
   "type": "module",
   "bin": "./dist/compile/cli.mjs",
   "exports": {
-    "./config": "./dist/compile/config.mjs"
+    "./config": "./dist/compile/config.mjs",
+    "./types/*": "./types/*.d.ts"
   },
   "typesVersions": {
     "*": {

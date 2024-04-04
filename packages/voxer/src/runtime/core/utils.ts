@@ -36,6 +36,7 @@ export function camelcase(s: string, ...strs: string[]): string {
   return result;
 }
 
-export function isAsyncFunction(f: any): boolean {
+export function isAsyncFunction(f: Function): boolean {
+  console.log(f.constructor.name);
   return f.constructor.name === "AsyncFunction";
 }

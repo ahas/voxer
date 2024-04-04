@@ -123,7 +123,7 @@ export class TypeTranslator extends TypeInjector {
     if (isAsync) {
       return [
         f.createMethodSignature(
-          modifiers,
+          modifiers.filter((x) => x.kind !== ts.SyntaxKind.AsyncKeyword),
           exposeOptions.as || method.name,
           decl.questionToken,
           typeParameters,

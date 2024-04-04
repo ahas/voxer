@@ -1,6 +1,6 @@
-import ts from "typescript";
 import { resolve } from "node:path";
-import { INJECTABLE_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, ACCESSOR_DECORATOR_NAME } from "./constants";
+import ts from "typescript";
+import { ACCESSOR_DECORATOR_NAME, EXPOSE_DECORATOR_NAME, INJECTABLE_DECORATOR_NAME } from "./constants";
 
 export class TypeExtractor {
   private _program: ts.Program;
@@ -10,7 +10,7 @@ export class TypeExtractor {
   constructor(program: ts.Program, cwd: string) {
     this._program = program;
     this._typeChecker = program.getTypeChecker();
-    this._DECORATORS_FILE_NAME = resolve(cwd, ".voxer/runtime/index.d.mts");
+    this._DECORATORS_FILE_NAME = resolve(cwd, ".voxer/runtime/core/decorators.mjs");
   }
 
   getExportsOfSourceFile(sourceFile: ts.SourceFile): ts.Symbol[] {

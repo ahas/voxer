@@ -25,7 +25,8 @@ export class TypeInferer {
 
   isAsync(decl: ts.MethodDeclaration): boolean {
     return (
-      !!ts.getModifiers(decl)?.find((x) => x.getText() === "async") || this._isPromiseType(this._getReturnType(decl))
+      !!ts.getModifiers(decl)?.find((x) => x.kind === ts.SyntaxKind.AsyncKeyword) ||
+      this._isPromiseType(this._getReturnType(decl))
     );
   }
 

@@ -16,4 +16,5 @@ export async function translate(): Promise<void> {
   const source = translator.execute();
 
   fs.writeFileSync(outputFileName, await prettier.format(source, { parser: "typescript" }));
+  // fs.writeFileSync(outputFileName, source);
 }

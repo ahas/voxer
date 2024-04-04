@@ -51,7 +51,7 @@ export function Expose(options?: ExposeOptions): MethodDecorator {
   return function <T extends Object>(target: T, propertyKey: string | symbol) {
     const exposedMethods = getMetadata<ExposedMethod<T>[]>(INJECTABLE_EXPOSED_METHODS_METADATA, target.constructor, []);
     const methodName = propertyKey as keyof T;
-    const isAsync = isAsyncFunction(target[methodName]);
+    const isAsync = isAsyncFunction(target[methodName] as Function);
 
     exposedMethods.push({
       methodName,
@@ -62,7 +62,7 @@ export function Expose(options?: ExposeOptions): MethodDecorator {
 }
 
 export function Invoke(channel: string): MethodDecorator {
-  return function <T extends Object>(target: T, propertyKey: string | symbol, descriptor: any) {
+  return function <T extends Object>(target: T, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const invokeHooks = getMetadata<InvokeHook<T>[]>(INJECTABLE_INVOKE_HOOK_METADATA, target.constructor, []);
     const methodName = propertyKey as keyof T;
     const hook = {
@@ -101,7 +101,7 @@ export function Command(combinations: string | string[]): MethodDecorator {
   return function <T extends Object>(target: T, propertyKey: string | symbol) {
     const commands = getMetadata<CommandHandler<T>[]>(INJECTABLE_COMMANDS_METADATA, target.constructor, []);
     const methodName = propertyKey as keyof T;
-    const isAsync = isAsyncFunction(target[methodName]);
+    const isAsync = isAsyncFunction(target[methodName] as Function);
 
     commands.push({
       methodName,
@@ -115,7 +115,7 @@ export function MenuItem(selector: string | string[]): MethodDecorator {
   return function <T extends Object>(target: T, propertyKey: string | symbol) {
     const menuItems = getMetadata<MenuItemHandler<T>[]>(INJECTABLE_MENU_ITEMS_METADATA, target.constructor, []);
     const methodName = propertyKey as keyof T;
-    const isAsync = isAsyncFunction(target[methodName]);
+    const isAsync = isAsyncFunction(target[methodName] as Function);
 
     menuItems.push({
       methodName,
