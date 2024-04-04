@@ -19,6 +19,6 @@
     "./**/*.d.ts",
     "./**/*.tsx",
     "./**/*.vue",
-    "../.voxer/api.d.ts"
+    "../.voxer/api.d.mts"
   ]
 }

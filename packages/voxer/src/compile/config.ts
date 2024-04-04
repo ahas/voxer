@@ -16,5 +16,5 @@ export function defineVoxerConfig(config: UserConfig): UserConfig {
 }
 
 export async function readConfig(): Promise<UserConfig> {
-  return await import(resolve(cwd, ".voxer/voxer.config.mjs"));
+  return (await import(resolve(cwd, ".voxer/voxer.config.mjs"))).default;
 }

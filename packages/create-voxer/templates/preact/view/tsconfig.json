@@ -16,6 +16,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "include": [".", "../.voxer/api.d.ts"],
+  "include": [".", "../.voxer/api.d.mts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

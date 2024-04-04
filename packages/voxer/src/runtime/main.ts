@@ -21,7 +21,11 @@ declare global {
 
 global.__VOXER_MAIN__ = true;
 
-function connectToRenderer<T extends Object>(instance: T, { context, isAsync }: MethodMetadata<T>, eventName: string) {
+function connectToRenderer<T extends Object>(
+  instance: T,
+  { methodName, isAsync }: MethodMetadata<T>,
+  eventName: string
+) {
   const method = (instance[methodName] as Function).bind(instance);
 
   if (isAsync) {
@@ -167,10 +171,10 @@ async function createWindow() {
 
   voxer.ipcMain = ipcMain;
 
+  await main(resolve);
+
   injectDependencies();
   initVoxerEvents();
-
-  await main(resolve);
 
   const appMenu = Menu.getApplicationMenu();
   appMenu?.items && extendAppMenu(appMenu.items);

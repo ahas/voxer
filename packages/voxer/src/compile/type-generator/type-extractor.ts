@@ -10,7 +10,7 @@ export class TypeExtractor {
   constructor(program: ts.Program, cwd: string) {
     this._program = program;
     this._typeChecker = program.getTypeChecker();
-    this._DECORATORS_FILE_NAME = resolve(cwd, "node_modules/voxer/dist/runtime/core/decorators.d.ts");
+    this._DECORATORS_FILE_NAME = resolve(cwd, ".voxer/runtime/index.d.mts");
   }
 
   getExportsOfSourceFile(sourceFile: ts.SourceFile): ts.Symbol[] {

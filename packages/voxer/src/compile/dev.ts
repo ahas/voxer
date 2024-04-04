@@ -24,9 +24,9 @@ export function pipeIo(child: ChildProcess): void {
 export function runElectron(args: string[]): ChildProcess {
   mkdir(".voxer");
 
-  const entry = resolve(cwd, ".voxer/runtime/main.mjs");
-  const command = `npx electron ${args.join(" ")} ${entry}`;
-  const electron = exec(command);
+  const command = `bun x electron ${args.join(" ")} .`;
+  // const electron = exec(command, { cwd: resolve(import.meta.dirname, '../../') });
+  const electron = exec(`bun x electron ${args.join(" ")} .`);
 
   pipeIo(electron);
 
@@ -56,7 +56,7 @@ export async function runChildProcesses(commands: string[]) {
 }
 
 export async function runDevApp(options: BuildOptions, electronArgs: string[]): Promise<void> {
-  await installVoxer(options);
+  await installVoxer();
 
   const config = await readConfig();
   const viteServer = await runVite(config);

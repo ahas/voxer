@@ -1,14 +1,14 @@
 {
   "name": "voxer-monorepo",
-  "private": true,
   "license": "MIT",
-  "workspaces": [
-    "packages/*",
-    "packages/examples/*"
-  ],
+  "private": true,
   "scripts": {
     "build:voxer": "bun run build --cwd packages/voxer",
     "build:create-voxer": "bun run build --cwd packages/create-voxer",
     "build": "build:voxer && build:create-voxer"
-  }
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/examples/*"
+  ]
 }

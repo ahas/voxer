@@ -26,10 +26,7 @@
   ],
   "type": "module",
   "bin": "./dist/compile/cli.mjs",
-  "main": "dist/runtime/index.mjs",
-  "types": "dist/runtime/index.d.mts",
   "exports": {
-    ".": "./dist/runtime/index.mjs",
     "./config": "./dist/compile/config.mjs"
   },
   "typesVersions": {

@@ -80,12 +80,8 @@ withElectronFlags(program.command("start"))
 program
   .command("prepare")
   .description("Prepare voxer resources")
-  .option("-d, --dev")
-  .option("--no-src", "Run typescript build")
-  .action(async (options) => {
-    await installVoxer({
-      mode: options.dev ? "development" : "production",
-    });
+  .action(async () => {
+    await installVoxer();
   });
 
 program

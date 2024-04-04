@@ -6,7 +6,7 @@ import { TypeTranslator } from "./type-translator";
 const cwd = process.cwd();
 
 export async function translate(): Promise<void> {
-  const outputFileName = resolve(cwd, ".voxer/api.d.ts");
+  const outputFileName = resolve(cwd, ".voxer/api.d.mts");
 
   if (fs.existsSync(outputFileName)) {
     fs.unlinkSync(outputFileName);

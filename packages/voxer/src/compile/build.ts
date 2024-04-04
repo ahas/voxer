@@ -23,7 +23,13 @@ export interface BuildOptions {
   targets?: { [key in "vite" | "electron"]?: boolean };
 }
 
-export function buildPreload(options: BuildOptions): Promise<void> {
+export interface TranspileOptions {
+  input: string;
+  outDir?: string;
+  baseDir?: string;
+}
+
+export function bundlePreload(): Promise<void> {
   return printStep("Build preload", async () => {
     printLog("Bundling...");
 
@@ -48,11 +54,13 @@ export function buildPreload(options: BuildOptions): Promise<void> {
   });
 }
 
-export function buildTs(step: string, inputGlob: string, outputDir = "", baseDir = "") {
+export function transpile(step: string, options: TranspileOptions) {
   return printStep(`Build ${step}`, () => {
     printLog("Transpiling...");
 
-    const filenames = glob.sync(resolvePath(cwd, join(baseDir, inputGlob)));
+    const baseDir = options.baseDir ?? "";
+    const outDir = options.outDir ?? "";
+    const filenames = glob.sync(resolvePath(cwd, join(baseDir, options.input)));
 
     return Promise.all(
       filenames.map(async (x) => {
@@ -62,13 +70,22 @@ export function buildTs(step: string, inputGlob: string, outputDir = "", baseDir
             import.meta.resolve("@babel/preset-typescript"),
           ],
           plugins: [
-            [import.meta.resolve("@babel/plugin-proposal-decorators"), { version: "2023-11" }],
+            [import.meta.resolve("@babel/plugin-proposal-decorators"), { version: "legacy" }],
             [import.meta.resolve("babel-plugin-add-import-extension"), { extension: "mjs" }],
+            [
+              import.meta.resolve("babel-plugin-module-resolver"),
+              {
+                root: [resolvePath(cwd, ".voxer")],
+                alias: {
+                  "#voxer": "./runtime/index.mjs",
+                },
+              },
+            ],
           ],
         });
 
         if (result?.code) {
-          const out = join(".voxer", outputDir, dirname(relative(baseDir, x)), basename(x, ".ts") + ".mjs");
+          const out = join(".voxer", outDir, dirname(relative(baseDir, x)), basename(x, ".ts") + ".mjs");
           await fs.mkdir(dirname(out), { recursive: true });
           await fs.writeFile(out, result.code);
         }
@@ -115,7 +132,7 @@ export function buildElectron(config: UserConfig): Promise<string[]> {
 
 export function buildRelease(options: BuildOptions): Promise<void> {
   return printStep("Build for release", async () => {
-    await installVoxer(options);
+    await installVoxer();
     const config = await readConfig();
 
     if (options.targets?.vite) {
@@ -130,23 +147,25 @@ export function buildRelease(options: BuildOptions): Promise<void> {
 
 export function installRuntime(): Promise<void> {
   return printStep("Install voxer runtime", () => {
-    duplicateResource("res", "tsconfig.json");
+    duplicateResource("res", "tsconfig.base.json");
     duplicateResource("res", "tsconfig.main.json");
     duplicateResource("res", "tsconfig.preload.json");
+    duplicateResource("res", "tsconfig.view.json");
     duplicateResource("dist", "runtime");
   });
 }
 
-export async function installVoxer(options: BuildOptions): Promise<void> {
+export async function installVoxer(): Promise<void> {
   cleanVoxer();
 
   await installRuntime();
-  await buildTs("config", "voxer.config.ts");
-  await buildTs("main", "**/*.ts", "dist", "src");
-  // await buildPreload(options);
-
-  // console.log("Resolving aliases");
-  // resolveAliases();
+  await transpile("config", { input: "voxer.config.ts" });
+  await transpile("main", {
+    input: "**/*.ts",
+    baseDir: "src",
+    outDir: "dist",
+  });
+  await bundlePreload();
 
   console.log("Translating...");
   await translate();

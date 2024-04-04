@@ -15,5 +15,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [".", "../.voxer/api.d.ts"]
+  "include": [".", "../.voxer/api.d.mts"]
 }

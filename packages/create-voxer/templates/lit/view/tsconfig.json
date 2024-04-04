@@ -18,5 +18,5 @@
     "useDefineForClassFields": false,
     "skipLibCheck": true
   },
-  "include": [".", "../.voxer/api.d.ts"]
+  "include": [".", "../.voxer/api.d.mts"]
 }

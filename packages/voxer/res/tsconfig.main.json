@@ -1,11 +1,9 @@
-// this configurations file will be locate into .voxer
-// and extended by src/tsconfig.json
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "../src",
-    "baseUrl": "../src"
+    "paths": {
+      "#voxer": ["./runtime/index.mjs"]
+    }
   },
-  "include": ["../src/**/*"],
-  "exclude": ["../src/preload.ts"]
+  "include": ["../src/**/*"]
 }

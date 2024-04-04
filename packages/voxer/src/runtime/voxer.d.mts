@@ -1,3 +1,3 @@
-/// <reference types="./core/decorators.d.ts" />
-/// <reference types="./core/metadata-storage.d.ts" />
-/// <reference types="./core/params.d.ts" />
+/// <reference types="./core/decorators.d.mts" />
+/// <reference types="./core/metadata-storage.d.mts" />
+/// <reference types="./core/params.d.mts" />
