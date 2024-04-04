@@ -66,14 +66,12 @@ export function transpile(step: string, options: TranspileOptions) {
       filenames.map(async (x) => {
         const result = await babel.transformFileAsync(x, {
           presets: [
-            [import.meta.resolve("@babel/preset-env"), { modules: false }],
+            // [import.meta.resolve("@babel/preset-env"), { modules: false }],
             import.meta.resolve("@babel/preset-typescript"),
           ],
           plugins: [
-            [
-              import.meta.resolve("@babel/plugin-proposal-decorators"),
-              { version: "2021-12", decoratorsBeforeExport: true },
-            ],
+            [import.meta.resolve("@babel/plugin-proposal-decorators"), { version: "legacy" }],
+            [import.meta.resolve("@babel/plugin-transform-class-properties")],
             [import.meta.resolve("babel-plugin-add-import-extension"), { extension: "mjs" }],
             [
               import.meta.resolve("babel-plugin-module-resolver"),
