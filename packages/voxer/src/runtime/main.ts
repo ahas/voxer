@@ -29,7 +29,9 @@ function connectToRenderer<T extends Object>(
   const method = (instance[methodName] as Function).bind(instance);
 
   if (isAsync) {
-    ipcMain.handle(eventName, async (event, ...args) => await method(...args));
+    ipcMain.handle(eventName, async (event, ...args) => {
+      await method(...args);
+    });
   } else {
     ipcMain.on(eventName, (event, ...args) => {
       event.returnValue = method(...args);

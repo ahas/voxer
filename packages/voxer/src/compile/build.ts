@@ -70,8 +70,9 @@ export function transpile(step: string, options: TranspileOptions) {
             import.meta.resolve("@babel/preset-typescript"),
           ],
           plugins: [
+            import.meta.resolve("babel-plugin-transform-typescript-metadata"),
             [import.meta.resolve("@babel/plugin-proposal-decorators"), { version: "legacy" }],
-            [import.meta.resolve("@babel/plugin-transform-class-properties")],
+            [import.meta.resolve("@babel/plugin-proposal-class-properties"), { loose: "legacy" }],
             [import.meta.resolve("babel-plugin-add-import-extension"), { extension: "mjs" }],
             [
               import.meta.resolve("babel-plugin-module-resolver"),

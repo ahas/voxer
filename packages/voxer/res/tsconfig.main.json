@@ -5,5 +5,6 @@
       "#voxer": ["./runtime/index.mjs"]
     }
   },
-  "include": ["../src/**/*"]
+  "include": ["../src/**/*"],
+  "exclude": ["../node_modules", "../.voxer", "../.release"]
 }
